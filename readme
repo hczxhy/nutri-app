@@ -7,4 +7,6 @@ guang : setup git, raw text
 
 note
 
-please clone this directory and link your own tess-two. please don't delete other's link even though it might show up as a red X on your project property. we decided to not include the tess-two pre-built.
+please clone this directory and link your own tess-two.
+please don't delete other's link even though it might show up as a red X on your project property.
+we decided to not include the tess-two pre-built.
