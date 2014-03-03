@@ -1,13 +1,20 @@
+<<<<<<< HEAD
 guang's comment
+=======
+//sagun's comment
+>>>>>>> 4ab17419f0d79b42188605683eb1e2bda6e44b09
 task
 
 jacob : language model
 sagun : setup project, remove unused fcn
-guang : setup git, raw text
+guang : setup git, raw text 
+
 
 
 note
 
-please clone this directory and link your own tess-two.
-please don't delete other's link even though it might show up as a red X on your project property.
-we decided to not include the tess-two pre-built.
+1 please clone this directory and link your own tess-two.
+  please don't delete other's link even though it might show up as a red X on your project property.
+  we decided to not include the tess-two pre-built.
+  
+2 obtain raw text after OCR in your external directory under /Download/tempTextData/test_nutriapp_ocr_string.txt
