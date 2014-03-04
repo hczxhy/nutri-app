@@ -1,25 +1,19 @@
-//different place modification test
-<<<<<<< HEAD
-//another test comment/sagun
-=======
-<<<<<<< HEAD
-guang's comment
-=======
->>>>>>> fbdde5fa5bd1c08da3cb2e1dd3f96e2bba8ef5e3
-//sagun's comment
->>>>>>> 4ab17419f0d79b42188605683eb1e2bda6e44b09
+
+
+===============================================================================================================
 task
-///////random line test
-
-
 
 jacob : language model
+        raw ocr text to sensible text
+
 sagun : setup project, remove unused fcn
+        make a temp display activity for results
+
 guang : setup git, raw text 
+        launch display activity
 
-
-
-note
+===============================================================================================================
+notes
 
 1 please clone this directory and link your own tess-two.
   please don't delete other's link even though it might show up as a red X on your project property.
@@ -27,5 +21,7 @@ note
   
 2 obtain raw text after OCR in your external directory under /Download/tempTextData/test_nutriapp_ocr_string.txt
 
+3 Currently display will take in a dummy string array and dummy float array, named dummy and dummyVal.
+  These are the value that will be loaded in the display activity
+===============================================================================================================
 
-// guang's end of file comment test
