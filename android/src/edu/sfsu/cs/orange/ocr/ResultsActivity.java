@@ -18,6 +18,7 @@ public class ResultsActivity extends Activity {
 		Bundle b = getIntent().getExtras();
 		
 		String[] nutritionValues = b.getStringArray(NUTRITION_LABEL_KEY);
+		String[] nutritionMeasure = {"","g","mg","g","g","mg"};
 		float[] nutritionQuant = b.getFloatArray(NUTRITION_QUANT_KEY);
 		String update;
 		
@@ -26,7 +27,7 @@ public class ResultsActivity extends Activity {
 		int[] ids = {R.id.textView1,R.id.textView2,R.id.textView3,R.id.textView4,R.id.textView5,R.id.textView6};		
 		for(int i=0;i<ids.length;i++){
 			tv = (TextView) findViewById(ids[i]);
-			update = nutritionValues[i] + " " + Float.toString(nutritionQuant[i]);
+			update = nutritionValues[i] + " " + Float.toString(nutritionQuant[i]) + nutritionMeasure[i];
 			tv.setText(update);
 		}		
 	}
