@@ -1,11 +1,14 @@
-# view AndroidManifest.xml #generated:37
+# view AndroidManifest.xml #generated:50
 -keep class edu.sfsu.cs.orange.ocr.CaptureActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:48
+# view AndroidManifest.xml #generated:62
 -keep class edu.sfsu.cs.orange.ocr.HelpActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:56
+# view AndroidManifest.xml #generated:71
 -keep class edu.sfsu.cs.orange.ocr.PreferencesActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:72
+-keep class edu.sfsu.cs.orange.ocr.ResultsActivity { <init>(...); }
 
 # view res/layout/capture.xml #generated:27
 -keep class edu.sfsu.cs.orange.ocr.ViewfinderView { <init>(...); }
