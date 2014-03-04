@@ -739,8 +739,11 @@ public final class CaptureActivity extends Activity implements
 		statusViewTop.setVisibility(View.GONE);
 		cameraButtonView.setVisibility(View.GONE);
 		viewfinderView.setVisibility(View.GONE);
+		
+		// original result UI
+		/*
 		resultView.setVisibility(View.VISIBLE);
-
+		
 		ImageView bitmapImageView = (ImageView) findViewById(R.id.image_view);
 		lastBitmap = ocrResult.getBitmap();
 		if (lastBitmap == null) {
@@ -750,6 +753,7 @@ public final class CaptureActivity extends Activity implements
 			bitmapImageView.setImageBitmap(lastBitmap);
 		}
 
+		
 		// Display the recognized text
 		TextView sourceLanguageTextView = (TextView) findViewById(R.id.source_language_text_view);
 		sourceLanguageTextView.setText(sourceLanguageReadable);
@@ -762,6 +766,7 @@ public final class CaptureActivity extends Activity implements
 		TextView translationLanguageLabelTextView = (TextView) findViewById(R.id.translation_language_label_text_view);
 		TextView translationLanguageTextView = (TextView) findViewById(R.id.translation_language_text_view);
 		TextView translationTextView = (TextView) findViewById(R.id.translation_text_view);
+		
 		if (isTranslationActive) {
 			// Handle translation text fields
 			translationLanguageLabelTextView.setVisibility(View.VISIBLE);
@@ -787,7 +792,20 @@ public final class CaptureActivity extends Activity implements
 			progressView.setVisibility(View.GONE);
 			setProgressBarVisibility(false);
 		}
-
+*/
+		
+		
+		// launch result activity 
+		// dummy test
+		String[] dummy = {"Calories","Fat", "Sodium","Carbohydrate","Protein","Cholesterol" };
+		float[] dummyVal ={	100,0,1,20,(float) 0.3,0};			
+		// end dummy test
+		Intent intent = new Intent(CaptureActivity.this, ResultsActivity.class);
+		Bundle b = new Bundle();
+		b.putStringArray(ResultsActivity.NUTRITION_LABEL_KEY, dummy);
+		b.putFloatArray(ResultsActivity.NUTRITION_QUANT_KEY, dummyVal);
+		intent.putExtras(b);
+		startActivity(intent);
 		return true;
 	}
 

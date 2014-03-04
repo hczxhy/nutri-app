@@ -7,14 +7,20 @@ import android.widget.TextView;
 
 public class ResultsActivity extends Activity {
 
+	public static final String NUTRITION_LABEL_KEY = "nutritionValues";
+	public static final String NUTRITION_QUANT_KEY = "nutritionQuant";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_results);
+
+		Bundle b = getIntent().getExtras();
 		
-		String[] nutritionValues = savedInstanceState.getStringArray("nutritionValues");
-		float[] nutritionQuant = savedInstanceState.getFloatArray("nutritionQuant");
+		String[] nutritionValues = b.getStringArray(NUTRITION_LABEL_KEY);
+		float[] nutritionQuant = b.getFloatArray(NUTRITION_QUANT_KEY);
 		String update;
+		
 		
 		TextView tv;
 		int[] ids = {R.id.textView1,R.id.textView2,R.id.textView3,R.id.textView4,R.id.textView5,R.id.textView6};		
