@@ -18,7 +18,7 @@ public class ResultsActivity extends Activity {
 		Bundle b = getIntent().getExtras();
 		
 		String[] nutritionValues = b.getStringArray(NUTRITION_LABEL_KEY);
-		String[] nutritionMeasure = {"","g","mg","g","g","mg"};
+		String[] nutritionMeasure = {"","g","mg","g","g","g"};
 		float[] nutritionQuant = b.getFloatArray(NUTRITION_QUANT_KEY);
 		String update;
 		
