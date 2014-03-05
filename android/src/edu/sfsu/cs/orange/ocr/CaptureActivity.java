@@ -20,6 +20,9 @@ package edu.sfsu.cs.orange.ocr;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -797,8 +800,24 @@ public final class CaptureActivity extends Activity implements
 		
 		// launch result activity 
 		// dummy test
-		String[] dummy = {"Calories","Fat", "Sodium","Carbohydrate","Protein","Cholesterol" };
-		float[] dummyVal ={	100,0,1,20,(float) 0.3,0};			
+		Dictionary_comparison mtranslator=new Dictionary_comparison(ocrResult.getText());
+		mtranslator.execute();
+		try {
+			mtranslator.get(15000, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String output=mtranslator.get_translated_text();
+		
+		String[] dummy = {"Calories","Fat", "Cholesterol","Sodium","Carbohydrate","Protein"};
+		float[] dummyVal =mtranslator.get_core_fields();			
 		// end dummy test
 		Intent intent = new Intent(CaptureActivity.this, ResultsActivity.class);
 		Bundle b = new Bundle();
