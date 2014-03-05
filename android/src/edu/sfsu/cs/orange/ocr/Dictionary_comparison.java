@@ -67,21 +67,21 @@ public class Dictionary_comparison extends AsyncTask<Void, String, Void>{
 			}
 
 			String transformed_text=text_in_line;
-			
+			//Go through all the words in the dictionary and compare to the input substring
 			for(int j=0;j<dictionary.length;j++){
-
-				Distance_calculator dist_calc=new Distance_calculator(text_in_line, dictionary[j]);
-				int dist=dist_calc.calculate_dist();
-				//Check to see if the strings have any similarity at all first before comparing to dictionary
-				if(dist==Math.max(text_in_line.length(), dictionary[j].length())){
-					System.out.println("No match");
-				}else {
-					if(dist<min_dist&&dist<scores[j]){
-						min_dist=dist;
-						transformed_text=dictionary[j];
-						field_index=j;
-						//Remove instance of field from dictionary once it has been found
-						//dictionary[j]="";
+				//Do not compare with this dictionary word if it has been already found earlier
+				if(fields_found[j]==false){
+					Distance_calculator dist_calc=new Distance_calculator(text_in_line, dictionary[j]);
+					int dist=dist_calc.calculate_dist();
+					//Check to see if the strings have any similarity at all first before comparing to dictionary
+					if(dist==Math.max(text_in_line.length(), dictionary[j].length())){
+						System.out.println("No match");
+					}else {
+						if(dist<min_dist&&dist<scores[j]){
+							min_dist=dist;
+							transformed_text=dictionary[j];
+							field_index=j;
+						}
 					}
 				}
 			}
