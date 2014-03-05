@@ -122,12 +122,17 @@ public class Dictionary_comparison extends AsyncTask<Void, String, Void>{
 			int n=m;
 			while(n<text.length()&&Character.isDigit(text.charAt(n))){
 				n++;
+				//Catch the case where the last digit is actually a misidentified g
 			}
 			result=Float.parseFloat(text.substring(m, n));
 			if(text.indexOf(" g")!=-1){
 				result=Float.parseFloat(text.substring(m, n));
-			}else if(text.indexOf(" mg")!=-1){
+			}else if(text.indexOf("mg")!=-1){
 				result=Float.parseFloat(text.substring(m,n))/1000;
+			}else if(n<text.length()&&text.charAt(n)=='g'){
+				result=Float.parseFloat(text.substring(m, n));
+			}else if(text.charAt(n-1)==9){
+				result=Float.parseFloat(text.substring(m, n-1));
 			}
 		}
 		return result;
