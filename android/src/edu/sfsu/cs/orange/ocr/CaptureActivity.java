@@ -27,41 +27,29 @@ import java.util.concurrent.TimeoutException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.text.ClipboardManager;
 import android.text.SpannableStringBuilder;
 import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -814,15 +802,20 @@ public final class CaptureActivity extends Activity implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String output=mtranslator.get_translated_text();
 		
 		String[] dummy = {"Calories","Fat", "Cholesterol","Sodium","Carbohydrate","Protein"};
-		float[] dummyVal =mtranslator.get_core_fields();			
+		float[] dummyVal =mtranslator.get_core_fields();
+		System.out.println("Calories is "+dummyVal[0]);
+		System.out.println("Fat is "+dummyVal[1]);
+		System.out.println("Cholesterol is "+dummyVal[2]);
+		System.out.println("Sodium is "+dummyVal[3]);
+		System.out.println("Carbohydrate is "+dummyVal[4]);
+		System.out.println("Protein is "+dummyVal[5]);
 		// end dummy test
-		Intent intent = new Intent(CaptureActivity.this, ResultsActivity.class);
+		Intent intent = new Intent(CaptureActivity.this, Visualization_Activity.class);
 		Bundle b = new Bundle();
-		b.putStringArray(ResultsActivity.NUTRITION_LABEL_KEY, dummy);
-		b.putFloatArray(ResultsActivity.NUTRITION_QUANT_KEY, dummyVal);
+		b.putStringArray(Visualization_Activity.NUTRITION_LABEL_KEY, dummy);
+		b.putFloatArray(Visualization_Activity.NUTRITION_QUANT_KEY, dummyVal);
 		intent.putExtras(b);
 		startActivity(intent);
 		return true;

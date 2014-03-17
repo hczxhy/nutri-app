@@ -42,6 +42,10 @@
 	<uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Allows access to the flashlight -->
+ 	<permission android:name="android.permission.FLASHLIGHT"
+             android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
+             android:protectionLevel="normal" />
     
     <application
         android:icon="@drawable/ic_launcher"
@@ -75,6 +79,15 @@
             <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" />
+        </activity>
+        <activity
+            android:name="edu.sfsu.cs.orange.ocr.Visualization_Activity"
+            android:label="@string/visualization_activity_title"
+             android:parentActivityName="edu.sfsu.cs.orange.ocr.CaptureActivity" 
+             android:screenOrientation="portrait">
+            <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" /> 
         </activity>
     </application>
     
