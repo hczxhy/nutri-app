@@ -18,22 +18,22 @@
 package edu.sfsu.cs.orange.ocr.camera;
 
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Point;
-import android.hardware.Camera;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
-
-import edu.sfsu.cs.orange.ocr.PreferencesActivity;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Point;
+import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
+import edu.sfsu.cs.orange.ocr.PreferencesActivity;
 
 /**
  * A class which deals with reading, parsing, and setting the camera parameters which are used to
@@ -67,6 +67,7 @@ final class CameraConfigurationManager {
     Display display = manager.getDefaultDisplay();
     int width = display.getWidth();
     int height = display.getHeight();
+    
     // We're landscape-only, and have apparently seen issues with display thinking it's portrait 
     // when waking from sleep. If it's not landscape, assume it's mistaken and reverse them:
     if (width < height) {
@@ -113,7 +114,8 @@ final class CameraConfigurationManager {
     if (focusMode != null) {
       parameters.setFocusMode(focusMode);
     }
-
+    //Turn on flash
+    parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
     parameters.setPreviewSize(cameraResolution.x, cameraResolution.y);
     camera.setParameters(parameters);
   }

@@ -19,7 +19,17 @@
 
     <string name="app_name">OCR Test</string>
     <string name="title_activity_results">ResultsActivity</string>
+	<string name="visualization_activity_title">VisualizationActivity</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="vis_page_title">Nutrition Facts</string>
 
+    <string name="calories">Calories</string>
+    <string name="total_fat">Total Fat</string>
+    <string name="carbs">Carbohydrates</string>
+    <string name="serving_size">Serving Size</string>
+    <string name="sodium">Sodium</string>
+    <string name="cholesterol">Cholesterol</string>
+    
+    <string name="comparison_button">This is equivalent to...</string>
 </resources>
