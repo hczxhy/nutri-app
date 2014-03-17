@@ -71,6 +71,7 @@ public final class ViewfinderView extends View {
   private final int maskColor;
   private final int frameColor;
   private final int cornerColor;
+  private final int segmentationColor;
   private OcrResultText resultText;
   private String[] words;
   private List<Rect> regionBoundingBoxes;
@@ -92,6 +93,7 @@ public final class ViewfinderView extends View {
     maskColor = resources.getColor(R.color.viewfinder_mask);
     frameColor = resources.getColor(R.color.viewfinder_frame);
     cornerColor = resources.getColor(R.color.viewfinder_corners);
+    segmentationColor = resources.getColor(R.color.viewfinder_segmentation);
 
     //    bounds = new Rect();
     previewFrame = new Rect();
@@ -118,7 +120,8 @@ public final class ViewfinderView extends View {
     canvas.drawRect(0, frame.top, frame.left, frame.bottom + 1, paint);
     canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1, paint);
     canvas.drawRect(0, frame.bottom + 1, width, height, paint);
-
+    
+   
     // If we have an OCR result, overlay its information on the viewfinder.
     if (resultText != null) {
 
@@ -369,7 +372,13 @@ public final class ViewfinderView extends View {
     canvas.drawRect(frame.right - 15, frame.bottom, frame.right + 15, frame.bottom + 15, paint);
     canvas.drawRect(frame.right, frame.bottom - 15, frame.right + 15, frame.bottom + 15, paint);  
 
+    // Draw overlay segmentation
+    paint.setColor(segmentationColor);
 
+    canvas.drawRect(frame.left+frame.width()/4, frame.top, frame.left+frame.width()/4+1, frame.bottom, paint);
+    canvas.drawRect(frame.left+frame.width()/2, frame.top, frame.left+frame.width()/2+1, frame.bottom, paint);
+    canvas.drawRect(frame.right-frame.width()/4, frame.top, frame.right-frame.width()/4+1, frame.bottom, paint);
+    
     // Request another update at the animation interval, but don't repaint the entire viewfinder mask.
     //postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
   }

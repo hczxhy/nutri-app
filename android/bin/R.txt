@@ -20,6 +20,7 @@ int color translation_text 0x7f070007
 int color viewfinder_corners 0x7f070008
 int color viewfinder_frame 0x7f070009
 int color viewfinder_mask 0x7f07000a
+int color viewfinder_segmentation 0x7f07000b
 int dimen activity_horizontal_margin 0x7f080000
 int dimen activity_vertical_margin 0x7f080001
 int drawable background 0x7f020000
