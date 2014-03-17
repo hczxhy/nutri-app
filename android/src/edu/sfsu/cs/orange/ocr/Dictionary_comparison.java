@@ -122,7 +122,6 @@ public class Dictionary_comparison extends AsyncTask<Void, String, Void>{
 			int n=m;
 			while(n<text.length()&&Character.isDigit(text.charAt(n))){
 				n++;
-				//Catch the case where the last digit is actually a misidentified g
 			}
 			result=Float.parseFloat(text.substring(m, n));
 			if(text.indexOf(" g")!=-1){
@@ -131,7 +130,8 @@ public class Dictionary_comparison extends AsyncTask<Void, String, Void>{
 				result=Float.parseFloat(text.substring(m,n))/1000;
 			}else if(n<text.length()&&text.charAt(n)=='g'){
 				result=Float.parseFloat(text.substring(m, n));
-			}else if(text.charAt(n-1)==9){
+			}else if(text.charAt(n-1)=='9'){
+				//Catch the case where the last digit is actually a misidentified g
 				result=Float.parseFloat(text.substring(m, n-1));
 			}
 		}
@@ -141,31 +141,31 @@ public class Dictionary_comparison extends AsyncTask<Void, String, Void>{
 	private String fix_misid(String text){
 		if(text!=null){
 			if(text.indexOf("o g")!=-1){
-				text.replaceFirst("o g", " 0 g");
+				text=text.replaceFirst("o g", " 0 g");
 			}
 			if(text.indexOf("t g")!=-1){
-				text.replaceFirst("t g", "1 g");
+				text=text.replaceFirst("t g", "1 g");
 			}
 			if(text.indexOf("I g")!=-1){
-				text.replaceFirst("I g", "1 g");
+				text=text.replaceFirst("I g", "1 g");
 			}
 			if(text.indexOf("o 9")!=-1){
-				text.replaceFirst("o 9", "0 g");
+				text=text.replaceFirst("o 9", "0 g");
 			}
 			if(text.indexOf("t 9 ")!=-1){
 				text.replaceFirst("t 9", "1 g");
 			}
 			if(text.indexOf("I 9")!=-1){
-				text.replaceFirst("I 9", "1 g");
+				text=text.replaceFirst("I 9", "1 g");
 			}
 			if(text.indexOf("m9")!=-1){
-				text.replaceFirst("m9", "mg");
+				text=text.replaceFirst("m9", "mg");
 			}
 			if((text.indexOf(" 9")!=-1) && Character.isDigit(text.charAt(text.indexOf(" 9")-1))){
-				text.replaceFirst(" 9", " g");
+				text=text.replaceFirst(" 9", " g");
 			}
 			if((text.indexOf(" m")!=-1) && Character.isDigit(text.charAt(text.indexOf(" m")-1))){
-				text.replaceFirst(" m", " mg");
+				text=text.replaceFirst(" m", " mg");
 			}
 		}
 		return text;
