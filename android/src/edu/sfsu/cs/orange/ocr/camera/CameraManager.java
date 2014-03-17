@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -42,10 +43,10 @@ public final class CameraManager {
 
   private static final String TAG = CameraManager.class.getSimpleName();
   
-  private static final int MIN_FRAME_WIDTH = 50; // originally 240
-  private static final int MIN_FRAME_HEIGHT = 20; // originally 240
-  private static final int MAX_FRAME_WIDTH = 900; // originally 480
-  private static final int MAX_FRAME_HEIGHT = 600; // originally 360
+  private static final int MIN_FRAME_WIDTH = 20; // originally 240
+  private static final int MIN_FRAME_HEIGHT = 50; // originally 240
+  private static final int MAX_FRAME_WIDTH = 600; // originally 480
+  private static final int MAX_FRAME_HEIGHT = 900; // originally 360
   
   private final Context context;
   private final CameraConfigurationManager configManager;
@@ -85,6 +86,13 @@ public final class CameraManager {
       }
       camera = theCamera;
     }
+
+    // set orientation
+    camera.setDisplayOrientation(90);
+    Parameters paramOrientation = camera.getParameters();
+    Rect origPreviewSize = holder.getSurfaceFrame();
+    paramOrientation.setPreviewSize(origPreviewSize.height(),origPreviewSize.width());
+    
     camera.setPreviewDisplay(holder);
     if (!initialized) {
       initialized = true;
@@ -99,6 +107,7 @@ public final class CameraManager {
     
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
     reverseImage = prefs.getBoolean(PreferencesActivity.KEY_REVERSE_IMAGE, false);
+    
   }
 
   /**
@@ -184,7 +193,7 @@ public final class CameraManager {
         // Called early, before init even finished
         return null;
       }
-      int width = screenResolution.x * 5/6;
+      int width = screenResolution.y *3/ 5;
       if (width < MIN_FRAME_WIDTH) {
         width = MIN_FRAME_WIDTH;
       } else if (width > MAX_FRAME_WIDTH) {
@@ -196,7 +205,7 @@ public final class CameraManager {
       } else if (height > MAX_FRAME_HEIGHT) {
         height = MAX_FRAME_HEIGHT;
       }
-      int leftOffset = (screenResolution.x - width) / 4;
+      int leftOffset = (screenResolution.y - width) / 2;
       int topOffset = (screenResolution.y - height) / 2;
       framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);      
     }

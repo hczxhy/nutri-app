@@ -277,7 +277,7 @@ public final class CaptureActivity extends Activity implements
 		int previousOcrEngineMode = ocrEngineMode;
 
 		retrievePreferences();
-
+	
 		// Set up the camera preview surface.
 		surfaceView = (SurfaceView) findViewById(R.id.preview_view);
 		surfaceHolder = surfaceView.getHolder();

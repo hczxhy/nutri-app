@@ -16,9 +16,12 @@
 package edu.sfsu.cs.orange.ocr;
 
 import com.googlecode.leptonica.android.ReadFile;
+import com.googlecode.tesseract.android.ResultIterator;
 import com.googlecode.tesseract.android.TessBaseAPI;
+import com.googlecode.tesseract.android.TessBaseAPI.PageIteratorLevel;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -74,8 +77,24 @@ final class OcrRecognizeAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
     try {     
     
-      Bitmap CroppedBitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth()/4,bitmap.getHeight());
-      baseApi.setImage(ReadFile.readBitmap(CroppedBitmap));
+      //Bitmap CroppedBitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth()/4,bitmap.getHeight());
+    	/*
+    	byte[] bm = CustomPreprocess.createBinaryImage(bitmap);
+    	int w = bitmap.getWidth();
+    	int h = bitmap.getHeight();
+    	baseApi.setImage(bm,w,h,0,w);
+    	*/
+    	baseApi.setImage(ReadFile.readBitmap(bitmap));
+    	/*
+    	final ResultIterator ri = baseApi.getResultIterator();
+    	ri.begin();
+    	textResult="";
+    	do{
+    		String line = ri.getUTF8Text(PageIteratorLevel.RIL_TEXTLINE);
+    		textResult+=line;
+    		} while(ri.next(PageIteratorLevel.RIL_TEXTLINE));
+    	*/
+    	//baseApi.setRectangle(left, top, width, height)
       textResult = baseApi.getUTF8Text();
       timeRequired = System.currentTimeMillis() - start;
 

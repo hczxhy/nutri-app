@@ -37,7 +37,7 @@
         android:name="android.hardware.camera.flash"
         android:required="false" />
     <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.screen.landscape" />
+    <uses-feature android:name="android.hardware.screen.portrait" />
     
 	<uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -53,7 +53,7 @@
         <activity
             android:name="edu.sfsu.cs.orange.ocr.CaptureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>

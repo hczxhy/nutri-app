@@ -94,18 +94,38 @@ public final class R {
     public static final class drawable {
         public static final int background=0x7f020000;
         public static final int background_pressed=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int shutter=0x7f020003;
-        public static final int shutter_button=0x7f020004;
-        public static final int shutter_pressed=0x7f020005;
+        public static final int greenprogressbar=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int redprogressbar=0x7f020004;
+        public static final int shutter=0x7f020005;
+        public static final int shutter_button=0x7f020006;
+        public static final int shutter_pressed=0x7f020007;
+        public static final int yellowprogressbar=0x7f020008;
     }
     public static final class id {
-        public static final int action_settings=0x7f090022;
+        public static final int action_settings=0x7f090039;
+        public static final int cal_text_row=0x7f090027;
+        public static final int cal_vis=0x7f090025;
+        public static final int cal_vis_row=0x7f090024;
         public static final int camera_button_view=0x7f09001c;
+        public static final int car_num=0x7f09002e;
+        public static final int car_pb=0x7f09002f;
+        public static final int car_vis=0x7f09002d;
+        public static final int chol_num=0x7f090033;
+        public static final int chol_pb=0x7f090034;
+        public static final int chol_text_row=0x7f090030;
+        public static final int chol_vis=0x7f090032;
+        public static final int chol_vis_row=0x7f090031;
+        public static final int comparison_button=0x7f090038;
         public static final int decode=0x7f090000;
         public static final int decode_failed=0x7f090001;
         public static final int decode_succeeded=0x7f090002;
         public static final int done_button=0x7f090021;
+        public static final int fat_num=0x7f09002b;
+        public static final int fat_pb=0x7f09002c;
+        public static final int fat_text_row=0x7f090028;
+        public static final int fat_vis=0x7f09002a;
+        public static final int fat_vis_row=0x7f090029;
         public static final int help_contents=0x7f090020;
         public static final int image_view=0x7f090014;
         public static final int indeterminate_progress_indicator_view=0x7f09001b;
@@ -121,7 +141,11 @@ public final class R {
         public static final int quit=0x7f090009;
         public static final int restart_preview=0x7f09000a;
         public static final int result_view=0x7f090013;
+        public static final int ser_vis=0x7f090026;
         public static final int shutter_button=0x7f09001e;
+        public static final int sod_num=0x7f090036;
+        public static final int sod_pb=0x7f090037;
+        public static final int sod_vis=0x7f090035;
         public static final int source_language_text_view=0x7f090016;
         public static final int source_language_text_view_label=0x7f090015;
         public static final int status_view_bottom=0x7f09001f;
@@ -132,6 +156,8 @@ public final class R {
         public static final int textView4=0x7f09000e;
         public static final int textView5=0x7f09000f;
         public static final int textView6=0x7f090010;
+        public static final int title=0x7f090023;
+        public static final int title_row=0x7f090022;
         public static final int translation_language_label_text_view=0x7f090017;
         public static final int translation_language_text_view=0x7f090018;
         public static final int translation_text_view=0x7f09001a;
@@ -141,6 +167,7 @@ public final class R {
         public static final int activity_results=0x7f030000;
         public static final int capture=0x7f030001;
         public static final int help=0x7f030002;
+        public static final int visualization_page=0x7f030003;
     }
     public static final class menu {
         public static final int results=0x7f0b0000;
@@ -149,10 +176,19 @@ public final class R {
         public static final int beep=0x7f050000;
     }
     public static final class string {
-        public static final int action_settings=0x7f0a0002;
+        public static final int action_settings=0x7f0a0003;
         public static final int app_name=0x7f0a0000;
-        public static final int hello_world=0x7f0a0003;
+        public static final int calories=0x7f0a0006;
+        public static final int carbs=0x7f0a0008;
+        public static final int cholesterol=0x7f0a000b;
+        public static final int comparison_button=0x7f0a000c;
+        public static final int hello_world=0x7f0a0004;
+        public static final int serving_size=0x7f0a0009;
+        public static final int sodium=0x7f0a000a;
         public static final int title_activity_results=0x7f0a0001;
+        public static final int total_fat=0x7f0a0007;
+        public static final int vis_page_title=0x7f0a0005;
+        public static final int visualization_activity_title=0x7f0a0002;
     }
     public static final class xml {
         public static final int preferences=0x7f040000;

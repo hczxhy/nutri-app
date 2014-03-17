@@ -373,12 +373,17 @@ public final class ViewfinderView extends View {
     canvas.drawRect(frame.right, frame.bottom - 15, frame.right + 15, frame.bottom + 15, paint);  
 
     // Draw overlay segmentation
+    /*
     paint.setColor(segmentationColor);
-
-    canvas.drawRect(frame.left+frame.width()/4, frame.top, frame.left+frame.width()/4+1, frame.bottom, paint);
-    canvas.drawRect(frame.left+frame.width()/2, frame.top, frame.left+frame.width()/2+1, frame.bottom, paint);
-    canvas.drawRect(frame.right-frame.width()/4, frame.top, frame.right-frame.width()/4+1, frame.bottom, paint);
-    
+    int seg_width = 10;
+    canvas.drawRect(frame.left+frame.width()/8, frame.top, frame.left+frame.width()/8+seg_width, frame.bottom, paint);
+    canvas.drawRect(frame.left+frame.width()/4, frame.top, frame.left+frame.width()/4+seg_width, frame.bottom, paint);
+    canvas.drawRect(frame.left+frame.width()*3/8, frame.top, frame.left+frame.width()*3/8+seg_width, frame.bottom, paint);
+    canvas.drawRect(frame.left+frame.width()/2, frame.top, frame.left+frame.width()/2+seg_width, frame.bottom, paint);
+    canvas.drawRect(frame.left+frame.width()*5/8, frame.top, frame.left+frame.width()*5/8+seg_width, frame.bottom, paint);
+    canvas.drawRect(frame.left+frame.width()*3/4, frame.top, frame.left+frame.width()*3/4+seg_width, frame.bottom, paint);
+    canvas.drawRect(frame.left+frame.width()*7/8, frame.top, frame.left+frame.width()*7/8+seg_width, frame.bottom, paint);
+    */
     // Request another update at the animation interval, but don't repaint the entire viewfinder mask.
     //postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
   }
