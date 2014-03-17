@@ -31,27 +31,27 @@ public class TextAnimationView extends ImageView {
 		
 		large_green_paint.setColor(Color.GREEN);
 		large_green_paint.setTextSize(LARGE_TEXT_SIZE);
-		large_green_paint.setShadowLayer(SHADOW_SIZE, 0, 0, Color.GRAY);
+		large_green_paint.setShadowLayer(SHADOW_SIZE, 1, 1, Color.BLACK);
 		
 		large_yellow_paint.setColor(Color.YELLOW);
 		large_yellow_paint.setTextSize(LARGE_TEXT_SIZE);
-		large_yellow_paint.setShadowLayer(SHADOW_SIZE, 0, 0, Color.GRAY);
+		large_yellow_paint.setShadowLayer(SHADOW_SIZE, 1, 1, Color.BLACK);
 		
 		large_red_paint.setColor(Color.RED);
 		large_red_paint.setTextSize(LARGE_TEXT_SIZE);
-		large_red_paint.setShadowLayer(SHADOW_SIZE, 0, 0, Color.GRAY);
+		large_red_paint.setShadowLayer(SHADOW_SIZE, 1, 1, Color.BLACK);
 		
 		small_green_paint.setColor(Color.GREEN);
 		small_green_paint.setTextSize(SMALL_TEXT_SIZE);
-		small_green_paint.setShadowLayer(SHADOW_SIZE, 0, 0, Color.GRAY);
+		small_green_paint.setShadowLayer(SHADOW_SIZE, 1, 1, Color.BLACK);
 		
 		small_yellow_paint.setColor(Color.YELLOW);
 		small_yellow_paint.setTextSize(SMALL_TEXT_SIZE);
-		small_yellow_paint.setShadowLayer(SHADOW_SIZE, 0, 0, Color.GRAY);
+		small_yellow_paint.setShadowLayer(SHADOW_SIZE, 1, 1, Color.BLACK);
 		
 		small_red_paint.setColor(Color.RED);
 		small_red_paint.setTextSize(SMALL_TEXT_SIZE);
-		small_red_paint.setShadowLayer(SHADOW_SIZE, 0, 0, Color.GRAY);
+		small_red_paint.setShadowLayer(SHADOW_SIZE, 1, 1, Color.BLACK);
 		
 		large_curr_paint=large_green_paint;
 		small_curr_paint=small_green_paint;
