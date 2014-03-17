@@ -77,6 +77,9 @@ public final class R {
         /**  viewfinder rectangle 
          */
         public static final int viewfinder_mask=0x7f07000a;
+        /**  viewfinder exterior darkened area 
+         */
+        public static final int viewfinder_segmentation=0x7f07000b;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 

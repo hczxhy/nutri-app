@@ -784,7 +784,9 @@ public final class CaptureActivity extends Activity implements
 			setProgressBarVisibility(false);
 		}
 */
-		
+		// launch toast to indicate ocr time
+		Toast toast = Toast.makeText(this, ocrResult.toString(),
+				Toast.LENGTH_SHORT);
 		
 		// launch result activity 
 		// dummy test
@@ -818,6 +820,7 @@ public final class CaptureActivity extends Activity implements
 		b.putFloatArray(Visualization_Activity.NUTRITION_QUANT_KEY, dummyVal);
 		intent.putExtras(b);
 		startActivity(intent);
+		
 		return true;
 	}
 

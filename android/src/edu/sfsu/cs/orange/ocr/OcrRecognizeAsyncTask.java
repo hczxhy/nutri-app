@@ -73,7 +73,9 @@ final class OcrRecognizeAsyncTask extends AsyncTask<Void, Void, Boolean> {
     //      }
 
     try {     
-      baseApi.setImage(ReadFile.readBitmap(bitmap));
+    
+      Bitmap CroppedBitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth()/4,bitmap.getHeight());
+      baseApi.setImage(ReadFile.readBitmap(CroppedBitmap));
       textResult = baseApi.getUTF8Text();
       timeRequired = System.currentTimeMillis() - start;
 
