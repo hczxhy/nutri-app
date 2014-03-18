@@ -15,13 +15,17 @@
  */
 package edu.sfsu.cs.orange.ocr;
 
+import com.googlecode.leptonica.android.Binarize;
+import com.googlecode.leptonica.android.Pix;
 import com.googlecode.leptonica.android.ReadFile;
+import com.googlecode.leptonica.android.WriteFile;
 import com.googlecode.tesseract.android.ResultIterator;
 import com.googlecode.tesseract.android.TessBaseAPI;
 import com.googlecode.tesseract.android.TessBaseAPI.PageIteratorLevel;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -74,7 +78,17 @@ final class OcrRecognizeAsyncTask extends AsyncTask<Void, Void, Boolean> {
     //        Log.e("OcrRecognizeAsyncTask", "thresholding completed. converting to bmp. size:" + bitmap.getWidth() + "x" + bitmap.getHeight());
     //        bitmap = WriteFile.writeBitmap(thresholdedImage);
     //      }
-
+    // fix bitmap rotation
+	int w = bitmap.getWidth();
+	int h = bitmap.getHeight();
+    Matrix RotationMatrix = new Matrix();
+    RotationMatrix.postRotate(90);
+    bitmap = Bitmap.createBitmap(bitmap,0,0,w,h,RotationMatrix,true);
+    
+    // binarize
+    Pix thresholdedImage = Binarize.otsuAdaptiveThreshold(ReadFile.readBitmap(bitmap), 48, 48, 1, 1, 0.1F);
+    
+    bitmap = WriteFile.writeBitmap(thresholdedImage);
     try {     
     
       //Bitmap CroppedBitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth()/4,bitmap.getHeight());
@@ -85,6 +99,7 @@ final class OcrRecognizeAsyncTask extends AsyncTask<Void, Void, Boolean> {
     	baseApi.setImage(bm,w,h,0,w);
     	*/
     	baseApi.setImage(ReadFile.readBitmap(bitmap));
+    	//baseApi.setRectangle(0,0,432,576/4);
     	/*
     	final ResultIterator ri = baseApi.getResultIterator();
     	ri.begin();

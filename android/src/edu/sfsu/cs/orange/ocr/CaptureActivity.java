@@ -722,6 +722,7 @@ public final class CaptureActivity extends Activity implements
 			return false;
 		} else {
 			storeResultToTextFile(ocrResult.getText());
+			storeOCRToBitmapFile(ocrResult.getBitmap());
 		}
 
 		// Turn off capture-related UI elements
@@ -860,6 +861,44 @@ public final class CaptureActivity extends Activity implements
 				toast.show();
 			} catch (IOException e) {
 				Toast toast = Toast.makeText(this, "Result Text File Creation Failed : "+fileNameTextResult,
+						Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.BOTTOM, 0, 0);
+				toast.show();
+			}
+		}
+
+	}
+	void storeOCRToBitmapFile(Bitmap result) {
+		// Store to text file
+		final String fileNameBitmapResult = "test_nutriapp_ocr_bitmap.bmp";
+
+		if (result != null && !result.equals("")) {
+			// make directory if it does not exist
+
+
+			File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+			File dataDir = new File(storageDir,"tempTextData");
+			
+			// if the directory does not exist, create it
+			if (!dataDir.exists()) {
+				dataDir.mkdir();
+			}
+
+			File fileToWrite = new File(dataDir,fileNameBitmapResult);
+
+			try {
+				// write to file
+				
+				FileOutputStream fos = new FileOutputStream(fileToWrite);
+				result.compress(Bitmap.CompressFormat.PNG,  90, fos);
+				fos.close();
+
+				Toast toast = Toast.makeText(this, "Result Bitmap File Created as "+fileNameBitmapResult,
+						Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.BOTTOM, 0, 0);
+				toast.show();
+			} catch (IOException e) {
+				Toast toast = Toast.makeText(this, "Result Bitmap File Creation Failed : "+fileNameBitmapResult,
 						Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.BOTTOM, 0, 0);
 				toast.show();
