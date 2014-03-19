@@ -814,11 +814,12 @@ public final class CaptureActivity extends Activity implements
 		System.out.println("Sodium is "+dummyVal[3]);
 		System.out.println("Carbohydrate is "+dummyVal[4]);
 		System.out.println("Protein is "+dummyVal[5]);
+		float[] dummyVal_with_ss={dummyVal[0],dummyVal[1],dummyVal[2],dummyVal[3],dummyVal[4],dummyVal[5],0};
 		// end dummy test
 		Intent intent = new Intent(CaptureActivity.this, Visualization_Activity.class);
 		Bundle b = new Bundle();
 		b.putStringArray(Visualization_Activity.NUTRITION_LABEL_KEY, dummy);
-		b.putFloatArray(Visualization_Activity.NUTRITION_QUANT_KEY, dummyVal);
+		b.putFloatArray(Visualization_Activity.NUTRITION_QUANT_KEY, dummyVal_with_ss);
 		intent.putExtras(b);
 		startActivity(intent);
 		

@@ -115,7 +115,7 @@ final class CameraConfigurationManager {
       parameters.setFocusMode(focusMode);
     }
     //Turn on flash (taken out)
-    //parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
+    parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
     parameters.setPreviewSize(cameraResolution.x, cameraResolution.y);
     camera.setParameters(parameters);
   }

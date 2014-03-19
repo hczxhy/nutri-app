@@ -9,9 +9,9 @@ import android.os.AsyncTask;
 public class Dictionary_comparison extends AsyncTask<Void, String, Void>{
 	private String input_text="";
 	private String output_text="";
-	private String[] dictionary={"Amount","Teneur","Calories / Calories", "Fat / Lipides", "Cholesterol / Cholesterol", "Sodium / Sodium", "Carbohydrate / Glucides", "Protein / Proteines"};
+	private String[] dictionary={"Amount","teneur","Calories / Calories", "Fat / Lipides", "Cholesterol / Cholesterol", "Sodium / Sodium", "Carbohydrate / Glucides", "Protein / Proteines"};
 	private int[] scores={4,4,10,7,14,9,15,10};
-	private float[] core_values=new float[6]; 			//Core values are in this order: Calories, Fat, Cholesterol, Sodium, Carbohydrate, Protein
+	private float[] core_values=new float[6]; 			//Core values are in this order: Calories, Fat, Cholesterol, Sodium, Carbohydrate, Protein, Serving Size
 	
 	public Dictionary_comparison(String text){
 		if(text!=null){
@@ -44,7 +44,7 @@ public class Dictionary_comparison extends AsyncTask<Void, String, Void>{
 			substrings[m]=substring_vec.get(m);
 		}
 		//Go through input text line by line and compare to dictionary
-		for(int i=3;i<substrings.length;i++){
+		for(int i=0;i<substrings.length;i++){
 			int min_dist=10000;
 			String curr_line=substrings[i];
 			//Check special cases where numbers were misidentified as letters, or vice versa
@@ -85,7 +85,32 @@ public class Dictionary_comparison extends AsyncTask<Void, String, Void>{
 					}
 				}
 			}
-			
+			//Do a special check for serving size
+			/*if(j==(dictionary.length-1) && dist<=1){
+				int x=0;
+				while(x<curr_line.length()){
+					int y=x;
+					while(y<curr_line.length()&&!Character.isDigit(curr_line.charAt(y))){
+						y++;
+					}
+					int z=y;
+					while(z<curr_line.length()&&Character.isDigit(curr_line.charAt(z))){
+						z++;
+					}
+					if(z<curr_line.length()&&(curr_line.charAt(z)==' ' || curr_line.charAt(z)=='g')){
+						if(curr_line.charAt(z)=='g'){
+							core_values[6]=Float.parseFloat(curr_line.substring(y,z));
+							System.out.println("Serving size found!!  "+core_values[6]);
+							break;
+						}else if(curr_line.charAt(z-1)=='9' || ((z+1)<curr_line.length() && (curr_line.charAt(z+1)=='g'||curr_line.charAt(z+1)=='9'))){
+							core_values[6]=Float.parseFloat(curr_line.substring(y,z));
+							System.out.println("Serving size found!!  "+core_values[6]);
+							break;
+						}
+					}
+					x=z;
+				}
+			}*/
 			substrings[i]=transformed_text+" "+rest_of_line;
 			//Store values of core fields
 			if(field_index==2 && fields_found[field_index]==false)
@@ -113,7 +138,7 @@ public class Dictionary_comparison extends AsyncTask<Void, String, Void>{
 	}
 	
 	private float parse_value(String text){
-		float result=9999;
+		float result=0;
 		if(text.length()!=0){
 			int m=0;
 			while(m<text.length()&&!Character.isDigit(text.charAt(m))){
@@ -130,7 +155,7 @@ public class Dictionary_comparison extends AsyncTask<Void, String, Void>{
 				result=Float.parseFloat(text.substring(m,n))/1000;
 			}else if(n<text.length()&&text.charAt(n)=='g'){
 				result=Float.parseFloat(text.substring(m, n));
-			}else if(text.charAt(n-1)=='9'){
+			}else if(text.charAt(n-1)=='9' && m!=(n-1)){
 				//Catch the case where the last digit is actually a misidentified g
 				result=Float.parseFloat(text.substring(m, n-1));
 			}
