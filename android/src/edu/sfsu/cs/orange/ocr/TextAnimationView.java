@@ -74,10 +74,10 @@ public class TextAnimationView extends ImageView {
 	}
 
 	 public void draw_value(float value, int percent){
-		 if(percent<Visualization_Activity.YELLOW_THRESH){
+		 if(percent<GraphActivity.YELLOW_THRESH){
 			 large_curr_paint=large_green_paint;
 			 small_curr_paint=small_green_paint;
-		 }else if(percent>Visualization_Activity.YELLOW_THRESH && percent<Visualization_Activity.RED_THRESH){
+		 }else if(percent>GraphActivity.YELLOW_THRESH && percent<GraphActivity.RED_THRESH){
 			 large_curr_paint=large_yellow_paint;
 			 small_curr_paint=small_yellow_paint;
 		 }else{
