@@ -31,5 +31,11 @@
   <color name="viewfinder_frame">#ffd6d6d6</color> <!-- viewfinder rectangle -->
   <color name="viewfinder_mask">#60000000</color>  <!-- viewfinder exterior darkened area -->
   <color name="viewfinder_segmentation">#ffffffff</color> <!-- segmentation lines -->
-  
+  <!--  Palette Colors -->
+  <color name ="nutri_red">#ffa93722</color>
+  <color name ="nutri_yellow">#fff3c505</color>
+  <color name ="nutri_green">#ff90c000</color>
+  <color name ="nutri_white">#ffffffff</color>
+  <color name ="nutri_gray">#ff888888</color>
+  <color name ="nutri_blue">#ff0083c0</color>
 </resources>
