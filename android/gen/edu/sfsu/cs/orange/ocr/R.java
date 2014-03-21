@@ -243,11 +243,14 @@ containing a value of this type.
     }
     public static final class id {
         public static final int RelativeLayout01=0x7f0a003d;
-        public static final int action_settings=0x7f0a0045;
+        public static final int action_settings=0x7f0a004e;
         public static final int btn_increment=0x7f0a0041;
         public static final int btn_spin=0x7f0a0040;
         public static final int cal_spinner=0x7f0a0021;
         public static final int cal_text=0x7f0a0023;
+        public static final int cal_text_row=0x7f0a0049;
+        public static final int cal_vis=0x7f0a0047;
+        public static final int cal_vis_row=0x7f0a0046;
         public static final int camera_button_view=0x7f0a001c;
         public static final int car_num=0x7f0a002b;
         public static final int car_pb=0x7f0a002c;
@@ -256,7 +259,9 @@ containing a value of this type.
         public static final int cho_text=0x7f0a002d;
         public static final int chol_num=0x7f0a0030;
         public static final int chol_pb=0x7f0a0031;
+        public static final int chol_text_row=0x7f0a004c;
         public static final int chol_vis=0x7f0a002f;
+        public static final int chol_vis_row=0x7f0a004d;
         public static final int comparison_button=0x7f0a0035;
         public static final int decode=0x7f0a0000;
         public static final int decode_failed=0x7f0a0001;
@@ -265,7 +270,9 @@ containing a value of this type.
         public static final int fat_num=0x7f0a0028;
         public static final int fat_pb=0x7f0a0029;
         public static final int fat_text=0x7f0a0025;
+        public static final int fat_text_row=0x7f0a004a;
         public static final int fat_vis=0x7f0a0027;
+        public static final int fat_vis_row=0x7f0a004b;
         public static final int help_contents=0x7f0a0036;
         public static final int image_view=0x7f0a0014;
         public static final int indeterminate_progress_indicator_view=0x7f0a001b;
@@ -289,6 +296,7 @@ containing a value of this type.
         public static final int result_view=0x7f0a0013;
         public static final int rl_login_header=0x7f0a0038;
         public static final int ser_text=0x7f0a0024;
+        public static final int ser_vis=0x7f0a0048;
         public static final int serving_size_vis=0x7f0a0022;
         public static final int shutter_button=0x7f0a001e;
         public static final int sod_num=0x7f0a0033;
@@ -306,6 +314,7 @@ containing a value of this type.
         public static final int textView5=0x7f0a000f;
         public static final int textView6=0x7f0a0010;
         public static final int title=0x7f0a0020;
+        public static final int title_row=0x7f0a0045;
         public static final int translation_language_label_text_view=0x7f0a0017;
         public static final int translation_language_text_view=0x7f0a0018;
         public static final int translation_text_view=0x7f0a001a;
@@ -322,6 +331,7 @@ containing a value of this type.
         public static final int main=0x7f030004;
         public static final int progress_spinner=0x7f030005;
         public static final int progress_wheel_activity=0x7f030006;
+        public static final int visualization_page=0x7f030007;
     }
     public static final class menu {
         public static final int results=0x7f0b0000;

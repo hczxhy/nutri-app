@@ -23,6 +23,10 @@
 # view res/layout/graphs_page.xml #generated:174
 # view res/layout/graphs_page.xml #generated:243
 # view res/layout/graphs_page.xml #generated:264
+# view res/layout/visualization_page.xml #generated:147
+# view res/layout/visualization_page.xml #generated:169
+# view res/layout/visualization_page.xml #generated:231
+# view res/layout/visualization_page.xml #generated:252
 -keep class edu.sfsu.cs.orange.ocr.TextAnimationView { <init>(...); }
 
 # view res/layout/capture.xml #generated:27
