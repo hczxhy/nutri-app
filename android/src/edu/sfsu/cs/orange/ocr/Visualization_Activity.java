@@ -7,12 +7,15 @@ import java.util.concurrent.Executors;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -181,6 +184,19 @@ public class Visualization_Activity extends Activity {
 		run_chol_visualization();
 		run_sod_visualization();
 		
+		
+		// button listener
+		final float[] _val = values;
+		Button comparisonButton = (Button)findViewById(R.id.comparison_button);
+		comparisonButton.setOnClickListener(new Button.OnClickListener(){
+			public void onClick(View v){
+				Intent intent = new Intent(Visualization_Activity.this, RecommenderActivity.class);
+				Bundle b = new Bundle();
+				b.putFloatArray(RecommenderActivity.NUTRITION_QUANT_KEY, _val);
+				intent.putExtras(b);
+				startActivity(intent);
+			}
+		});
 	}
 	
 	public void run_cal_visualization(){
