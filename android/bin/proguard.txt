@@ -16,13 +16,16 @@
 # view AndroidManifest.xml #generated:55
 -keep class edu.sfsu.cs.orange.ocr.CaptureActivity { <init>(...); }
 
+# view AndroidManifest.xml #generated:94
+-keep class edu.sfsu.cs.orange.ocr.GraphActivity { <init>(...); }
+
 # view AndroidManifest.xml #generated:67
 -keep class edu.sfsu.cs.orange.ocr.HelpActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:76
 -keep class edu.sfsu.cs.orange.ocr.PreferencesActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:94
+# view AndroidManifest.xml #generated:103
 -keep class edu.sfsu.cs.orange.ocr.RecommenderActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:77
