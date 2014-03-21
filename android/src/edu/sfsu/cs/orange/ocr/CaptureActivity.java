@@ -785,9 +785,6 @@ public final class CaptureActivity extends Activity implements
 			setProgressBarVisibility(false);
 		}
 */
-		// launch toast to indicate ocr time
-		Toast toast = Toast.makeText(this, ocrResult.toString(),
-				Toast.LENGTH_SHORT);
 		
 		// launch result activity 
 		// dummy test
@@ -920,7 +917,7 @@ public final class CaptureActivity extends Activity implements
 		lastResult = ocrResult;
 
 		// Send an OcrResultText object to the ViewfinderView for text rendering
-		viewfinderView.addResultText(new OcrResultText(ocrResult.getText(),
+		/*viewfinderView.addResultText(new OcrResultText(ocrResult.getText(),
 				ocrResult.getWordConfidences(), ocrResult.getMeanConfidence(),
 				ocrResult.getBitmapDimensions(), ocrResult
 						.getRegionBoundingBoxes(), ocrResult
@@ -930,7 +927,8 @@ public final class CaptureActivity extends Activity implements
 						.getCharacterBoundingBoxes()));
 
 		Integer meanConfidence = ocrResult.getMeanConfidence();
-
+*/
+		/*
 		if (CONTINUOUS_DISPLAY_RECOGNIZED_TEXT) {
 			// Display the recognized text on the screen
 			statusViewTop.setText(ocrResult.getText());
@@ -954,6 +952,7 @@ public final class CaptureActivity extends Activity implements
 					+ " - Mean confidence: " + meanConfidence.toString()
 					+ " - Time required: " + recognitionTimeRequired + " ms");
 		}
+		*/
 	}
 
 	/**

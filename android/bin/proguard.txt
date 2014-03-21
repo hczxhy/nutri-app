@@ -1,7 +1,7 @@
-# view res/layout/recommender_activity.xml #generated:14
+# view res/layout/recommender_activity.xml #generated:13
 -keep class android.support.v4.view.PagerTitleStrip { <init>(...); }
 
-# view res/layout/recommender_activity.xml #generated:8
+# view res/layout/recommender_activity.xml #generated:7
 -keep class android.support.v4.view.ViewPager { <init>(...); }
 
 # view res/layout/graphs_page.xml #generated:39

@@ -38,4 +38,6 @@
   <color name ="nutri_white">#ffffffff</color>
   <color name ="nutri_gray">#ff888888</color>
   <color name ="nutri_blue">#ff0083c0</color>
+  
+  <color name ="nutri_black">#ff000000</color>
 </resources>

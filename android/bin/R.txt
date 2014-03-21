@@ -25,6 +25,7 @@ int attr textColor 0x7f010001
 int attr textSize 0x7f010002
 int color help_button_view 0x7f080000
 int color help_view 0x7f080001
+int color nutri_black 0x7f080012
 int color nutri_blue 0x7f080011
 int color nutri_gray 0x7f080010
 int color nutri_green 0x7f08000e

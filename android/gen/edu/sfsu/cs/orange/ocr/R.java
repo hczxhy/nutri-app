@@ -181,6 +181,7 @@ containing a value of this type.
         /**  help button view background color 
          */
         public static final int help_view=0x7f080001;
+        public static final int nutri_black=0x7f080012;
         public static final int nutri_blue=0x7f080011;
         public static final int nutri_gray=0x7f080010;
         public static final int nutri_green=0x7f08000e;

@@ -6,11 +6,13 @@ import java.util.Vector;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,28 +36,21 @@ public class RecommenderActivity extends FragmentActivity {
 			"Cheeseburger", "Egg", "Teaspoon of Salt", "blah blah CARB" };
 	private final static String[] queries = { "Calories", "Fat", "Cholesterol",
 			"Sodium", "Carbohydrate" };
-
+	
+	// resources
+	private static Typeface arialblack;
+	private static Typeface arial;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.recommender_activity);
 
-		/*
-		 * // Handle Database
-		 * 
-		 * db = new MyDatabaseHelper(getApplicationContext());
-		 * 
-		 * // Read SQL SQLiteDatabase database = db.getReadableDatabase(); //
-		 * Create cursor to table Cursor result =
-		 * database.query(MyDatabaseHelper.TABLE, new String[] {
-		 * MyDatabaseHelper.QUERY }, null, null, null, null, null); // Count
-		 * entries numQuery = result.getCount();
-		 * 
-		 * // Load from SQL queries.clear(); // Loop cursor through table
-		 * result.moveToFirst(); for (int i = 0; i < numQuery; i++) { //
-		 * queries[i]=result.getString(0); queries.add(result.getString(0));
-		 * result.moveToNext(); } // SQL cleanup database.close(); db.close();
-		 */
+		
+		// grab typeface from resource
+		arialblack=Typeface.createFromAsset(getAssets(), "fonts/arialblack.ttf");
+		arial=Typeface.createFromAsset(getAssets(), "fonts/arial.ttf");
+
 
 		if (getIntent().getExtras() != null) {
 			nutrition_values = (getIntent().getExtras())
@@ -67,6 +62,18 @@ public class RecommenderActivity extends FragmentActivity {
 				getSupportFragmentManager());
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		
+		// set title font 
+		PagerTitleStrip _Title = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
+		for (int counter = 0; counter < _Title.getChildCount(); counter++) {
+
+			if (_Title.getChildAt(counter) instanceof TextView) {
+				((TextView) _Title.getChildAt(counter)).setTypeface(arialblack);
+				((TextView) _Title.getChildAt(counter)).setTextSize(25);
+			}
+
+		}
+
 	}
 
 	// make sure database is closed
@@ -154,6 +161,8 @@ public class RecommenderActivity extends FragmentActivity {
 					+ comparison_target[category] + " in terms of "
 					+ queries[category]);
 
+			comparison_text.setTypeface(arial);
+			
 			return rootView;
 		}
 
