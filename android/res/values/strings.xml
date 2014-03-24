@@ -34,4 +34,5 @@
     <string name="cholesterol">Cholesterol</string>
     
     <string name="comparison_button">This is equivalent to...</string>
+    <string name="title_activity_settings">% Daily Recommendations</string>
 </resources>

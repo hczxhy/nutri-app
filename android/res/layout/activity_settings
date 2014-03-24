@@ -1,0 +1,226 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView1"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+			
+    <LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+    	
+    	<TextView
+		    android:id="@+id/Settings"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:paddingBottom="10dp"
+		    android:textColor="#000000"
+		    android:text="%Daily Recommended" />
+    	
+	    <TextView
+		    android:id="@+id/Settings"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:paddingBottom="10dp"
+		    android:textColor="#000000"
+		    android:text="Settings" />
+	    
+	    <ToggleButton
+	            android:id="@+id/maleFemale"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/malefemale"
+	            android:paddingBottom="20dp"
+	            android:textOff=""
+	            android:textOn=""/>
+	
+	    <TextView
+	        android:id="@+id/Calories"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingBottom="5dp"
+	        android:text="Large Text"
+	        android:textColor="#000000"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textSize="25sp" />
+	
+	    <TextView
+	        android:id="@+id/caloriesInfo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingBottom="10dp"
+	        android:text="Calories per Day"
+	        android:textColor="#888888" />
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:gravity="center"
+	        android:paddingBottom="15dp"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:id="@+id/height"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/height" />
+	
+	        <SeekBar
+	            android:id="@+id/heightBar"
+	            android:layout_width="200dp"
+	            android:layout_height="wrap_content"
+	            android:paddingTop="10dp" />
+	
+	        <TextView
+	            android:id="@+id/textHeight"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:background="@drawable/back"
+	            android:gravity="center"
+	            android:paddingTop="10dp"
+	            android:text="178"
+	            android:textColor="#ffffff"
+	            android:textSize="19sp" />
+
+	        <TextView
+	            android:id="@+id/heightUnit"
+	            android:layout_width="20dp"
+	            android:layout_height="wrap_content"
+	            android:gravity="center"
+	            android:paddingTop="10dp"
+	            android:text="cm"
+	            android:textAppearance="?android:attr/textAppearanceSmall"
+	            android:textColor="#888888" />
+	
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:gravity="center"
+	        android:paddingBottom="15dp"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:id="@+id/weight"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/weight" />
+	
+	        <SeekBar
+	            android:id="@+id/weightBar"
+	            android:layout_width="200dp"
+	            android:layout_height="wrap_content"
+	            android:paddingTop="10dp" />
+	
+	        <TextView
+	            android:id="@+id/textWeight"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:background="@drawable/back"
+	            android:gravity="center"
+	            android:paddingTop="10dp"
+	            android:text="552"
+	            android:textColor="#ffffff"
+	            android:textSize="19sp" />
+	        
+	        <TextView
+	            android:id="@+id/weightUnit"
+	            android:layout_width="20dp"
+	            android:layout_height="wrap_content"
+	            android:paddingTop="10dp"
+	            android:text="kg"
+	            android:textColor="#888888"
+	            android:gravity="center"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:gravity="center"
+	        android:paddingBottom="15dp"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:id="@+id/age"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/age" />
+	
+	        <SeekBar
+	            android:id="@+id/ageBar"
+	            android:layout_width="200dp"
+	            android:layout_height="wrap_content"
+	            android:paddingTop="10dp" />
+	
+	        <TextView
+	            android:id="@+id/textAge"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:background="@drawable/back"
+	            android:gravity="center"
+	            android:paddingTop="10dp"
+	            android:text="130"
+	            android:textColor="#ffffff"
+	            android:textSize="19sp" />
+	        
+	        <TextView
+	            android:id="@+id/ageUnit"
+	            android:layout_width="20dp"
+	            android:layout_height="wrap_content"
+	            android:paddingTop="10dp"
+	            android:textColor="#888888"
+	            android:text="yrs"
+	            android:gravity="center"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:gravity="center"
+	        android:paddingBottom="15dp"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:id="@+id/sedentary"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/sedentary" />
+	
+	        <SeekBar
+	            android:id="@+id/sedentaryBar"
+	            android:layout_width="200dp"
+	            android:layout_height="wrap_content"
+	            android:paddingTop="10dp" />
+	
+	        <ImageView
+	            android:id="@+id/imageView1"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/active" />
+	        
+	        <TextView
+	            android:id="@+id/placeHolder"
+	            android:layout_width="20dp"
+	            android:layout_height="wrap_content"
+	            android:paddingTop="10dp"
+	            android:text=""
+	            android:textAppearance="?android:attr/textAppearanceSmall" />	        
+	
+	    </LinearLayout>
+
+	    <Button
+	        android:id="@+id/button_default"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="#ffffff"
+	        android:textColor="#000000"
+	        android:text="Default Values" />
+	    
+	</LinearLayout>
+        
+</ScrollView>
+
+   

@@ -33,7 +33,6 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -42,7 +41,6 @@ import android.text.SpannableStringBuilder;
 import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
@@ -50,6 +48,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -197,6 +196,7 @@ public final class CaptureActivity extends Activity implements
 	private String characterBlacklist;
 	private String characterWhitelist;
 	private ShutterButton shutterButton;
+	private Button settingsButton;
 	private boolean isTranslationActive; // Whether we want to show translations
 	private boolean isContinuousModeActive; // Whether we are doing OCR in
 											// continuous mode
@@ -254,7 +254,16 @@ public final class CaptureActivity extends Activity implements
 			shutterButton = (ShutterButton) findViewById(R.id.shutter_button);
 			shutterButton.setOnShutterButtonListener(this);
 		}
-
+		settingsButton = (Button) findViewById(R.id.settings_button);	
+		settingsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+            	Intent settingsIntent;
+            	settingsIntent = new Intent().setClass(CaptureActivity.this, SettingsActivity.class);
+            	startActivity(settingsIntent);
+            }
+        });
+		
 		ocrResultView = (TextView) findViewById(R.id.ocr_result_text_view);
 		registerForContextMenu(ocrResultView);
 		translationView = (TextView) findViewById(R.id.translation_text_view);
@@ -365,6 +374,7 @@ public final class CaptureActivity extends Activity implements
 		handler.resetState();
 		if (shutterButton != null && DISPLAY_SHUTTER_BUTTON) {
 			shutterButton.setVisibility(View.VISIBLE);
+			settingsButton.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -727,6 +737,7 @@ public final class CaptureActivity extends Activity implements
 
 		// Turn off capture-related UI elements
 		shutterButton.setVisibility(View.GONE);
+		settingsButton.setVisibility(View.GONE);
 		statusViewBottom.setVisibility(View.GONE);
 		statusViewTop.setVisibility(View.GONE);
 		cameraButtonView.setVisibility(View.GONE);
@@ -1094,6 +1105,7 @@ public final class CaptureActivity extends Activity implements
 		cameraButtonView.setVisibility(View.VISIBLE);
 		if (DISPLAY_SHUTTER_BUTTON) {
 			shutterButton.setVisibility(View.VISIBLE);
+			settingsButton.setVisibility(View.VISIBLE);
 		}
 		lastResult = null;
 		viewfinderView.removeResultText();
@@ -1126,8 +1138,10 @@ public final class CaptureActivity extends Activity implements
 	void setButtonVisibility(boolean visible) {
 		if (shutterButton != null && visible == true && DISPLAY_SHUTTER_BUTTON) {
 			shutterButton.setVisibility(View.VISIBLE);
+			settingsButton.setVisibility(View.VISIBLE);
 		} else if (shutterButton != null) {
 			shutterButton.setVisibility(View.GONE);
+			settingsButton.setVisibility(View.GONE);
 		}
 	}
 
