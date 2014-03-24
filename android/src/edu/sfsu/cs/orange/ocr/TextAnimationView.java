@@ -21,8 +21,9 @@ public class TextAnimationView extends ImageView {
 	private Paint small_curr_paint;
 	private Typeface arial;
 	private int curr_per=0;
-	private float curr_val=0;
-	private static final int LARGE_TEXT_SIZE=45;
+	private int curr_val=0;
+	private boolean mg=false;
+	private static final int LARGE_TEXT_SIZE=48;
 	private static final int SMALL_TEXT_SIZE=30;
 	private static final int SHADOW_SIZE=0;
 
@@ -74,10 +75,10 @@ public class TextAnimationView extends ImageView {
 	}
 
 	 public void draw_value(float value, int percent){
-		 if(percent<GraphActivity.YELLOW_THRESH){
+		 if(percent<=GraphActivity.YELLOW_THRESH){
 			 large_curr_paint=large_green_paint;
 			 small_curr_paint=small_green_paint;
-		 }else if(percent>GraphActivity.YELLOW_THRESH && percent<GraphActivity.RED_THRESH){
+		 }else if(percent>GraphActivity.YELLOW_THRESH && percent<=GraphActivity.RED_THRESH){
 			 large_curr_paint=large_yellow_paint;
 			 small_curr_paint=small_yellow_paint;
 		 }else{
@@ -85,7 +86,12 @@ public class TextAnimationView extends ImageView {
 			 small_curr_paint=small_red_paint;
 		 }
 		 curr_per=percent;
-		 curr_val=value;
+		 if(value<1){
+			 curr_val=(int)Math.round(value*1000);
+			 mg=true;
+		 }else{
+			 curr_val=(int)Math.round(value);
+		 }
 	 }
 	 
 	 @Override
@@ -97,7 +103,11 @@ public class TextAnimationView extends ImageView {
 		
 		//Draw text
 		canvas.drawText(Integer.toString(curr_per)+"%", 0, 35, large_curr_paint);
-		canvas.drawText(Float.toString(curr_val)+"g", 205, 35, small_curr_paint);
+		if(mg==true){
+			canvas.drawText(Integer.toString(curr_val)+"mg", 205, 35, small_curr_paint);
+		}else{
+			canvas.drawText(Integer.toString(curr_val)+"g", 205, 35, small_curr_paint);
+		}
 	 }
 	 @Override
 	 protected void onSizeChanged(int w, int h, int oldw, int oldh){

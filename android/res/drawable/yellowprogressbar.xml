@@ -7,7 +7,7 @@
                 android:startColor="#e6e6e6"
                 android:centerColor="#e6e6e6"
                 android:centerY="0.75"
-                android:endColor="#888888"
+                android:endColor="#e6e6e6"
                 android:angle="270"
         />
     </shape>
@@ -24,7 +24,7 @@
                 android:startColor="#f3c505"
                 android:centerColor="#f3c505"
                 android:centerY="0.75"
-                android:endColor="#B5981F"
+                android:endColor="#f3c505"
                 android:angle="270"
         	/>
         </shape>

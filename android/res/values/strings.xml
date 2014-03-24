@@ -30,10 +30,10 @@
     <string name="calories">Calories</string>
     <string name="total_fat">Total Fat</string>
     <string name="carbs">Carbohydrates</string>
-    <string name="serving_size">Serving Size</string>
+    <string name="serving_size">Servings</string>
     <string name="sodium">Sodium</string>
     <string name="cholesterol">Cholesterol</string>
     
-    <string name="comparison_button">This is equivalent to...</string>
+    <string name="comparison_button">This is equivalent to…</string>
     <string name="title_activity_settings">% Daily Recommendations</string>
 </resources>

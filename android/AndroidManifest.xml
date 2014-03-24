@@ -102,6 +102,7 @@
             android:name="edu.sfsu.cs.orange.ocr.GraphActivity"
             android:label="@string/graph_activity_title"
              android:parentActivityName="edu.sfsu.cs.orange.ocr.CaptureActivity" 
+             android:theme="@style/SampleTheme.Light"
              android:screenOrientation="portrait">
             <meta-data
 	            android:name="android.support.PARENT_ACTIVITY"
