@@ -198,21 +198,22 @@
               android:autoLink="web"   
               android:clickable="true" />
      
-     <!-- 
-     <ToggleButton android:id="@+id/torch_button"
+     
+     <Button android:id="@+id/settings_button"
 		      android:layout_width="wrap_content" 
 		      android:layout_height="wrap_content"
-		      android:background="@drawable/torch_button"
+		      android:background="@drawable/settings"
 		      android:clickable="true" 
-		      android:focusable="true"
-		      android:textOff=""
-		      android:textOn=""
-		      android:layout_alignParentRight="true" 
+		      android:focusable="true"		      
+		      android:layout_alignParentLeft="true" 
 		      android:layout_alignParentBottom="true"
-		      android:layout_marginRight="8dip" 
-		      android:layout_marginBottom="8dip"
-		      android:scaleType="center" />
-     -->
+		      android:layout_centerInParent="true"
+              android:gravity="center_vertical"
+		      android:layout_marginLeft="8dip" 
+		      android:layout_marginBottom="20dip"
+		      android:scaleType="center" 
+		      android:visibility="gone"/>
+     
      
   </RelativeLayout>
 

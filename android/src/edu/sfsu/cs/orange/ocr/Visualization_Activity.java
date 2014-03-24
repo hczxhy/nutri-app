@@ -7,7 +7,9 @@ import java.util.concurrent.Executors;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Typeface;
@@ -19,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.todddavies.components.progressbar.ProgressWheel;
 
@@ -151,9 +154,10 @@ public class Visualization_Activity extends Activity {
 		if(getIntent().getExtras()!=null){
 			values=(getIntent().getExtras()).getFloatArray(NUTRITION_QUANT_KEY);
 		}
-		
-		set_recommended_values((float)1200, (float)60, (float)300, (float) 0.2, (float)2);
-		fat_num=values[1];
+		SharedPreferences sharedPref = this.getSharedPreferences("OCRSettingsPreferences",Context.MODE_PRIVATE);
+		float recomCalories = sharedPref.getFloat("calories",2141f);		
+		set_recommended_values((float)recomCalories, (float)60, (float)300, (float) 0.2, (float)2);
+		fat_num=values[1];		
 		set_fat((int) Math.round(fat_num/rec_fat*100));
 		car_num=values[4];
 		set_carb((int) Math.round(car_num/rec_car*100));
