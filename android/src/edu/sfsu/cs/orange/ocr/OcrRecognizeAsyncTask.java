@@ -125,6 +125,8 @@ final class OcrRecognizeAsyncTask extends AsyncTask<Void, Void, Boolean> {
 			// baseApi.setRectangle(left, top, width, height)
 
 			textResult = baseApi.getUTF8Text();
+			
+			//textResult = "bogus";
 
 			timeRequired = System.currentTimeMillis() - start;
 

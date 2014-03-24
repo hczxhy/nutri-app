@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class RecommenderActivity extends FragmentActivity {
@@ -36,21 +37,36 @@ public class RecommenderActivity extends FragmentActivity {
 			"Cheeseburger", "Egg", "Teaspoon of Salt", "blah blah CARB" };
 	private final static String[] queries = { "Calories", "Fat", "Cholesterol",
 			"Sodium", "Carbohydrate" };
-	
+
+	private final static String[] units = { " Calories", "g", "g", "g", "g" };
+
+	// database
+	class ComparisonData {
+		public String label;
+		public float value;
+		public int imageID;
+
+		public ComparisonData(String label, float value, int imageID) {
+			this.label = label;
+			this.value = value;
+			this.imageID = imageID;
+		}
+	}
+
+	private static List<ComparisonData[]> dataList = new ArrayList<ComparisonData[]>();
 	// resources
 	private static Typeface arialblack;
 	private static Typeface arial;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.recommender_activity);
 
-		
 		// grab typeface from resource
-		arialblack=Typeface.createFromAsset(getAssets(), "fonts/arialblack.ttf");
-		arial=Typeface.createFromAsset(getAssets(), "fonts/arial.ttf");
-
+		arialblack = Typeface.createFromAsset(getAssets(),
+				"fonts/arialblack.ttf");
+		arial = Typeface.createFromAsset(getAssets(), "fonts/arial.ttf");
 
 		if (getIntent().getExtras() != null) {
 			nutrition_values = (getIntent().getExtras())
@@ -62,8 +78,8 @@ public class RecommenderActivity extends FragmentActivity {
 				getSupportFragmentManager());
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-		
-		// set title font 
+
+		// set title font
 		PagerTitleStrip _Title = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
 		for (int counter = 0; counter < _Title.getChildCount(); counter++) {
 
@@ -74,6 +90,68 @@ public class RecommenderActivity extends FragmentActivity {
 
 		}
 
+		// create database
+		createDataList();
+
+	}
+
+	// create database
+	public void createDataList() {
+		ComparisonData[] cal = new ComparisonData[4];
+		cal[0] = new ComparisonData("cal1", 100, R.drawable.active);
+		cal[1] = new ComparisonData("cal2", 200, R.drawable.age);
+		cal[2] = new ComparisonData("cal3", 300, R.drawable.female);
+		cal[3] = new ComparisonData("cal4", 400, R.drawable.weight);
+		dataList.add(cal);
+		ComparisonData[] fat = new ComparisonData[4];
+		fat[0] = new ComparisonData("fat 1", 1, R.drawable.active);
+		fat[1] = new ComparisonData("fat 2", 10, R.drawable.active);
+		fat[2] = new ComparisonData("fat 3", 15, R.drawable.active);
+		fat[3] = new ComparisonData("fat 4", 28, R.drawable.active);
+		dataList.add(fat);
+		ComparisonData[] chole = new ComparisonData[11];
+		chole[0] = new ComparisonData("Salad", 0, R.drawable.cholesterol_000mg);
+		chole[1] = new ComparisonData("One oyster", 4,
+				R.drawable.cholesterol_004mg);
+		chole[2] = new ComparisonData("One box of milk", 21,
+				R.drawable.cholesterol_021mg);
+		chole[3] = new ComparisonData("One slice of cheese", 46,
+				R.drawable.cholesterol_046mg);
+		chole[4] = new ComparisonData("Porkchop", 65,
+				R.drawable.cholesterol_065mg);
+		chole[5] = new ComparisonData("BBQ ribs", 84,
+				R.drawable.cholesterol_084mg);
+		chole[6] = new ComparisonData("Double Mac", 103,
+				R.drawable.cholesterol_103mg);
+		chole[7] = new ComparisonData("Four chicken fingers", 124,
+				R.drawable.cholesterol_124mg);
+		chole[8] = new ComparisonData("One egg", 216,
+				R.drawable.cholesterol_216mg);
+		chole[9] = new ComparisonData("One McMuffin", 234,
+				R.drawable.cholesterol_234mg);
+		chole[10] = new ComparisonData("Fried eggs", 367,
+				R.drawable.cholesterol_367mg);
+		dataList.add(chole);
+		ComparisonData[] sodium = new ComparisonData[8];
+		sodium[0] = new ComparisonData("One banana", 1, R.drawable.sodium_001mg);
+		sodium[1] = new ComparisonData("???", 5, R.drawable.sodium_005mg);
+		sodium[2] = new ComparisonData("One Oreo cookie", 80,
+				R.drawable.sodium_080mg);
+		sodium[3] = new ComparisonData("A handful of almond", 119,
+				R.drawable.sodium_119mg);
+		sodium[4] = new ComparisonData("Ham", 150, R.drawable.sodium_150mg);
+		sodium[5] = new ComparisonData("Two Toast", 360,
+				R.drawable.sodium_360mg);
+		sodium[6] = new ComparisonData("6-inch Sandwitch", 529,
+				R.drawable.sodium_529mg);
+		sodium[7] = new ComparisonData("Bacon", 1460, R.drawable.sodium_1460mg);
+		dataList.add(sodium);
+		ComparisonData[] carb = new ComparisonData[4];
+		carb[0] = new ComparisonData("carbo 1", 100, R.drawable.active);
+		carb[1] = new ComparisonData("carbo 2", 200, R.drawable.active);
+		carb[2] = new ComparisonData("carbo 3", 300, R.drawable.active);
+		carb[3] = new ComparisonData("carbo 4", 400, R.drawable.active);
+		dataList.add(carb);
 	}
 
 	// make sure database is closed
@@ -97,10 +175,8 @@ public class RecommenderActivity extends FragmentActivity {
 			// int ind = Math.min(position,conversion.length-1);
 			// frag =
 			// RecommenderViewFragment.newInstance(position,nutrition_values[position]/conversion[position]);
-			frag = RecommenderViewFragment
-					.newInstance(
-							position,
-							(float) (nutrition_values[position] / conversion[position]));
+			frag = RecommenderViewFragment.newInstance(position,
+					(float) nutrition_values[position]);
 
 			return frag;
 		}
@@ -153,16 +229,51 @@ public class RecommenderActivity extends FragmentActivity {
 
 			View rootView = inflater.inflate(R.layout.recommender_fragment,
 					container, false);
+
+			/*
+			 * comparison_text.setText("This food is equivalent to " +
+			 * String.format("%.2f", value) + " " + comparison_target[category]
+			 * + " in terms of " + queries[category]);
+			 */
+
+			// compute closest food for this category
+			ComparisonData[] thisCategory = dataList.get(category);
+			float minVal = Math.abs(thisCategory[0].value - value);
+			int minIndex = 0;
+			for (int i = 1; i < thisCategory.length; i++) {
+				if (Math.abs(thisCategory[i].value - value) < minVal) {
+					minVal = Math.abs(thisCategory[i].value - value);
+					minIndex = i;
+				}
+			}
+			String targetLabel = thisCategory[minIndex].label;
+			int targetImageID = thisCategory[minIndex].imageID;
+
+			// set comparison text
 			TextView comparison_text = (TextView) rootView
 					.findViewById(R.id.comparison_result_text);
-
-			comparison_text.setText("This food is equivalent to "
-					+ String.format("%.2f", value) + " "
-					+ comparison_target[category] + " in terms of "
-					+ queries[category]);
-
+			comparison_text.setText("Similar food in terms of "
+					+ queries[category] + " is " + targetLabel);
 			comparison_text.setTypeface(arial);
-			
+
+			// set measurement text
+			TextView measurement_text = (TextView) rootView
+					.findViewById(R.id.comparison_result_measurement);
+			if (category == 0) {
+				measurement_text.setText(value + units[category]);
+			} else {
+				measurement_text.setText(value + units[category] + " of "
+						+ queries[category]);
+			}
+
+			measurement_text.setTypeface(arial);
+
+			// set image
+			ImageView comparison_image = (ImageView) rootView
+					.findViewById(R.id.comparison_result_image);
+			comparison_image.setImageDrawable(getResources().getDrawable(
+					targetImageID));
+
 			return rootView;
 		}
 

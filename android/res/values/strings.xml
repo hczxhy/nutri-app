@@ -25,6 +25,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="vis_page_title">Nutrition Facts</string>
+    <string name = "comparison_result_image_desc">Dynamic Comparison Result Picture</string>
 
     <string name="calories">Calories</string>
     <string name="total_fat">Total Fat</string>
