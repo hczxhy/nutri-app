@@ -419,11 +419,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int Calories=0x7f070016;
         public static final int RelativeLayout01=0x7f070057;
         public static final int Settings=0x7f070014;
-<<<<<<< HEAD
         public static final int action_settings=0x7f070064;
-=======
-        public static final int action_settings=0x7f07006d;
->>>>>>> 1a11b33525c0404415ac6a385341b9a4d914cfba
         public static final int age=0x7f070020;
         public static final int ageBar=0x7f070021;
         public static final int ageUnit=0x7f070023;
@@ -432,12 +428,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int button_default=0x7f070028;
         public static final int cal_spinner=0x7f07003a;
         public static final int cal_text=0x7f07003c;
-<<<<<<< HEAD
-=======
-        public static final int cal_text_row=0x7f070068;
-        public static final int cal_vis=0x7f070066;
-        public static final int cal_vis_row=0x7f070065;
->>>>>>> 1a11b33525c0404415ac6a385341b9a4d914cfba
         public static final int caloriesInfo=0x7f070017;
         public static final int camera_button_view=0x7f070034;
         public static final int car_num=0x7f070044;
@@ -447,13 +437,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int cho_text=0x7f070046;
         public static final int chol_num=0x7f070049;
         public static final int chol_pb=0x7f07004a;
-<<<<<<< HEAD
         public static final int chol_vis=0x7f070048;
-=======
-        public static final int chol_text_row=0x7f07006b;
-        public static final int chol_vis=0x7f070048;
-        public static final int chol_vis_row=0x7f07006c;
->>>>>>> 1a11b33525c0404415ac6a385341b9a4d914cfba
         public static final int comparison_button=0x7f07004e;
         public static final int comparison_result_image=0x7f070063;
         public static final int comparison_result_measurement=0x7f070062;
@@ -465,13 +449,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int fat_num=0x7f070041;
         public static final int fat_pb=0x7f070042;
         public static final int fat_text=0x7f07003e;
-<<<<<<< HEAD
         public static final int fat_vis=0x7f070040;
-=======
-        public static final int fat_text_row=0x7f070069;
-        public static final int fat_vis=0x7f070040;
-        public static final int fat_vis_row=0x7f07006a;
->>>>>>> 1a11b33525c0404415ac6a385341b9a4d914cfba
         public static final int height=0x7f070018;
         public static final int heightBar=0x7f070019;
         public static final int heightUnit=0x7f07001b;
@@ -511,10 +489,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int sedentary=0x7f070024;
         public static final int sedentaryBar=0x7f070025;
         public static final int ser_text=0x7f07003d;
-<<<<<<< HEAD
-=======
-        public static final int ser_vis=0x7f070067;
->>>>>>> 1a11b33525c0404415ac6a385341b9a4d914cfba
         public static final int serving_size_picker=0x7f07003b;
         public static final int settings_button=0x7f070038;
         public static final int shutter_button=0x7f070036;
@@ -536,10 +510,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int textView6=0x7f070012;
         public static final int textWeight=0x7f07001e;
         public static final int title=0x7f070039;
-<<<<<<< HEAD
-=======
-        public static final int title_row=0x7f070064;
->>>>>>> 1a11b33525c0404415ac6a385341b9a4d914cfba
         public static final int translation_language_label_text_view=0x7f07002f;
         public static final int translation_language_text_view=0x7f070030;
         public static final int translation_text_view=0x7f070032;
