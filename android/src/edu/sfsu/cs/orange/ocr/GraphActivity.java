@@ -10,6 +10,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Typeface;
@@ -171,8 +172,14 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 		if(getIntent().getExtras()!=null){
 			values=(getIntent().getExtras()).getFloatArray(NUTRITION_QUANT_KEY);
 		}
-		
-		set_recommended_values((float)1200, (float)60, (float)300, (float) 0.2, (float)2);
+		SharedPreferences sharedPref = this.getSharedPreferences("OCRSettingsPreferences", MODE_PRIVATE);
+		float calval = sharedPref.getFloat("calories", 2014f);
+		// need to fix this depending on units *******************
+		float fat = calval*30f; // fat is in mg
+		float carb = calval*0.15f; // carb is in g
+		float chol = 300.0f; // chol is in mg
+		float sodium = 2400.0f; // sodium is in mg
+		set_recommended_values(calval, fat, carb, chol, sodium);
 		fat_num=values[1];
 		car_num=values[4];
 		cho_num=values[2];
