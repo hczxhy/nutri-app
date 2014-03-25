@@ -29,23 +29,19 @@ public class RecommenderActivity extends FragmentActivity {
 
 	public final static String NUTRITION_QUANT_KEY = "nutritionQuant";
 
-	// private MyDatabaseHelper db = null;
 	private float[] nutrition_values;
-	private final static float[] conversion = { (float) 89, (float) 14,
-			(float) 0.373, (float) 2.325, (float) 1.0 };
-	private final static String[] comparison_target = { "Banana",
-			"Cheeseburger", "Egg", "Teaspoon of Salt", "blah blah CARB" };
+	private final static float[] conversion = { (float) 1, (float) 1,
+			(float) 1000, (float) 1000, (float) 1000 };
 	private final static String[] queries = { "Calories", "Fat", "Cholesterol",
 			"Sodium", "Carbohydrate" };
-
-	private final static String[] units = { " Calories", "g", "g", "g", "g" };
+	private final static String[] units = { " Calories", "g", "mg", "mg", "mg" };
 
 	// database
 	class ComparisonData {
 		public String label;
 		public float value;
 		public int imageID;
-
+		
 		public ComparisonData(String label, float value, int imageID) {
 			this.label = label;
 			this.value = value;
@@ -57,6 +53,7 @@ public class RecommenderActivity extends FragmentActivity {
 	// resources
 	private static Typeface arialblack;
 	private static Typeface arial;
+	private Fragment[] allFragments = new Fragment[5];
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +69,8 @@ public class RecommenderActivity extends FragmentActivity {
 			nutrition_values = (getIntent().getExtras())
 					.getFloatArray(NUTRITION_QUANT_KEY);
 		}
+		// loag fragments
+		loadFragments();
 
 		// Set up the ViewPager with the sections adapter.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -97,20 +96,50 @@ public class RecommenderActivity extends FragmentActivity {
 
 	// create database
 	public void createDataList() {
-		ComparisonData[] cal = new ComparisonData[4];
-		cal[0] = new ComparisonData("cal1", 100, R.drawable.active);
-		cal[1] = new ComparisonData("cal2", 200, R.drawable.age);
-		cal[2] = new ComparisonData("cal3", 300, R.drawable.female);
-		cal[3] = new ComparisonData("cal4", 400, R.drawable.weight);
+		ComparisonData[] cal = new ComparisonData[15];
+		cal[0] = new ComparisonData("One blueberry", 1, R.drawable.calories_001);
+		cal[1] = new ComparisonData("Three cherries", 10,
+				R.drawable.calories_010);
+		cal[2] = new ComparisonData("One carrot", 35, R.drawable.calories_035);
+		cal[3] = new ComparisonData("One box of raisin", 45,
+				R.drawable.calories_045);
+		cal[4] = new ComparisonData("One cup of pistachios", 80,
+				R.drawable.calories_080);
+		cal[5] = new ComparisonData("One bowl of popcorn", 150,
+				R.drawable.calories_150);
+		cal[6] = new ComparisonData("Handful of fries", 225,
+				R.drawable.calories_225);
+		cal[7] = new ComparisonData("One small cup of sundae", 325,
+				R.drawable.calories_325);
+		cal[8] = new ComparisonData("Handful of onion rings", 340,
+				R.drawable.calories_340);
+		cal[9] = new ComparisonData("One cupcake", 460, R.drawable.calories_460);
+		cal[10] = new ComparisonData("Two clices of pizza", 530,
+				R.drawable.calories_530);
+		cal[11] = new ComparisonData("Fried chicken burger", 632,
+				R.drawable.calories_632);
+		cal[12] = new ComparisonData("Seven pancakes", 750,
+				R.drawable.calories_750);
+		cal[13] = new ComparisonData("Triple cheeseburger", 1120,
+				R.drawable.calories_1120);
+		cal[14] = new ComparisonData("Mcdonald Big Breakfast", 1350,
+				R.drawable.calories_1350);
 		dataList.add(cal);
-		ComparisonData[] fat = new ComparisonData[4];
-		fat[0] = new ComparisonData("fat 1", 1, R.drawable.active);
-		fat[1] = new ComparisonData("fat 2", 10, R.drawable.active);
-		fat[2] = new ComparisonData("fat 3", 15, R.drawable.active);
-		fat[3] = new ComparisonData("fat 4", 28, R.drawable.active);
+		ComparisonData[] fat = new ComparisonData[10];
+		fat[0] = new ComparisonData("One apple", 0, R.drawable.fat_000g);
+		fat[1] = new ComparisonData("Eight pretzel biscuits", 1, R.drawable.fat_001g);
+		fat[2] = new ComparisonData("One granola bar", 2, R.drawable.fat_002g);
+		fat[3] = new ComparisonData("A bag of baked potato crisps", 3, R.drawable.fat_003g);
+		fat[4] = new ComparisonData("One icecream cone", 4, R.drawable.fat_004g);
+		fat[5] = new ComparisonData("A handful of chips", 9, R.drawable.fat_009g);
+		fat[6] = new ComparisonData("One bacon hamburger", 14, R.drawable.fat_014g);
+		fat[7] = new ComparisonData("Small fries", 25, R.drawable.fat_025g);
+		fat[8] = new ComparisonData("A large chunk of cheese", 33, R.drawable.fat_033g);
+		fat[9] = new ComparisonData("A bar of butter", 81, R.drawable.fat_081g);
 		dataList.add(fat);
 		ComparisonData[] chole = new ComparisonData[11];
-		chole[0] = new ComparisonData("Salad", 0, R.drawable.cholesterol_000mg);
+		chole[0] = new ComparisonData("One plate of fruits & veggies", 0,
+				R.drawable.cholesterol_000mg);
 		chole[1] = new ComparisonData("One oyster", 4,
 				R.drawable.cholesterol_004mg);
 		chole[2] = new ComparisonData("One box of milk", 21,
@@ -121,7 +150,7 @@ public class RecommenderActivity extends FragmentActivity {
 				R.drawable.cholesterol_065mg);
 		chole[5] = new ComparisonData("BBQ ribs", 84,
 				R.drawable.cholesterol_084mg);
-		chole[6] = new ComparisonData("Double Mac", 103,
+		chole[6] = new ComparisonData("Double cheeseburger", 103,
 				R.drawable.cholesterol_103mg);
 		chole[7] = new ComparisonData("Four chicken fingers", 124,
 				R.drawable.cholesterol_124mg);
@@ -134,7 +163,8 @@ public class RecommenderActivity extends FragmentActivity {
 		dataList.add(chole);
 		ComparisonData[] sodium = new ComparisonData[8];
 		sodium[0] = new ComparisonData("One banana", 1, R.drawable.sodium_001mg);
-		sodium[1] = new ComparisonData("???", 5, R.drawable.sodium_005mg);
+		sodium[1] = new ComparisonData("Handful of Grapes", 5,
+				R.drawable.sodium_005mg);
 		sodium[2] = new ComparisonData("One Oreo cookie", 80,
 				R.drawable.sodium_080mg);
 		sodium[3] = new ComparisonData("A handful of almond", 119,
@@ -154,6 +184,14 @@ public class RecommenderActivity extends FragmentActivity {
 		dataList.add(carb);
 	}
 
+	// pre-load all fragment to memory
+	public void loadFragments() {
+		for (int i = 0; i < allFragments.length; i++) {
+			allFragments[i] = RecommenderViewFragment.newInstance(i,
+					(float) (nutrition_values[i] * conversion[i]));
+		}
+	}
+
 	// make sure database is closed
 	@Override
 	public void onDestroy() {
@@ -170,20 +208,11 @@ public class RecommenderActivity extends FragmentActivity {
 
 		@Override
 		public Fragment getItem(int position) {
-
-			Fragment frag;
-			// int ind = Math.min(position,conversion.length-1);
-			// frag =
-			// RecommenderViewFragment.newInstance(position,nutrition_values[position]/conversion[position]);
-			frag = RecommenderViewFragment.newInstance(position,
-					(float) nutrition_values[position]);
-
-			return frag;
+			return allFragments[position];
 		}
 
 		@Override
 		public int getCount() {
-
 			return this.COUNT;
 		}
 
