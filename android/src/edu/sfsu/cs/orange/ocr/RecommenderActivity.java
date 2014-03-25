@@ -22,10 +22,10 @@ public class RecommenderActivity extends Activity implements
 
 	private float[] nutrition_values;
 	private final static float[] conversion = { (float) 1, (float) 1,
-			(float) 1000, (float) 1000, (float) 1000 };
+			(float) 1000, (float) 1000, (float) 1 };
 	private final static String[] queries = { "Calories", "Fat", "Cholesterol",
 			"Sodium", "Carbohydrate" };
-	private final static String[] units = { " Calories", "g", "mg", "mg", "mg" };
+	private final static String[] units = { " Calories", "g", "mg", "mg", "g" };
 	private Drawable[] allDrawables = new Drawable[5];
 	private String[] allComparisonText = new String[5];
 	private String[] allMeasurementText = new String[5];
@@ -188,11 +188,16 @@ public class RecommenderActivity extends Activity implements
 				R.drawable.sodium_529mg);
 		sodium[7] = new ComparisonData("Bacon", 1460, R.drawable.sodium_1460mg);
 		dataList.add(sodium);
-		ComparisonData[] carb = new ComparisonData[4];
-		carb[0] = new ComparisonData("carbo 1", 100, R.drawable.active);
-		carb[1] = new ComparisonData("carbo 2", 200, R.drawable.active);
-		carb[2] = new ComparisonData("carbo 3", 300, R.drawable.active);
-		carb[3] = new ComparisonData("carbo 4", 400, R.drawable.active);
+		ComparisonData[] carb = new ComparisonData[9];
+		carb[0] = new ComparisonData("A cup of coffee", 0, R.drawable.carbohydrates_000g);
+		carb[1] = new ComparisonData("A chunk of cheese", 1, R.drawable.carbohydrates_001g);
+		carb[2] = new ComparisonData("Three celery sticks", 3, R.drawable.carbohydrates_003g);
+		carb[3] = new ComparisonData("A glass of milk", 5, R.drawable.carbohydrates_005g);
+		carb[4] = new ComparisonData("One orange", 12, R.drawable.carbohydrates_012g);
+		carb[5] = new ComparisonData("A handful of peanuts", 16, R.drawable.carbohydrates_016g);
+		carb[6] = new ComparisonData("A bowl of cereal", 20, R.drawable.carbohydrates_020g);
+		carb[7] = new ComparisonData("A bowl of mac & cheese", 46, R.drawable.carbohydrates_046g);
+		carb[8] = new ComparisonData("One cupcake", 48, R.drawable.carbohydrates_048g);
 		dataList.add(carb);
 	}
 
