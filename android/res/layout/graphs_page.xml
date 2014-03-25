@@ -49,12 +49,16 @@
             ProgressWheel:spinSpeed="3dp"
             ProgressWheel:textColor="#000000"
             ProgressWheel:textSize="24sp" />
-	    <ImageView
-            android:id="@+id/serving_size_vis"
-            android:layout_marginLeft="18dip"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:layout_gravity="right" />
+		<net.simonvt.numberpicker.NumberPicker
+		    android:id="@+id/serving_size_picker"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:paddingLeft="20dip"
+		    android:paddingRight="20dip"
+		    android:layout_marginLeft="18dip"
+		    android:layout_gravity="center_vertical"
+		    android:textSize="16sp"
+		    android:gravity="center" />
 	</LinearLayout>
 	
 	<LinearLayout

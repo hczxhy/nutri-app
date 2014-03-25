@@ -9,39 +9,39 @@ package edu.sfsu.cs.orange.ocr;
 
 public final class R {
     public static final class array {
-        public static final int capturemodes=0x7f070000;
+        public static final int capturemodes=0x7f0a0000;
         /**  Unused 
  Vietnamese 
          */
-        public static final int iso6391=0x7f070006;
+        public static final int iso6391=0x7f0a0006;
         /**  The elements in this array must match to the languagenames array. 
  Vietnamese 
          */
-        public static final int iso6393=0x7f070005;
+        public static final int iso6393=0x7f0a0005;
         /**  The elements in this array must match to the iso6393 array. 
          */
-        public static final int languagenames=0x7f070004;
-        public static final int ocrenginemodes=0x7f070002;
-        public static final int pagesegmentationmodes=0x7f070001;
+        public static final int languagenames=0x7f0a0004;
+        public static final int ocrenginemodes=0x7f0a0002;
+        public static final int pagesegmentationmodes=0x7f0a0001;
         /**  Translation target codes for Google Translate. 
  The elements in this array must match to the translationtargetlanguagenames_google array. 
  Yiddish 
          */
-        public static final int translationtargetiso6391_google=0x7f070007;
+        public static final int translationtargetiso6391_google=0x7f0a0007;
         /**  Translation target language codes for the Microsoft Translate API. 
  The elements in this array must match to the translationtargetlanguagenames_microsoft array. 
  Vietnamese 
          */
-        public static final int translationtargetiso6391_microsoft=0x7f070009;
+        public static final int translationtargetiso6391_microsoft=0x7f0a0009;
         /**  Translation target names for Google Translate. 
  The elements in this array must match to the translationtargetiso6391_google array. 
          */
-        public static final int translationtargetlanguagenames_google=0x7f070008;
+        public static final int translationtargetlanguagenames_google=0x7f0a0008;
         /**  Translation target names for the Microsoft Translate API. 
  The elements in this array must match to the translationtargetiso6391_microsoft array. 
          */
-        public static final int translationtargetlanguagenames_microsoft=0x7f07000a;
-        public static final int translators=0x7f070003;
+        public static final int translationtargetlanguagenames_microsoft=0x7f0a000a;
+        public static final int translators=0x7f0a0003;
     }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -109,6 +109,64 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int delayMillis=0x7f010007;
+        /**  @hide The layout of the number picker. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int internalLayout=0x7f010017;
+        /**  @hide The max height of the NumberPicker. 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int internalMaxHeight=0x7f010014;
+        /**  @hide The max width of the NumberPicker. 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int internalMaxWidth=0x7f010016;
+        /**  @hide The min height of the NumberPicker. 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int internalMinHeight=0x7f010013;
+        /**  @hide The min width of the NumberPicker. 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int internalMinWidth=0x7f010015;
+        /**  Copy one of these attributes to your own theme (choose either dark or light).
+        <item name="numberPickerStyle">@style/NPWidget.Holo.NumberPicker</item>
+        <item name="numberPickerStyle">@style/NPWidget.Holo.Light.NumberPicker</item>
+    
+ Don't touch this 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int numberPickerStyle=0x7f01000e;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -138,6 +196,40 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int rimWidth=0x7f010005;
+        /**  @hide The divider for making the selection area. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int selectionDivider=0x7f010010;
+        /**  @hide The height of the selection divider. 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int selectionDividerHeight=0x7f010011;
+        /**  @hide The distance between the two selection dividers. 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int selectionDividersDistance=0x7f010012;
+        /**  @hide Color for the solid color background if such for optimized rendering. 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int solidColor=0x7f01000f;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -175,52 +267,58 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int textSize=0x7f010002;
+        /**  @hide The drawable for pressed virtual (increment/decrement) buttons. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int virtualButtonPressedDrawable=0x7f010018;
     }
     public static final class color {
-        public static final int help_button_view=0x7f080000;
+        public static final int help_button_view=0x7f070001;
         /**  help button view background color 
          */
-        public static final int help_view=0x7f080001;
-        public static final int nutri_black=0x7f080012;
-        public static final int nutri_blue=0x7f080011;
-        public static final int nutri_gray=0x7f080010;
-        public static final int nutri_green=0x7f08000e;
+        public static final int help_view=0x7f070002;
+        public static final int nutri_black=0x7f070013;
+        public static final int nutri_blue=0x7f070012;
+        public static final int nutri_gray=0x7f070011;
+        public static final int nutri_green=0x7f07000f;
         /**  segmentation lines 
   Palette Colors 
          */
-        public static final int nutri_red=0x7f08000c;
-        public static final int nutri_white=0x7f08000f;
-        public static final int nutri_yellow=0x7f08000d;
+        public static final int nutri_red=0x7f07000d;
+        public static final int nutri_white=0x7f070010;
+        public static final int nutri_yellow=0x7f07000e;
         /**  background color for entire help view 
          */
-        public static final int result_minor_text=0x7f080002;
+        public static final int result_minor_text=0x7f070003;
         /**  source language text/label text color. For example, "OCR English" 
          */
-        public static final int result_text=0x7f080003;
+        public static final int result_text=0x7f070004;
         /**  OCR result text color 
          */
-        public static final int result_view=0x7f080004;
+        public static final int result_view=0x7f070005;
         /**  result view background color 
          */
-        public static final int status_text=0x7f080005;
+        public static final int status_text=0x7f070006;
         /**  status_view_top/status_view_bottom text color 
          */
-        public static final int status_top_text_background=0x7f080006;
+        public static final int status_top_text_background=0x7f070007;
         /**  status_view_top text background color 
          */
-        public static final int translation_text=0x7f080007;
+        public static final int translation_text=0x7f070008;
+        public static final int transparent=0x7f070000;
         /**  translation text color 
          */
-        public static final int viewfinder_corners=0x7f080008;
+        public static final int viewfinder_corners=0x7f070009;
         /**  four corner elements for viewfinder 
          */
-        public static final int viewfinder_frame=0x7f080009;
+        public static final int viewfinder_frame=0x7f07000a;
         /**  viewfinder rectangle 
          */
-        public static final int viewfinder_mask=0x7f08000a;
+        public static final int viewfinder_mask=0x7f07000b;
         /**  viewfinder exterior darkened area 
          */
-        public static final int viewfinder_segmentation=0x7f08000b;
+        public static final int viewfinder_segmentation=0x7f07000c;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -229,8 +327,8 @@ containing a value of this type.
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f090000;
-        public static final int activity_vertical_margin=0x7f090001;
+        public static final int activity_horizontal_margin=0x7f0b0000;
+        public static final int activity_vertical_margin=0x7f0b0001;
     }
     public static final class drawable {
         public static final int active=0x7f020000;
@@ -238,6 +336,7 @@ containing a value of this type.
         public static final int back=0x7f020002;
         public static final int background=0x7f020003;
         public static final int background_pressed=0x7f020004;
+<<<<<<< HEAD
         public static final int calories_001=0x7f020005;
         public static final int calories_010=0x7f020006;
         public static final int calories_035=0x7f020007;
@@ -304,116 +403,176 @@ containing a value of this type.
         public static final int sodium_529mg=0x7f020044;
         public static final int weight=0x7f020045;
         public static final int yellowprogressbar=0x7f020046;
+=======
+        public static final int cholesterol_000mg=0x7f020005;
+        public static final int cholesterol_004mg=0x7f020006;
+        public static final int cholesterol_021mg=0x7f020007;
+        public static final int cholesterol_046mg=0x7f020008;
+        public static final int cholesterol_065mg=0x7f020009;
+        public static final int cholesterol_084mg=0x7f02000a;
+        public static final int cholesterol_103mg=0x7f02000b;
+        public static final int cholesterol_124mg=0x7f02000c;
+        public static final int cholesterol_216mg=0x7f02000d;
+        public static final int cholesterol_234mg=0x7f02000e;
+        public static final int cholesterol_367mg=0x7f02000f;
+        public static final int divider=0x7f020010;
+        public static final int female=0x7f020011;
+        public static final int greenprogressbar=0x7f020012;
+        public static final int header=0x7f020013;
+        public static final int height=0x7f020014;
+        public static final int ic_launcher=0x7f020015;
+        public static final int icon=0x7f020016;
+        public static final int item_background_holo_dark=0x7f020017;
+        public static final int item_background_holo_light=0x7f020018;
+        public static final int list_focused_holo=0x7f020019;
+        public static final int list_longpressed_holo=0x7f02001a;
+        public static final int list_pressed_holo_dark=0x7f02001b;
+        public static final int list_pressed_holo_light=0x7f02001c;
+        public static final int list_selector_background_transition_holo_dark=0x7f02001d;
+        public static final int list_selector_background_transition_holo_light=0x7f02001e;
+        public static final int list_selector_disabled_holo_dark=0x7f02001f;
+        public static final int list_selector_disabled_holo_light=0x7f020020;
+        public static final int login_gradient=0x7f020021;
+        public static final int login_gradient_flip=0x7f020022;
+        public static final int logo=0x7f020023;
+        public static final int male=0x7f020024;
+        public static final int malefemale=0x7f020025;
+        public static final int np_numberpicker_selection_divider=0x7f020026;
+        public static final int redprogressbar=0x7f020027;
+        public static final int sedentary=0x7f020028;
+        public static final int servingsize_equal=0x7f020029;
+        public static final int servingsize_less=0x7f02002a;
+        public static final int servingsize_more=0x7f02002b;
+        public static final int settings=0x7f02002c;
+        public static final int shutter=0x7f02002d;
+        public static final int shutter_button=0x7f02002e;
+        public static final int shutter_pressed=0x7f02002f;
+        public static final int sodium_001mg=0x7f020030;
+        public static final int sodium_005mg=0x7f020031;
+        public static final int sodium_080mg=0x7f020032;
+        public static final int sodium_119mg=0x7f020033;
+        public static final int sodium_1460mg=0x7f020034;
+        public static final int sodium_150mg=0x7f020035;
+        public static final int sodium_360mg=0x7f020036;
+        public static final int sodium_529mg=0x7f020037;
+        public static final int weight=0x7f020038;
+        public static final int yellowprogressbar=0x7f020039;
+>>>>>>> 7ea13695613ffbe46363158aa08e8f99f2671044
     }
     public static final class id {
-        public static final int Calories=0x7f0a0014;
-        public static final int RelativeLayout01=0x7f0a0054;
-        public static final int Settings=0x7f0a0012;
-        public static final int action_settings=0x7f0a006a;
-        public static final int age=0x7f0a001e;
-        public static final int ageBar=0x7f0a001f;
-        public static final int ageUnit=0x7f0a0021;
-        public static final int btn_increment=0x7f0a0058;
-        public static final int btn_spin=0x7f0a0057;
-        public static final int button_default=0x7f0a0026;
-        public static final int cal_spinner=0x7f0a0038;
-        public static final int cal_text=0x7f0a003a;
-        public static final int cal_text_row=0x7f0a0065;
-        public static final int cal_vis=0x7f0a0063;
-        public static final int cal_vis_row=0x7f0a0062;
-        public static final int caloriesInfo=0x7f0a0015;
-        public static final int camera_button_view=0x7f0a0032;
-        public static final int car_num=0x7f0a0042;
-        public static final int car_pb=0x7f0a0043;
-        public static final int car_text=0x7f0a003d;
-        public static final int car_vis=0x7f0a0041;
-        public static final int cho_text=0x7f0a0044;
-        public static final int chol_num=0x7f0a0047;
-        public static final int chol_pb=0x7f0a0048;
-        public static final int chol_text_row=0x7f0a0068;
-        public static final int chol_vis=0x7f0a0046;
-        public static final int chol_vis_row=0x7f0a0069;
-        public static final int comparison_button=0x7f0a004c;
-        public static final int comparison_result_image=0x7f0a0060;
-        public static final int comparison_result_measurement=0x7f0a005f;
-        public static final int comparison_result_text=0x7f0a005e;
-        public static final int decode=0x7f0a0000;
-        public static final int decode_failed=0x7f0a0001;
-        public static final int decode_succeeded=0x7f0a0002;
-        public static final int done_button=0x7f0a004e;
-        public static final int fat_num=0x7f0a003f;
-        public static final int fat_pb=0x7f0a0040;
-        public static final int fat_text=0x7f0a003c;
-        public static final int fat_text_row=0x7f0a0066;
-        public static final int fat_vis=0x7f0a003e;
-        public static final int fat_vis_row=0x7f0a0067;
-        public static final int height=0x7f0a0016;
-        public static final int heightBar=0x7f0a0017;
-        public static final int heightUnit=0x7f0a0019;
-        public static final int help_contents=0x7f0a004d;
-        public static final int imageView1=0x7f0a0024;
-        public static final int image_view=0x7f0a002a;
-        public static final int indeterminate_progress_indicator_view=0x7f0a0031;
-        public static final int iv_login_header_image=0x7f0a0050;
-        public static final int maleFemale=0x7f0a0013;
-        public static final int ocr_continuous_decode=0x7f0a0003;
-        public static final int ocr_continuous_decode_failed=0x7f0a0004;
-        public static final int ocr_continuous_decode_succeeded=0x7f0a0005;
-        public static final int ocr_decode=0x7f0a0006;
-        public static final int ocr_decode_failed=0x7f0a0007;
-        public static final int ocr_decode_succeeded=0x7f0a0008;
-        public static final int ocr_result_text_view=0x7f0a002f;
-        public static final int pager=0x7f0a005c;
-        public static final int pager_title_strip=0x7f0a005d;
-        public static final int placeHolder=0x7f0a0025;
-        public static final int preview_view=0x7f0a0027;
-        public static final int progressBar=0x7f0a0053;
-        public static final int progressBarFour=0x7f0a005b;
-        public static final int progressBarThree=0x7f0a005a;
-        public static final int progressBarTwo=0x7f0a0059;
-        public static final int progressImage=0x7f0a0055;
+        public static final int Calories=0x7f080016;
+        public static final int RelativeLayout01=0x7f080057;
+        public static final int Settings=0x7f080014;
+        public static final int action_settings=0x7f08006d;
+        public static final int age=0x7f080020;
+        public static final int ageBar=0x7f080021;
+        public static final int ageUnit=0x7f080023;
+        public static final int btn_increment=0x7f08005b;
+        public static final int btn_spin=0x7f08005a;
+        public static final int button_default=0x7f080028;
+        public static final int cal_spinner=0x7f08003a;
+        public static final int cal_text=0x7f08003c;
+        public static final int cal_text_row=0x7f080068;
+        public static final int cal_vis=0x7f080066;
+        public static final int cal_vis_row=0x7f080065;
+        public static final int caloriesInfo=0x7f080017;
+        public static final int camera_button_view=0x7f080034;
+        public static final int car_num=0x7f080044;
+        public static final int car_pb=0x7f080045;
+        public static final int car_text=0x7f08003f;
+        public static final int car_vis=0x7f080043;
+        public static final int cho_text=0x7f080046;
+        public static final int chol_num=0x7f080049;
+        public static final int chol_pb=0x7f08004a;
+        public static final int chol_text_row=0x7f08006b;
+        public static final int chol_vis=0x7f080048;
+        public static final int chol_vis_row=0x7f08006c;
+        public static final int comparison_button=0x7f08004e;
+        public static final int comparison_result_image=0x7f080063;
+        public static final int comparison_result_measurement=0x7f080062;
+        public static final int comparison_result_text=0x7f080061;
+        public static final int decode=0x7f080002;
+        public static final int decode_failed=0x7f080003;
+        public static final int decode_succeeded=0x7f080004;
+        public static final int done_button=0x7f080050;
+        public static final int fat_num=0x7f080041;
+        public static final int fat_pb=0x7f080042;
+        public static final int fat_text=0x7f08003e;
+        public static final int fat_text_row=0x7f080069;
+        public static final int fat_vis=0x7f080040;
+        public static final int fat_vis_row=0x7f08006a;
+        public static final int height=0x7f080018;
+        public static final int heightBar=0x7f080019;
+        public static final int heightUnit=0x7f08001b;
+        public static final int help_contents=0x7f08004f;
+        public static final int imageView1=0x7f080026;
+        public static final int image_view=0x7f08002c;
+        public static final int indeterminate_progress_indicator_view=0x7f080033;
+        public static final int iv_login_header_image=0x7f080052;
+        public static final int maleFemale=0x7f080015;
+        public static final int np__decrement=0x7f080001;
+        /**  Just adding these so I wont have to remove a lot of code from NumberPicker.java. 
+         */
+        public static final int np__increment=0x7f080000;
+        public static final int np__numberpicker_input=0x7f080056;
+        public static final int ocr_continuous_decode=0x7f080005;
+        public static final int ocr_continuous_decode_failed=0x7f080006;
+        public static final int ocr_continuous_decode_succeeded=0x7f080007;
+        public static final int ocr_decode=0x7f080008;
+        public static final int ocr_decode_failed=0x7f080009;
+        public static final int ocr_decode_succeeded=0x7f08000a;
+        public static final int ocr_result_text_view=0x7f080031;
+        public static final int pager=0x7f08005f;
+        public static final int pager_title_strip=0x7f080060;
+        public static final int placeHolder=0x7f080027;
+        public static final int preview_view=0x7f080029;
+        public static final int progressBar=0x7f080055;
+        public static final int progressBarFour=0x7f08005e;
+        public static final int progressBarThree=0x7f08005d;
+        public static final int progressBarTwo=0x7f08005c;
+        public static final int progressImage=0x7f080058;
         public static final int progress_small=0x01010000;
-        public static final int quit=0x7f0a0009;
-        public static final int restart_preview=0x7f0a000a;
-        public static final int result_view=0x7f0a0029;
-        public static final int rl_login_header=0x7f0a004f;
-        public static final int scrollView1=0x7f0a0011;
-        public static final int sedentary=0x7f0a0022;
-        public static final int sedentaryBar=0x7f0a0023;
-        public static final int ser_text=0x7f0a003b;
-        public static final int ser_vis=0x7f0a0064;
-        public static final int serving_size_vis=0x7f0a0039;
-        public static final int settings_button=0x7f0a0036;
-        public static final int shutter_button=0x7f0a0034;
-        public static final int sod_num=0x7f0a004a;
-        public static final int sod_pb=0x7f0a004b;
-        public static final int sod_text=0x7f0a0045;
-        public static final int sod_vis=0x7f0a0049;
-        public static final int source_language_text_view=0x7f0a002c;
-        public static final int source_language_text_view_label=0x7f0a002b;
-        public static final int status_view_bottom=0x7f0a0035;
-        public static final int status_view_top=0x7f0a0033;
-        public static final int textAge=0x7f0a0020;
-        public static final int textHeight=0x7f0a0018;
-        public static final int textView1=0x7f0a000b;
-        public static final int textView2=0x7f0a000c;
-        public static final int textView3=0x7f0a000d;
-        public static final int textView4=0x7f0a000e;
-        public static final int textView5=0x7f0a000f;
-        public static final int textView6=0x7f0a0010;
-        public static final int textWeight=0x7f0a001c;
-        public static final int title=0x7f0a0037;
-        public static final int title_row=0x7f0a0061;
-        public static final int translation_language_label_text_view=0x7f0a002d;
-        public static final int translation_language_text_view=0x7f0a002e;
-        public static final int translation_text_view=0x7f0a0030;
-        public static final int tv_progressText=0x7f0a0056;
-        public static final int v_login_gradient=0x7f0a0051;
-        public static final int vf_login_flipper=0x7f0a0052;
-        public static final int viewfinder_view=0x7f0a0028;
-        public static final int weight=0x7f0a001a;
-        public static final int weightBar=0x7f0a001b;
-        public static final int weightUnit=0x7f0a001d;
+        public static final int quit=0x7f08000b;
+        public static final int restart_preview=0x7f08000c;
+        public static final int result_view=0x7f08002b;
+        public static final int rl_login_header=0x7f080051;
+        public static final int scrollView1=0x7f080013;
+        public static final int sedentary=0x7f080024;
+        public static final int sedentaryBar=0x7f080025;
+        public static final int ser_text=0x7f08003d;
+        public static final int ser_vis=0x7f080067;
+        public static final int serving_size_picker=0x7f08003b;
+        public static final int settings_button=0x7f080038;
+        public static final int shutter_button=0x7f080036;
+        public static final int sod_num=0x7f08004c;
+        public static final int sod_pb=0x7f08004d;
+        public static final int sod_text=0x7f080047;
+        public static final int sod_vis=0x7f08004b;
+        public static final int source_language_text_view=0x7f08002e;
+        public static final int source_language_text_view_label=0x7f08002d;
+        public static final int status_view_bottom=0x7f080037;
+        public static final int status_view_top=0x7f080035;
+        public static final int textAge=0x7f080022;
+        public static final int textHeight=0x7f08001a;
+        public static final int textView1=0x7f08000d;
+        public static final int textView2=0x7f08000e;
+        public static final int textView3=0x7f08000f;
+        public static final int textView4=0x7f080010;
+        public static final int textView5=0x7f080011;
+        public static final int textView6=0x7f080012;
+        public static final int textWeight=0x7f08001e;
+        public static final int title=0x7f080039;
+        public static final int title_row=0x7f080064;
+        public static final int translation_language_label_text_view=0x7f08002f;
+        public static final int translation_language_text_view=0x7f080030;
+        public static final int translation_text_view=0x7f080032;
+        public static final int tv_progressText=0x7f080059;
+        public static final int v_login_gradient=0x7f080053;
+        public static final int vf_login_flipper=0x7f080054;
+        public static final int viewfinder_view=0x7f08002a;
+        public static final int weight=0x7f08001c;
+        public static final int weightBar=0x7f08001d;
+        public static final int weightUnit=0x7f08001f;
     }
     public static final class layout {
         public static final int activity_results=0x7f030000;
@@ -422,14 +581,15 @@ containing a value of this type.
         public static final int graphs_page=0x7f030003;
         public static final int help=0x7f030004;
         public static final int main=0x7f030005;
-        public static final int progress_spinner=0x7f030006;
-        public static final int progress_wheel_activity=0x7f030007;
-        public static final int recommender_activity=0x7f030008;
-        public static final int recommender_fragment=0x7f030009;
-        public static final int visualization_page=0x7f03000a;
+        public static final int number_picker_with_selector_wheel=0x7f030006;
+        public static final int progress_spinner=0x7f030007;
+        public static final int progress_wheel_activity=0x7f030008;
+        public static final int recommender_activity=0x7f030009;
+        public static final int recommender_fragment=0x7f03000a;
+        public static final int visualization_page=0x7f03000b;
     }
     public static final class menu {
-        public static final int results=0x7f0b0000;
+        public static final int results=0x7f0c0000;
     }
     public static final class raw {
         public static final int beep=0x7f050000;
@@ -454,10 +614,209 @@ containing a value of this type.
         public static final int vis_page_title=0x7f060008;
         public static final int visualization_activity_title=0x7f060003;
     }
+    public static final class style {
+        public static final int NPWidget=0x7f090000;
+        public static final int NPWidget_Holo_Light_NumberPicker=0x7f090003;
+        public static final int NPWidget_Holo_NumberPicker=0x7f090002;
+        public static final int NPWidget_NumberPicker=0x7f090001;
+        public static final int SampleTheme=0x7f090004;
+        public static final int SampleTheme_Light=0x7f090005;
+    }
     public static final class xml {
         public static final int preferences=0x7f040000;
     }
     public static final class styleable {
+        /** Attributes that can be used with a NumberPicker.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #NumberPicker_internalLayout edu.sfsu.cs.orange.ocr:internalLayout}</code></td><td> @hide The layout of the number picker.</td></tr>
+           <tr><td><code>{@link #NumberPicker_internalMaxHeight edu.sfsu.cs.orange.ocr:internalMaxHeight}</code></td><td> @hide The max height of the NumberPicker.</td></tr>
+           <tr><td><code>{@link #NumberPicker_internalMaxWidth edu.sfsu.cs.orange.ocr:internalMaxWidth}</code></td><td> @hide The max width of the NumberPicker.</td></tr>
+           <tr><td><code>{@link #NumberPicker_internalMinHeight edu.sfsu.cs.orange.ocr:internalMinHeight}</code></td><td> @hide The min height of the NumberPicker.</td></tr>
+           <tr><td><code>{@link #NumberPicker_internalMinWidth edu.sfsu.cs.orange.ocr:internalMinWidth}</code></td><td> @hide The min width of the NumberPicker.</td></tr>
+           <tr><td><code>{@link #NumberPicker_selectionDivider edu.sfsu.cs.orange.ocr:selectionDivider}</code></td><td> @hide The divider for making the selection area.</td></tr>
+           <tr><td><code>{@link #NumberPicker_selectionDividerHeight edu.sfsu.cs.orange.ocr:selectionDividerHeight}</code></td><td> @hide The height of the selection divider.</td></tr>
+           <tr><td><code>{@link #NumberPicker_selectionDividersDistance edu.sfsu.cs.orange.ocr:selectionDividersDistance}</code></td><td> @hide The distance between the two selection dividers.</td></tr>
+           <tr><td><code>{@link #NumberPicker_solidColor edu.sfsu.cs.orange.ocr:solidColor}</code></td><td> @hide Color for the solid color background if such for optimized rendering.</td></tr>
+           <tr><td><code>{@link #NumberPicker_virtualButtonPressedDrawable edu.sfsu.cs.orange.ocr:virtualButtonPressedDrawable}</code></td><td> @hide The drawable for pressed virtual (increment/decrement) buttons.</td></tr>
+           </table>
+           @see #NumberPicker_internalLayout
+           @see #NumberPicker_internalMaxHeight
+           @see #NumberPicker_internalMaxWidth
+           @see #NumberPicker_internalMinHeight
+           @see #NumberPicker_internalMinWidth
+           @see #NumberPicker_selectionDivider
+           @see #NumberPicker_selectionDividerHeight
+           @see #NumberPicker_selectionDividersDistance
+           @see #NumberPicker_solidColor
+           @see #NumberPicker_virtualButtonPressedDrawable
+         */
+        public static final int[] NumberPicker = {
+            0x7f01000f, 0x7f010010, 0x7f010011, 0x7f010012,
+            0x7f010013, 0x7f010014, 0x7f010015, 0x7f010016,
+            0x7f010017, 0x7f010018
+        };
+        /**
+          <p>
+          @attr description
+           @hide The layout of the number picker. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name edu.sfsu.cs.orange.ocr:internalLayout
+        */
+        public static final int NumberPicker_internalLayout = 8;
+        /**
+          <p>
+          @attr description
+           @hide The max height of the NumberPicker. 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name edu.sfsu.cs.orange.ocr:internalMaxHeight
+        */
+        public static final int NumberPicker_internalMaxHeight = 5;
+        /**
+          <p>
+          @attr description
+           @hide The max width of the NumberPicker. 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name edu.sfsu.cs.orange.ocr:internalMaxWidth
+        */
+        public static final int NumberPicker_internalMaxWidth = 7;
+        /**
+          <p>
+          @attr description
+           @hide The min height of the NumberPicker. 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name edu.sfsu.cs.orange.ocr:internalMinHeight
+        */
+        public static final int NumberPicker_internalMinHeight = 4;
+        /**
+          <p>
+          @attr description
+           @hide The min width of the NumberPicker. 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name edu.sfsu.cs.orange.ocr:internalMinWidth
+        */
+        public static final int NumberPicker_internalMinWidth = 6;
+        /**
+          <p>
+          @attr description
+           @hide The divider for making the selection area. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name edu.sfsu.cs.orange.ocr:selectionDivider
+        */
+        public static final int NumberPicker_selectionDivider = 1;
+        /**
+          <p>
+          @attr description
+           @hide The height of the selection divider. 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name edu.sfsu.cs.orange.ocr:selectionDividerHeight
+        */
+        public static final int NumberPicker_selectionDividerHeight = 2;
+        /**
+          <p>
+          @attr description
+           @hide The distance between the two selection dividers. 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name edu.sfsu.cs.orange.ocr:selectionDividersDistance
+        */
+        public static final int NumberPicker_selectionDividersDistance = 3;
+        /**
+          <p>
+          @attr description
+           @hide Color for the solid color background if such for optimized rendering. 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name edu.sfsu.cs.orange.ocr:solidColor
+        */
+        public static final int NumberPicker_solidColor = 0;
+        /**
+          <p>
+          @attr description
+           @hide The drawable for pressed virtual (increment/decrement) buttons. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name edu.sfsu.cs.orange.ocr:virtualButtonPressedDrawable
+        */
+        public static final int NumberPicker_virtualButtonPressedDrawable = 9;
         /** Attributes that can be used with a ProgressWheel.
            <p>Includes the following attributes:</p>
            <table>
