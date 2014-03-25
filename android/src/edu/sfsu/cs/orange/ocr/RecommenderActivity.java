@@ -1,31 +1,22 @@
 package edu.sfsu.cs.orange.ocr;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import org.xmlpull.v1.XmlPullParserException;
+import net.simonvt.numberpicker.NumberPicker;
+import android.app.Activity;
+import android.content.res.Resources;
+import android.content.res.Resources.NotFoundException;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerTitleStrip;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class RecommenderActivity extends FragmentActivity {
-
-	SectionsPagerAdapter mSectionsPagerAdapter;
-	ViewPager mViewPager;
+public class RecommenderActivity extends Activity implements
+		NumberPicker.OnValueChangeListener {
 
 	public final static String NUTRITION_QUANT_KEY = "nutritionQuant";
 
@@ -35,13 +26,16 @@ public class RecommenderActivity extends FragmentActivity {
 	private final static String[] queries = { "Calories", "Fat", "Cholesterol",
 			"Sodium", "Carbohydrate" };
 	private final static String[] units = { " Calories", "g", "mg", "mg", "mg" };
+	private Drawable[] allDrawables = new Drawable[5];
+	private String[] allComparisonText = new String[5];
+	private String[] allMeasurementText = new String[5];
 
 	// database
 	class ComparisonData {
 		public String label;
 		public float value;
 		public int imageID;
-		
+
 		public ComparisonData(String label, float value, int imageID) {
 			this.label = label;
 			this.value = value;
@@ -53,12 +47,13 @@ public class RecommenderActivity extends FragmentActivity {
 	// resources
 	private static Typeface arialblack;
 	private static Typeface arial;
-	private Fragment[] allFragments = new Fragment[5];
 
+	// view setup
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.recommender_activity);
+		Resources res = getResources();
+		setContentView(R.layout.recommender_fragment);
 
 		// grab typeface from resource
 		arialblack = Typeface.createFromAsset(getAssets(),
@@ -69,29 +64,41 @@ public class RecommenderActivity extends FragmentActivity {
 			nutrition_values = (getIntent().getExtras())
 					.getFloatArray(NUTRITION_QUANT_KEY);
 		}
-		// loag fragments
-		loadFragments();
-
-		// Set up the ViewPager with the sections adapter.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
-
-		// set title font
-		PagerTitleStrip _Title = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
-		for (int counter = 0; counter < _Title.getChildCount(); counter++) {
-
-			if (_Title.getChildAt(counter) instanceof TextView) {
-				((TextView) _Title.getChildAt(counter)).setTypeface(arialblack);
-				((TextView) _Title.getChildAt(counter)).setTextSize(25);
-			}
-
+		// scroll wheel setup
+		NumberPicker category_picker;
+		Drawable divider = null;
+		try {
+			divider = Drawable.createFromXml(res,
+					res.getXml(R.drawable.divider));
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
+		category_picker = (NumberPicker) findViewById(R.id.comparison_category_picker);
+		category_picker.setMinValue(0);
+		category_picker.setMaxValue(4);
+		category_picker.setValue(0);
+		category_picker.setDividerDrawable(divider);
+		category_picker.setFocusable(true);
+		category_picker.setFocusableInTouchMode(true);
+		category_picker.setDisplayedValues(queries);
+		category_picker.setOnValueChangedListener(this);
+		category_picker.setWrapSelectorWheel(false);
 		// create database
 		createDataList();
-
+		
+		// pre-load drawable and strings
+		loadAllComparisonData();
+		
+		// initial default view
+		updatePicture(0);
 	}
 
 	// create database
@@ -127,14 +134,19 @@ public class RecommenderActivity extends FragmentActivity {
 		dataList.add(cal);
 		ComparisonData[] fat = new ComparisonData[10];
 		fat[0] = new ComparisonData("One apple", 0, R.drawable.fat_000g);
-		fat[1] = new ComparisonData("Eight pretzel biscuits", 1, R.drawable.fat_001g);
+		fat[1] = new ComparisonData("Eight pretzel biscuits", 1,
+				R.drawable.fat_001g);
 		fat[2] = new ComparisonData("One granola bar", 2, R.drawable.fat_002g);
-		fat[3] = new ComparisonData("A bag of baked potato crisps", 3, R.drawable.fat_003g);
+		fat[3] = new ComparisonData("A bag of baked potato crisps", 3,
+				R.drawable.fat_003g);
 		fat[4] = new ComparisonData("One icecream cone", 4, R.drawable.fat_004g);
-		fat[5] = new ComparisonData("A handful of chips", 9, R.drawable.fat_009g);
-		fat[6] = new ComparisonData("One bacon hamburger", 14, R.drawable.fat_014g);
+		fat[5] = new ComparisonData("A handful of chips", 9,
+				R.drawable.fat_009g);
+		fat[6] = new ComparisonData("One bacon hamburger", 14,
+				R.drawable.fat_014g);
 		fat[7] = new ComparisonData("Small fries", 25, R.drawable.fat_025g);
-		fat[8] = new ComparisonData("A large chunk of cheese", 33, R.drawable.fat_033g);
+		fat[8] = new ComparisonData("A large chunk of cheese", 33,
+				R.drawable.fat_033g);
 		fat[9] = new ComparisonData("A bar of butter", 81, R.drawable.fat_081g);
 		dataList.add(fat);
 		ComparisonData[] chole = new ComparisonData[11];
@@ -184,91 +196,21 @@ public class RecommenderActivity extends FragmentActivity {
 		dataList.add(carb);
 	}
 
-	// pre-load all fragment to memory
-	public void loadFragments() {
-		for (int i = 0; i < allFragments.length; i++) {
-			allFragments[i] = RecommenderViewFragment.newInstance(i,
-					(float) (nutrition_values[i] * conversion[i]));
-		}
-	}
-
 	// make sure database is closed
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 	}
 
-	// swipe tab inner-class
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
-		private final int COUNT = 5;
-
-		public SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			return allFragments[position];
-		}
-
-		@Override
-		public int getCount() {
-			return this.COUNT;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return queries[position];
-		}
-	}
-
-	public void done(View view) {
-		finish();
-	}
-
-	// my static fragment
-	public static class RecommenderViewFragment extends Fragment {
-
-		public static final String ARG_QUERY_LABEL = "category";
-		public static final String ARG_QUERY_VALUE = "nutrition_value";
-
-		public RecommenderViewFragment() {
-		}
-
-		// new instantiation of fragment
-		public static RecommenderViewFragment newInstance(int query, float value) {
-			RecommenderViewFragment frag = new RecommenderViewFragment();
-
-			// argument passing to fragment (String query)
-			Bundle bundle = new Bundle();
-			bundle.putInt(ARG_QUERY_LABEL, query);
-			bundle.putFloat(ARG_QUERY_VALUE, value);
-
-			frag.setArguments(bundle);
-
-			return frag;
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-
-			int category = getArguments().getInt(ARG_QUERY_LABEL);
-			float value = getArguments().getFloat(ARG_QUERY_VALUE);
-
-			View rootView = inflater.inflate(R.layout.recommender_fragment,
-					container, false);
-
-			/*
-			 * comparison_text.setText("This food is equivalent to " +
-			 * String.format("%.2f", value) + " " + comparison_target[category]
-			 * + " in terms of " + queries[category]);
-			 */
-
+	public void loadAllComparisonData() {
+		// do for all categories
+		for (int category = 0; category < allDrawables.length; category++) {
 			// compute closest food for this category
 			ComparisonData[] thisCategory = dataList.get(category);
+			float value = nutrition_values[category] * conversion[category];
 			float minVal = Math.abs(thisCategory[0].value - value);
 			int minIndex = 0;
+			// find closest label for this category
 			for (int i = 1; i < thisCategory.length; i++) {
 				if (Math.abs(thisCategory[i].value - value) < minVal) {
 					minVal = Math.abs(thisCategory[i].value - value);
@@ -276,41 +218,43 @@ public class RecommenderActivity extends FragmentActivity {
 				}
 			}
 			String targetLabel = thisCategory[minIndex].label;
-			int targetImageID = thisCategory[minIndex].imageID;
-
-			// set comparison text
-			TextView comparison_text = (TextView) rootView
-					.findViewById(R.id.comparison_result_text);
-			comparison_text.setText("Similar food in terms of "
-					+ queries[category] + " is " + targetLabel);
-			comparison_text.setTypeface(arial);
-
-			// set measurement text
-			TextView measurement_text = (TextView) rootView
-					.findViewById(R.id.comparison_result_measurement);
+			String targetMeasurementText = "";
 			if (category == 0) {
-				measurement_text.setText(value + units[category]);
+				targetMeasurementText = "" + value + units[category];
 			} else {
-				measurement_text.setText(value + units[category] + " of "
-						+ queries[category]);
+				targetMeasurementText = "" + value + units[category] + " of "
+						+ queries[category];
 			}
-
-			measurement_text.setTypeface(arial);
-
-			// set image
-			ImageView comparison_image = (ImageView) rootView
-					.findViewById(R.id.comparison_result_image);
-			comparison_image.setImageDrawable(getResources().getDrawable(
-					targetImageID));
-
-			return rootView;
+			allDrawables[category] = getResources().getDrawable(
+					thisCategory[minIndex].imageID);
+			allComparisonText[category] = "Similar food in terms of "
+					+ queries[category] + " is " + targetLabel;
+			allMeasurementText[category] = targetMeasurementText;
 		}
 
-		@Override
-		public void onPause() {
-			super.onPause();
-		}
+	}
 
+	public void updatePicture(int category) {
+
+		// set comparison text
+		TextView comparison_text = (TextView) findViewById(R.id.comparison_result_text);
+		comparison_text.setText(allComparisonText[category]);
+		comparison_text.setTypeface(arial);
+
+		// set measurement text
+		TextView measurement_text = (TextView) findViewById(R.id.comparison_result_measurement);
+		measurement_text.setText(allMeasurementText[category]);
+		measurement_text.setTypeface(arial);
+
+		// set image
+		ImageView comparison_image = (ImageView) findViewById(R.id.comparison_result_image);
+		comparison_image.setImageDrawable(allDrawables[category]);
+	}
+
+	@Override
+	public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+		// TODO Auto-generated method stub
+		updatePicture(newVal);
 	}
 
 }

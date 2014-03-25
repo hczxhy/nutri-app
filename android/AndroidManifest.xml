@@ -13,7 +13,7 @@
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
- limitations under the License.
+ limitations under the License.
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,19 +38,20 @@
         android:required="false" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.screen.portrait" />
-    
-	<uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Allows access to the flashlight -->
- 	<permission android:name="android.permission.FLASHLIGHT"
-             android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
-             android:protectionLevel="normal" />
-    
+    <permission
+        android:name="android.permission.FLASHLIGHT"
+        android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
+        android:protectionLevel="normal" />
+
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen"  >
+        android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
         <activity
             android:name="edu.sfsu.cs.orange.ocr.CaptureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -75,48 +76,49 @@
         <activity android:name="edu.sfsu.cs.orange.ocr.PreferencesActivity" />
         <activity
             android:name="edu.sfsu.cs.orange.ocr.ResultsActivity"
-            android:label="@string/title_activity_results" 
+            android:label="@string/title_activity_results"
             android:parentActivityName="edu.sfsu.cs.orange.ocr.CaptureActivity" >
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" />
         </activity>
         <activity
             android:name="edu.sfsu.cs.orange.ocr.SettingsActivity"
-            android:label="@string/title_activity_settings" 
+            android:label="@string/title_activity_settings"
             android:parentActivityName="edu.sfsu.cs.orange.ocr.CaptureActivity" >
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" />
         </activity>
         <activity
             android:name="edu.sfsu.cs.orange.ocr.Visualization_Activity"
             android:label="@string/visualization_activity_title"
-             android:parentActivityName="edu.sfsu.cs.orange.ocr.CaptureActivity" 
-             android:screenOrientation="portrait">
+            android:parentActivityName="edu.sfsu.cs.orange.ocr.CaptureActivity"
+            android:screenOrientation="portrait" >
             <meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" /> 
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" />
         </activity>
         <activity
             android:name="edu.sfsu.cs.orange.ocr.GraphActivity"
             android:label="@string/graph_activity_title"
-             android:parentActivityName="edu.sfsu.cs.orange.ocr.CaptureActivity" 
-             android:theme="@style/SampleTheme.Light"
-             android:screenOrientation="portrait">
+            android:parentActivityName="edu.sfsu.cs.orange.ocr.CaptureActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SampleTheme.Light" >
             <meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" /> 
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" />
         </activity>
         <activity
             android:name="edu.sfsu.cs.orange.ocr.RecommenderActivity"
             android:label="@string/recommender_activity_title"
-             android:parentActivityName="edu.sfsu.cs.orange.ocr.Visualization_Activity" 
-             android:screenOrientation="portrait">
+            android:parentActivityName="edu.sfsu.cs.orange.ocr.Visualization_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SampleTheme.Light" >
             <meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="edu.sfsu.cs.orange.ocr.Visualization_Activity" /> 
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.sfsu.cs.orange.ocr.Visualization_Activity" />
         </activity>
     </application>
-    
+
 </manifest>
