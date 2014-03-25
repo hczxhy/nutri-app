@@ -104,7 +104,7 @@ final class OcrRecognizeAsyncTask extends AsyncTask<Void, Void, Boolean> {
 		Pix thresholdedImage = Binarize.otsuAdaptiveThreshold(
 				ReadFile.readBitmap(bitmap), 48, 48, 1, 1, 0.1F);
 
-		bitmap = WriteFile.writeBitmap(thresholdedImage);
+		bitmap = WriteFile.writeBitmap(thresholdedImage.copy());
 		try {
 
 			// Bitmap CroppedBitmap =
