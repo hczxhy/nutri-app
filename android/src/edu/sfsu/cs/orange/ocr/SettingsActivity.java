@@ -16,7 +16,7 @@ import android.widget.ToggleButton;
 public class SettingsActivity extends Activity {
 
 	static int w;
-	static int h;
+	static float h;
 	static float a;
 	static int offset;
 	static float af;
@@ -39,7 +39,7 @@ public class SettingsActivity extends Activity {
 		sharedPref = this.getSharedPreferences("OCRSettingsPreferences",Context.MODE_PRIVATE);
 		editor = sharedPref.edit();
 		w = sharedPref.getInt("weight", 64);
-		h = sharedPref.getInt("height", 170);
+		h = sharedPref.getFloat("height", 170.0f);
 		a = sharedPref.getFloat("age", 30.0f);
 		offset = sharedPref.getInt("offset", 5);
 		af = sharedPref.getFloat("af", 1.375f);
@@ -47,11 +47,11 @@ public class SettingsActivity extends Activity {
 		
 		// initialize the settings page
 		seekBar = (SeekBar)findViewById(R.id.heightBar);		
-		seekBar.setProgress(h/3);
+		seekBar.setProgress((int)(h/2.5f));
 		seekBar2 = (SeekBar)findViewById(R.id.weightBar);
 		seekBar2.setProgress(w/2);
 		seekBar3 = (SeekBar)findViewById(R.id.ageBar);
-		seekBar3.setProgress((int)(a/1.5f));
+		seekBar3.setProgress((int)(a));
 		seekBar4 = (SeekBar)findViewById(R.id.sedentaryBar);
 		seekBar4.setProgress((int)(((af-1.2f)/0.7f)*100f));
 		updateCalories();				
@@ -86,14 +86,14 @@ public class SettingsActivity extends Activity {
 		
 		// adjust height bar		 
         seekBarValue = (TextView)findViewById(R.id.textHeight);
-        seekBarValue.setText(String.valueOf(h));
+        seekBarValue.setText(String.valueOf((int)h));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){ 
 		   @Override 
 		   public void onProgressChanged(SeekBar seekBar, int progress, 
 		     boolean fromUser) { 
 		    // TODO Auto-generated method stub 
-			int val = progress*3;
-		    seekBarValue.setText(String.valueOf(val));
+			float val = progress*2.5f;
+		    seekBarValue.setText(String.valueOf((int)val));
 		    h = val;		    
 		    updateCalories();
 		   } 	
@@ -138,7 +138,7 @@ public class SettingsActivity extends Activity {
       		   public void onProgressChanged(SeekBar seekBar, int progress, 
       		     boolean fromUser) { 
       		    // TODO Auto-generated method stub 
-      			float val = progress*1.5f;
+      			float val = progress;
       		    seekBarValue3.setText(String.valueOf((int)val)); 
       		    a = val;
       		    updateCalories();
@@ -180,7 +180,7 @@ public class SettingsActivity extends Activity {
 		calories = af*(10*w + 6.25f*h - 5*a + offset);
 		caloriesValue.setText(String.valueOf((int)calories));
 		editor.putInt("weight", w);
-		editor.putInt("height", h);
+		editor.putFloat("height", h);
 		editor.putFloat("age", a);
 		editor.putFloat("af", af);
 		editor.putInt("offset", offset);
@@ -191,7 +191,7 @@ public class SettingsActivity extends Activity {
 	
 	public void setDefault(){
 		w = 64;
-		h = 170;
+		h = 170f;
 		a = 30;
 		offset = 5;
 		af = 1.375f;
@@ -199,16 +199,16 @@ public class SettingsActivity extends Activity {
 		ToggleButton toggle = (ToggleButton) findViewById(R.id.maleFemale);
 		toggle.setChecked(ttt);
 		seekBar = (SeekBar)findViewById(R.id.heightBar);		
-		seekBar.setProgress(h/3);
+		seekBar.setProgress((int)(h/2.5f));
 		seekBar2 = (SeekBar)findViewById(R.id.weightBar);
 		seekBar2.setProgress(w/2);
 		seekBar3 = (SeekBar)findViewById(R.id.ageBar);
-		seekBar3.setProgress((int)(a/1.5f));
+		seekBar3.setProgress((int)(a));
 		seekBar4 = (SeekBar)findViewById(R.id.sedentaryBar);
 		seekBar4.setProgress((int)(((af-1.2f)/0.7f)*100f));
 		
 		seekBarValue = (TextView)findViewById(R.id.textHeight);
-        seekBarValue.setText(String.valueOf(h));
+        seekBarValue.setText(String.valueOf((int)h));
         seekBarValue2 = (TextView)findViewById(R.id.textWeight); 
         seekBarValue2.setText(String.valueOf(w));
         seekBarValue3 = (TextView)findViewById(R.id.textAge); 
