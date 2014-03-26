@@ -3,6 +3,8 @@ package edu.sfsu.cs.orange.ocr;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -27,13 +29,31 @@ public class SettingsActivity extends Activity {
 	TextView seekBarValue,seekBarValue2,seekBarValue3;
 	static SharedPreferences sharedPref;
 	static SharedPreferences.Editor editor;
-	
+	//Get resources
+	private Resources res;
+	private Typeface arialblack;
+	private Typeface arial;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);							
 		caloriesValue = (TextView)findViewById(R.id.Calories);					
+		
+		arialblack=Typeface.createFromAsset(getAssets(), "fonts/arialblack.ttf");
+		arial=Typeface.createFromAsset(getAssets(), "fonts/arial.ttf");
+				
+		
+		TextView sett = (TextView) findViewById(R.id.Settings);
+		sett.setTypeface(arial);
+		TextView calInfo = (TextView) findViewById(R.id.caloriesInfo);
+		calInfo.setTypeface(arial);
+		TextView hunit = (TextView) findViewById(R.id.heightUnit);
+		hunit.setTypeface(arial);
+		TextView wunit = (TextView) findViewById(R.id.weightUnit);
+		wunit.setTypeface(arial);
+		TextView aunit = (TextView) findViewById(R.id.ageUnit);
+		aunit.setTypeface(arial);
 		
 		// set up preferences file
 		sharedPref = this.getSharedPreferences("OCRSettingsPreferences",Context.MODE_PRIVATE);
@@ -47,7 +67,7 @@ public class SettingsActivity extends Activity {
 		
 		// initialize the settings page
 		seekBar = (SeekBar)findViewById(R.id.heightBar);		
-		seekBar.setProgress((int)(h/2.5f));
+		seekBar.setProgress((int)(h - 100f));
 		seekBar2 = (SeekBar)findViewById(R.id.weightBar);
 		seekBar2.setProgress(w/2);
 		seekBar3 = (SeekBar)findViewById(R.id.ageBar);
@@ -64,6 +84,7 @@ public class SettingsActivity extends Activity {
                 setDefault();
             }
         });
+        button.setTypeface(arial);
 		
 		// adjust male female
 		ToggleButton toggle = (ToggleButton) findViewById(R.id.maleFemale);
@@ -92,7 +113,7 @@ public class SettingsActivity extends Activity {
 		   public void onProgressChanged(SeekBar seekBar, int progress, 
 		     boolean fromUser) { 
 		    // TODO Auto-generated method stub 
-			float val = progress*2.5f;
+			float val = progress + 100f;
 		    seekBarValue.setText(String.valueOf((int)val));
 		    h = val;		    
 		    updateCalories();
@@ -172,7 +193,10 @@ public class SettingsActivity extends Activity {
       		   } 
         });
         
-	   
+        caloriesValue.setTypeface(arial);
+		seekBarValue.setTypeface(arial);
+		seekBarValue2.setTypeface(arial);
+		seekBarValue3.setTypeface(arial);
 		
 	}
 			
@@ -199,7 +223,7 @@ public class SettingsActivity extends Activity {
 		ToggleButton toggle = (ToggleButton) findViewById(R.id.maleFemale);
 		toggle.setChecked(ttt);
 		seekBar = (SeekBar)findViewById(R.id.heightBar);		
-		seekBar.setProgress((int)(h/2.5f));
+		seekBar.setProgress((int)(h - 100f));
 		seekBar2 = (SeekBar)findViewById(R.id.weightBar);
 		seekBar2.setProgress(w/2);
 		seekBar3 = (SeekBar)findViewById(R.id.ageBar);
