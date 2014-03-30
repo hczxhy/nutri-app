@@ -270,23 +270,26 @@ public final class CaptureActivity extends Activity implements
 		}
 		settingsButton = (Button) findViewById(R.id.settings_button);
 		settingsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-            	Intent settingsIntent;
-            	settingsIntent = new Intent().setClass(CaptureActivity.this, SettingsActivity.class);
-            	startActivity(settingsIntent);
-            }
-        });
-		
-		loadButton = (Button) findViewById(R.id.load_button);	
+			public void onClick(View v) {
+				// Perform action on click
+				Intent settingsIntent;
+				settingsIntent = new Intent().setClass(CaptureActivity.this,
+						SettingsActivity.class);
+				startActivity(settingsIntent);
+			}
+		});
+
+		loadButton = (Button) findViewById(R.id.load_button);
 		loadButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-            	Intent settingsIntent;
-            	settingsIntent = new Intent().setClass(CaptureActivity.this, SettingsActivity.class); // change this to change what the load button shows
-            	startActivity(settingsIntent);
-            }
-        });		
+			public void onClick(View v) {
+				// Perform action on click
+				Intent settingsIntent;
+				settingsIntent = new Intent().setClass(CaptureActivity.this,
+						SettingsActivity.class); // change this to change what
+													// the load button shows
+				startActivity(settingsIntent);
+			}
+		});
 
 		ocrResultView = (TextView) findViewById(R.id.ocr_result_text_view);
 		registerForContextMenu(ocrResultView);
@@ -299,7 +302,7 @@ public final class CaptureActivity extends Activity implements
 		viewfinderView.setCameraManager(cameraManager);
 
 		isEngineReady = false;
-		
+
 		setTypefaces();
 	}
 
@@ -893,12 +896,12 @@ public final class CaptureActivity extends Activity implements
 				FileOutputStream fos = new FileOutputStream(fileToWrite);
 				fos.write(textResultToStore.getBytes());
 				fos.close();
-
-				Toast toast = Toast.makeText(this,
-						"Result Text File Created as " + fileNameTextResult,
-						Toast.LENGTH_SHORT);
-				toast.setGravity(Gravity.BOTTOM, 0, 0);
-				toast.show();
+				/*
+				 * Toast toast = Toast.makeText(this,
+				 * "Result Text File Created as " + fileNameTextResult,
+				 * Toast.LENGTH_SHORT); toast.setGravity(Gravity.BOTTOM, 0, 0);
+				 * toast.show();
+				 */
 			} catch (IOException e) {
 				Toast toast = Toast.makeText(this,
 						"Result Text File Creation Failed : "
@@ -934,12 +937,12 @@ public final class CaptureActivity extends Activity implements
 				FileOutputStream fos = new FileOutputStream(fileToWrite);
 				result.compress(Bitmap.CompressFormat.PNG, 90, fos);
 				fos.close();
-
-				Toast toast = Toast
-						.makeText(this, "Result Bitmap File Created as "
-								+ fileNameBitmapResult, Toast.LENGTH_SHORT);
-				toast.setGravity(Gravity.BOTTOM, 0, 0);
-				toast.show();
+				/*
+				 * Toast toast = Toast .makeText(this,
+				 * "Result Bitmap File Created as " + fileNameBitmapResult,
+				 * Toast.LENGTH_SHORT); toast.setGravity(Gravity.BOTTOM, 0, 0);
+				 * toast.show();
+				 */
 			} catch (IOException e) {
 				Toast toast = Toast.makeText(this,
 						"Result Bitmap File Creation Failed : "
@@ -1463,7 +1466,8 @@ public final class CaptureActivity extends Activity implements
 		((TextView) indeterminateDialog.findViewById(R.id.factoid_text))
 				.setTypeface(arial);
 
-		ImageButton nextButton = (ImageButton)indeterminateDialog.findViewById(R.id.factoid_next);
+		ImageButton nextButton = (ImageButton) indeterminateDialog
+				.findViewById(R.id.factoid_next);
 		nextButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
 				((TextView) indeterminateDialog.findViewById(R.id.factoid_text))
@@ -1471,7 +1475,8 @@ public final class CaptureActivity extends Activity implements
 
 			}
 		});
-		ImageButton prevButton = (ImageButton)indeterminateDialog.findViewById(R.id.factoid_prev);
+		ImageButton prevButton = (ImageButton) indeterminateDialog
+				.findViewById(R.id.factoid_prev);
 		prevButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
 				((TextView) indeterminateDialog.findViewById(R.id.factoid_text))
@@ -1479,7 +1484,7 @@ public final class CaptureActivity extends Activity implements
 
 			}
 		});
-		
+
 		indeterminateDialog.show();
 
 	}
