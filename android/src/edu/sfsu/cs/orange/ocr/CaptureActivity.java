@@ -270,7 +270,6 @@ public final class CaptureActivity extends Activity implements
 		}
 		settingsButton = (Button) findViewById(R.id.settings_button);
 		settingsButton.setOnClickListener(new View.OnClickListener() {
-<<<<<<< HEAD
             public void onClick(View v) {
                 // Perform action on click
             	Intent settingsIntent;
@@ -287,19 +286,8 @@ public final class CaptureActivity extends Activity implements
             	settingsIntent = new Intent().setClass(CaptureActivity.this, SettingsActivity.class); // change this to change what the load button shows
             	startActivity(settingsIntent);
             }
-        });
-		
-=======
-			public void onClick(View v) {
-				// Perform action on click
-				Intent settingsIntent;
-				settingsIntent = new Intent().setClass(CaptureActivity.this,
-						SettingsActivity.class);
-				startActivity(settingsIntent);
-			}
-		});
+        });		
 
->>>>>>> c0869fe89595be9cfeaef92eb95d3baeada27af2
 		ocrResultView = (TextView) findViewById(R.id.ocr_result_text_view);
 		registerForContextMenu(ocrResultView);
 		translationView = (TextView) findViewById(R.id.translation_text_view);

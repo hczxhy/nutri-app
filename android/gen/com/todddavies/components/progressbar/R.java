@@ -32,35 +32,19 @@ public final class R {
 		public static final int logo = 0x7f02004c;
 	}
 	public static final class id {
-<<<<<<< HEAD
-		public static final int RelativeLayout01 = 0x7f080058;
-		public static final int btn_increment = 0x7f08005c;
-		public static final int btn_spin = 0x7f08005b;
+		public static final int RelativeLayout01 = 0x7f08005d;
+		public static final int btn_increment = 0x7f080061;
+		public static final int btn_spin = 0x7f080060;
 		public static final int iv_login_header_image = 0x7f080053;
 		public static final int progressBar = 0x7f080056;
-		public static final int progressBarFour = 0x7f08005f;
-		public static final int progressBarThree = 0x7f08005e;
-		public static final int progressBarTwo = 0x7f08005d;
-		public static final int progressImage = 0x7f080059;
+		public static final int progressBarFour = 0x7f080064;
+		public static final int progressBarThree = 0x7f080063;
+		public static final int progressBarTwo = 0x7f080062;
+		public static final int progressImage = 0x7f08005e;
 		public static final int rl_login_header = 0x7f080052;
-		public static final int tv_progressText = 0x7f08005a;
+		public static final int tv_progressText = 0x7f08005f;
 		public static final int v_login_gradient = 0x7f080054;
 		public static final int vf_login_flipper = 0x7f080055;
-=======
-		public static final int RelativeLayout01 = 0x7f07005c;
-		public static final int btn_increment = 0x7f070060;
-		public static final int btn_spin = 0x7f07005f;
-		public static final int iv_login_header_image = 0x7f070052;
-		public static final int progressBar = 0x7f070055;
-		public static final int progressBarFour = 0x7f070063;
-		public static final int progressBarThree = 0x7f070062;
-		public static final int progressBarTwo = 0x7f070061;
-		public static final int progressImage = 0x7f07005d;
-		public static final int rl_login_header = 0x7f070051;
-		public static final int tv_progressText = 0x7f07005e;
-		public static final int v_login_gradient = 0x7f070053;
-		public static final int vf_login_flipper = 0x7f070054;
->>>>>>> c0869fe89595be9cfeaef92eb95d3baeada27af2
 	}
 	public static final class layout {
 		public static final int main = 0x7f030005;
