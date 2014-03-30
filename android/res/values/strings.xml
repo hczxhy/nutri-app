@@ -26,7 +26,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="vis_page_title">Nutrition Facts</string>
     <string name = "comparison_result_image_desc">Dynamic Comparison Result Picture</string>
+    <string name = "prev_button_label">Previous</string>
+    <string name = "next_button_label">Next</string>
+    <string name = "factoid_dialog_title">Did you know ?</string>
 
+    
     <string name="calories">Calories</string>
     <string name="total_fat">Total Fat</string>
     <string name="carbs">Carbohydrates</string>

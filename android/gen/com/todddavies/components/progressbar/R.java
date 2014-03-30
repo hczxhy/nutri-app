@@ -24,32 +24,32 @@ public final class R {
 		public static final int textSize = 0x7f01000d;
 	}
 	public static final class drawable {
-		public static final int header = 0x7f020035;
-		public static final int ic_launcher = 0x7f020037;
-		public static final int icon = 0x7f020038;
-		public static final int login_gradient = 0x7f020043;
-		public static final int login_gradient_flip = 0x7f020044;
-		public static final int logo = 0x7f020045;
+		public static final int header = 0x7f020038;
+		public static final int ic_launcher = 0x7f02003a;
+		public static final int icon = 0x7f02003b;
+		public static final int login_gradient = 0x7f02004a;
+		public static final int login_gradient_flip = 0x7f02004b;
+		public static final int logo = 0x7f02004c;
 	}
 	public static final class id {
-		public static final int RelativeLayout01 = 0x7f070057;
-		public static final int btn_increment = 0x7f07005b;
-		public static final int btn_spin = 0x7f07005a;
+		public static final int RelativeLayout01 = 0x7f07005c;
+		public static final int btn_increment = 0x7f070060;
+		public static final int btn_spin = 0x7f07005f;
 		public static final int iv_login_header_image = 0x7f070052;
 		public static final int progressBar = 0x7f070055;
-		public static final int progressBarFour = 0x7f07005e;
-		public static final int progressBarThree = 0x7f07005d;
-		public static final int progressBarTwo = 0x7f07005c;
-		public static final int progressImage = 0x7f070058;
+		public static final int progressBarFour = 0x7f070063;
+		public static final int progressBarThree = 0x7f070062;
+		public static final int progressBarTwo = 0x7f070061;
+		public static final int progressImage = 0x7f07005d;
 		public static final int rl_login_header = 0x7f070051;
-		public static final int tv_progressText = 0x7f070059;
+		public static final int tv_progressText = 0x7f07005e;
 		public static final int v_login_gradient = 0x7f070053;
 		public static final int vf_login_flipper = 0x7f070054;
 	}
 	public static final class layout {
 		public static final int main = 0x7f030005;
-		public static final int progress_spinner = 0x7f030007;
-		public static final int progress_wheel_activity = 0x7f030008;
+		public static final int progress_spinner = 0x7f030008;
+		public static final int progress_wheel_activity = 0x7f030009;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f090001;

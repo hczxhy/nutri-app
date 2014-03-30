@@ -24,17 +24,17 @@ public final class R {
 		public static final int transparent = 0x7f060000;
 	}
 	public static final class drawable {
-		public static final int item_background_holo_dark = 0x7f020039;
-		public static final int item_background_holo_light = 0x7f02003a;
-		public static final int list_focused_holo = 0x7f02003b;
-		public static final int list_longpressed_holo = 0x7f02003c;
-		public static final int list_pressed_holo_dark = 0x7f02003d;
-		public static final int list_pressed_holo_light = 0x7f02003e;
-		public static final int list_selector_background_transition_holo_dark = 0x7f02003f;
-		public static final int list_selector_background_transition_holo_light = 0x7f020040;
-		public static final int list_selector_disabled_holo_dark = 0x7f020041;
-		public static final int list_selector_disabled_holo_light = 0x7f020042;
-		public static final int np_numberpicker_selection_divider = 0x7f020048;
+		public static final int item_background_holo_dark = 0x7f02003e;
+		public static final int item_background_holo_light = 0x7f02003f;
+		public static final int list_focused_holo = 0x7f020040;
+		public static final int list_longpressed_holo = 0x7f020041;
+		public static final int list_pressed_holo_dark = 0x7f020042;
+		public static final int list_pressed_holo_light = 0x7f020043;
+		public static final int list_selector_background_transition_holo_dark = 0x7f020044;
+		public static final int list_selector_background_transition_holo_light = 0x7f020045;
+		public static final int list_selector_disabled_holo_dark = 0x7f020046;
+		public static final int list_selector_disabled_holo_light = 0x7f020047;
+		public static final int np_numberpicker_selection_divider = 0x7f02004f;
 	}
 	public static final class id {
 		public static final int np__decrement = 0x7f070001;
