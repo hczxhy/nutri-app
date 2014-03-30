@@ -33,6 +33,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -49,6 +50,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -211,6 +213,17 @@ public final class CaptureActivity extends Activity implements
 	private static boolean isFirstLaunch; // True if this is the first time the
 											// app is being run
 
+	// typeface var
+	private Typeface arialblack;
+	private Typeface arial;
+
+	public void setTypefaces() {
+		arialblack = Typeface.createFromAsset(getAssets(),
+				"fonts/arialblack.ttf");
+		arial = Typeface.createFromAsset(getAssets(), "fonts/arial.ttf");
+
+	}
+
 	Handler getHandler() {
 		return handler;
 	}
@@ -255,8 +268,9 @@ public final class CaptureActivity extends Activity implements
 			shutterButton = (ShutterButton) findViewById(R.id.shutter_button);
 			shutterButton.setOnShutterButtonListener(this);
 		}
-		settingsButton = (Button) findViewById(R.id.settings_button);	
+		settingsButton = (Button) findViewById(R.id.settings_button);
 		settingsButton.setOnClickListener(new View.OnClickListener() {
+<<<<<<< HEAD
             public void onClick(View v) {
                 // Perform action on click
             	Intent settingsIntent;
@@ -275,6 +289,17 @@ public final class CaptureActivity extends Activity implements
             }
         });
 		
+=======
+			public void onClick(View v) {
+				// Perform action on click
+				Intent settingsIntent;
+				settingsIntent = new Intent().setClass(CaptureActivity.this,
+						SettingsActivity.class);
+				startActivity(settingsIntent);
+			}
+		});
+
+>>>>>>> c0869fe89595be9cfeaef92eb95d3baeada27af2
 		ocrResultView = (TextView) findViewById(R.id.ocr_result_text_view);
 		registerForContextMenu(ocrResultView);
 		translationView = (TextView) findViewById(R.id.translation_text_view);
@@ -286,6 +311,8 @@ public final class CaptureActivity extends Activity implements
 		viewfinderView.setCameraManager(cameraManager);
 
 		isEngineReady = false;
+		
+		setTypefaces();
 	}
 
 	@Override
@@ -297,7 +324,7 @@ public final class CaptureActivity extends Activity implements
 		int previousOcrEngineMode = ocrEngineMode;
 
 		retrievePreferences();
-	
+
 		// Set up the camera preview surface.
 		surfaceView = (SurfaceView) findViewById(R.id.preview_view);
 		surfaceHolder = surfaceView.getHolder();
@@ -743,8 +770,8 @@ public final class CaptureActivity extends Activity implements
 			toast.show();
 			return false;
 		} else {
-			storeResultToTextFile(ocrResult.getText());
-			storeOCRToBitmapFile(ocrResult.getBitmap());
+			//storeResultToTextFile(ocrResult.getText());
+			//storeOCRToBitmapFile(ocrResult.getBitmap());
 		}
 
 		// Turn off capture-related UI elements
@@ -755,64 +782,64 @@ public final class CaptureActivity extends Activity implements
 		statusViewTop.setVisibility(View.GONE);
 		cameraButtonView.setVisibility(View.GONE);
 		viewfinderView.setVisibility(View.GONE);
-		
+
 		// original result UI
 		/*
-		resultView.setVisibility(View.VISIBLE);
-		
-		ImageView bitmapImageView = (ImageView) findViewById(R.id.image_view);
-		lastBitmap = ocrResult.getBitmap();
-		if (lastBitmap == null) {
-			bitmapImageView.setImageBitmap(BitmapFactory.decodeResource(
-					getResources(), R.drawable.ic_launcher));
-		} else {
-			bitmapImageView.setImageBitmap(lastBitmap);
-		}
+		 * resultView.setVisibility(View.VISIBLE);
+		 * 
+		 * ImageView bitmapImageView = (ImageView)
+		 * findViewById(R.id.image_view); lastBitmap = ocrResult.getBitmap(); if
+		 * (lastBitmap == null) {
+		 * bitmapImageView.setImageBitmap(BitmapFactory.decodeResource(
+		 * getResources(), R.drawable.ic_launcher)); } else {
+		 * bitmapImageView.setImageBitmap(lastBitmap); }
+		 * 
+		 * 
+		 * // Display the recognized text TextView sourceLanguageTextView =
+		 * (TextView) findViewById(R.id.source_language_text_view);
+		 * sourceLanguageTextView.setText(sourceLanguageReadable); TextView
+		 * ocrResultTextView = (TextView)
+		 * findViewById(R.id.ocr_result_text_view);
+		 * ocrResultTextView.setText(ocrResult.getText()); // Crudely scale
+		 * betweeen 22 and 32 -- bigger font for shorter text int scaledSize =
+		 * Math.max(22, 32 - ocrResult.getText().length() / 4);
+		 * ocrResultTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,
+		 * scaledSize);
+		 * 
+		 * TextView translationLanguageLabelTextView = (TextView)
+		 * findViewById(R.id.translation_language_label_text_view); TextView
+		 * translationLanguageTextView = (TextView)
+		 * findViewById(R.id.translation_language_text_view); TextView
+		 * translationTextView = (TextView)
+		 * findViewById(R.id.translation_text_view);
+		 * 
+		 * if (isTranslationActive) { // Handle translation text fields
+		 * translationLanguageLabelTextView.setVisibility(View.VISIBLE);
+		 * translationLanguageTextView.setText(targetLanguageReadable);
+		 * translationLanguageTextView
+		 * .setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL),
+		 * Typeface.NORMAL);
+		 * translationLanguageTextView.setVisibility(View.VISIBLE);
+		 * 
+		 * // Activate/re-activate the indeterminate progress indicator
+		 * translationTextView.setVisibility(View.GONE);
+		 * progressView.setVisibility(View.VISIBLE);
+		 * setProgressBarVisibility(true);
+		 * 
+		 * // Get the translation asynchronously // new TranslateAsyncTask(this,
+		 * sourceLanguageCodeTranslation, // targetLanguageCodeTranslation, //
+		 * ocrResult.getText()).execute(); } else {
+		 * translationLanguageLabelTextView.setVisibility(View.GONE);
+		 * translationLanguageTextView.setVisibility(View.GONE);
+		 * translationTextView.setVisibility(View.GONE);
+		 * progressView.setVisibility(View.GONE);
+		 * setProgressBarVisibility(false); }
+		 */
 
-		
-		// Display the recognized text
-		TextView sourceLanguageTextView = (TextView) findViewById(R.id.source_language_text_view);
-		sourceLanguageTextView.setText(sourceLanguageReadable);
-		TextView ocrResultTextView = (TextView) findViewById(R.id.ocr_result_text_view);
-		ocrResultTextView.setText(ocrResult.getText());
-		// Crudely scale betweeen 22 and 32 -- bigger font for shorter text
-		int scaledSize = Math.max(22, 32 - ocrResult.getText().length() / 4);
-		ocrResultTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, scaledSize);
-
-		TextView translationLanguageLabelTextView = (TextView) findViewById(R.id.translation_language_label_text_view);
-		TextView translationLanguageTextView = (TextView) findViewById(R.id.translation_language_text_view);
-		TextView translationTextView = (TextView) findViewById(R.id.translation_text_view);
-		
-		if (isTranslationActive) {
-			// Handle translation text fields
-			translationLanguageLabelTextView.setVisibility(View.VISIBLE);
-			translationLanguageTextView.setText(targetLanguageReadable);
-			translationLanguageTextView
-					.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL),
-							Typeface.NORMAL);
-			translationLanguageTextView.setVisibility(View.VISIBLE);
-
-			// Activate/re-activate the indeterminate progress indicator
-			translationTextView.setVisibility(View.GONE);
-			progressView.setVisibility(View.VISIBLE);
-			setProgressBarVisibility(true);
-
-			// Get the translation asynchronously
-			// new TranslateAsyncTask(this, sourceLanguageCodeTranslation,
-			// targetLanguageCodeTranslation,
-			// ocrResult.getText()).execute();
-		} else {
-			translationLanguageLabelTextView.setVisibility(View.GONE);
-			translationLanguageTextView.setVisibility(View.GONE);
-			translationTextView.setVisibility(View.GONE);
-			progressView.setVisibility(View.GONE);
-			setProgressBarVisibility(false);
-		}
-*/
-		
-		// launch result activity 
+		// launch result activity
 		// dummy test
-		Dictionary_comparison mtranslator=new Dictionary_comparison(ocrResult.getText());
+		Dictionary_comparison mtranslator = new Dictionary_comparison(
+				ocrResult.getText());
 		mtranslator.execute();
 		try {
 			mtranslator.get(15000, TimeUnit.MILLISECONDS);
@@ -826,16 +853,18 @@ public final class CaptureActivity extends Activity implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		String[] dummy = {"Calories","Fat", "Cholesterol","Sodium","Carbohydrate","Protein"};
-		float[] dummyVal =mtranslator.get_core_fields();
-		System.out.println("Calories is "+dummyVal[0]);
-		System.out.println("Fat is "+dummyVal[1]);
-		System.out.println("Cholesterol is "+dummyVal[2]);
-		System.out.println("Sodium is "+dummyVal[3]);
-		System.out.println("Carbohydrate is "+dummyVal[4]);
-		System.out.println("Protein is "+dummyVal[5]);
-		float[] dummyVal_with_ss={dummyVal[0],dummyVal[1],dummyVal[2],dummyVal[3],dummyVal[4],dummyVal[5],0};
+
+		String[] dummy = { "Calories", "Fat", "Cholesterol", "Sodium",
+				"Carbohydrate", "Protein" };
+		float[] dummyVal = mtranslator.get_core_fields();
+		System.out.println("Calories is " + dummyVal[0]);
+		System.out.println("Fat is " + dummyVal[1]);
+		System.out.println("Cholesterol is " + dummyVal[2]);
+		System.out.println("Sodium is " + dummyVal[3]);
+		System.out.println("Carbohydrate is " + dummyVal[4]);
+		System.out.println("Protein is " + dummyVal[5]);
+		float[] dummyVal_with_ss = { dummyVal[0], dummyVal[1], dummyVal[2],
+				dummyVal[3], dummyVal[4], dummyVal[5], 0 };
 		// end dummy test
 		Intent intent = new Intent(CaptureActivity.this, GraphActivity.class);
 		Bundle b = new Bundle();
@@ -843,7 +872,7 @@ public final class CaptureActivity extends Activity implements
 		b.putFloatArray(GraphActivity.NUTRITION_QUANT_KEY, dummyVal_with_ss);
 		intent.putExtras(b);
 		startActivity(intent);
-		
+
 		return true;
 	}
 
@@ -858,38 +887,41 @@ public final class CaptureActivity extends Activity implements
 		if (result != null && !result.equals("")) {
 			// make directory if it does not exist
 
+			File storageDir = Environment
+					.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+			File dataDir = new File(storageDir, "tempTextData");
 
-			File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-			File dataDir = new File(storageDir,"tempTextData");
-			
 			// if the directory does not exist, create it
 			if (!dataDir.exists()) {
 				dataDir.mkdir();
 			}
 
-			File fileToWrite = new File(dataDir,fileNameTextResult);
+			File fileToWrite = new File(dataDir, fileNameTextResult);
 			String textResultToStore = result.trim();
 
 			try {
 				// write to file
-				
+
 				FileOutputStream fos = new FileOutputStream(fileToWrite);
 				fos.write(textResultToStore.getBytes());
 				fos.close();
 
-				Toast toast = Toast.makeText(this, "Result Text File Created as "+fileNameTextResult,
+				Toast toast = Toast.makeText(this,
+						"Result Text File Created as " + fileNameTextResult,
 						Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.BOTTOM, 0, 0);
 				toast.show();
 			} catch (IOException e) {
-				Toast toast = Toast.makeText(this, "Result Text File Creation Failed : "+fileNameTextResult,
-						Toast.LENGTH_SHORT);
+				Toast toast = Toast.makeText(this,
+						"Result Text File Creation Failed : "
+								+ fileNameTextResult, Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.BOTTOM, 0, 0);
 				toast.show();
 			}
 		}
 
 	}
+
 	void storeOCRToBitmapFile(Bitmap result) {
 		// Store to text file
 		final String fileNameBitmapResult = "test_nutriapp_ocr_bitmap.bmp";
@@ -897,31 +929,33 @@ public final class CaptureActivity extends Activity implements
 		if (result != null && !result.equals("")) {
 			// make directory if it does not exist
 
+			File storageDir = Environment
+					.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+			File dataDir = new File(storageDir, "tempTextData");
 
-			File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-			File dataDir = new File(storageDir,"tempTextData");
-			
 			// if the directory does not exist, create it
 			if (!dataDir.exists()) {
 				dataDir.mkdir();
 			}
 
-			File fileToWrite = new File(dataDir,fileNameBitmapResult);
+			File fileToWrite = new File(dataDir, fileNameBitmapResult);
 
 			try {
 				// write to file
-				
+
 				FileOutputStream fos = new FileOutputStream(fileToWrite);
-				result.compress(Bitmap.CompressFormat.PNG,  90, fos);
+				result.compress(Bitmap.CompressFormat.PNG, 90, fos);
 				fos.close();
 
-				Toast toast = Toast.makeText(this, "Result Bitmap File Created as "+fileNameBitmapResult,
-						Toast.LENGTH_SHORT);
+				Toast toast = Toast
+						.makeText(this, "Result Bitmap File Created as "
+								+ fileNameBitmapResult, Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.BOTTOM, 0, 0);
 				toast.show();
 			} catch (IOException e) {
-				Toast toast = Toast.makeText(this, "Result Bitmap File Creation Failed : "+fileNameBitmapResult,
-						Toast.LENGTH_SHORT);
+				Toast toast = Toast.makeText(this,
+						"Result Bitmap File Creation Failed : "
+								+ fileNameBitmapResult, Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.BOTTOM, 0, 0);
 				toast.show();
 			}
@@ -941,42 +975,35 @@ public final class CaptureActivity extends Activity implements
 		lastResult = ocrResult;
 
 		// Send an OcrResultText object to the ViewfinderView for text rendering
-		/*viewfinderView.addResultText(new OcrResultText(ocrResult.getText(),
-				ocrResult.getWordConfidences(), ocrResult.getMeanConfidence(),
-				ocrResult.getBitmapDimensions(), ocrResult
-						.getRegionBoundingBoxes(), ocrResult
-						.getTextlineBoundingBoxes(), ocrResult
-						.getStripBoundingBoxes(), ocrResult
-						.getWordBoundingBoxes(), ocrResult
-						.getCharacterBoundingBoxes()));
-
-		Integer meanConfidence = ocrResult.getMeanConfidence();
-*/
 		/*
-		if (CONTINUOUS_DISPLAY_RECOGNIZED_TEXT) {
-			// Display the recognized text on the screen
-			statusViewTop.setText(ocrResult.getText());
-			int scaledSize = Math
-					.max(22, 32 - ocrResult.getText().length() / 4);
-			statusViewTop.setTextSize(TypedValue.COMPLEX_UNIT_SP, scaledSize);
-			statusViewTop.setTextColor(Color.BLACK);
-			statusViewTop
-					.setBackgroundResource(R.color.status_top_text_background);
-
-			statusViewTop.getBackground()
-					.setAlpha(meanConfidence * (255 / 100));
-		}
-
-		if (CONTINUOUS_DISPLAY_METADATA) {
-			// Display recognition-related metadata at the bottom of the screen
-			long recognitionTimeRequired = ocrResult
-					.getRecognitionTimeRequired();
-			statusViewBottom.setTextSize(14);
-			statusViewBottom.setText("OCR: " + sourceLanguageReadable
-					+ " - Mean confidence: " + meanConfidence.toString()
-					+ " - Time required: " + recognitionTimeRequired + " ms");
-		}
-		*/
+		 * viewfinderView.addResultText(new OcrResultText(ocrResult.getText(),
+		 * ocrResult.getWordConfidences(), ocrResult.getMeanConfidence(),
+		 * ocrResult.getBitmapDimensions(), ocrResult .getRegionBoundingBoxes(),
+		 * ocrResult .getTextlineBoundingBoxes(), ocrResult
+		 * .getStripBoundingBoxes(), ocrResult .getWordBoundingBoxes(),
+		 * ocrResult .getCharacterBoundingBoxes()));
+		 * 
+		 * Integer meanConfidence = ocrResult.getMeanConfidence();
+		 */
+		/*
+		 * if (CONTINUOUS_DISPLAY_RECOGNIZED_TEXT) { // Display the recognized
+		 * text on the screen statusViewTop.setText(ocrResult.getText()); int
+		 * scaledSize = Math .max(22, 32 - ocrResult.getText().length() / 4);
+		 * statusViewTop.setTextSize(TypedValue.COMPLEX_UNIT_SP, scaledSize);
+		 * statusViewTop.setTextColor(Color.BLACK); statusViewTop
+		 * .setBackgroundResource(R.color.status_top_text_background);
+		 * 
+		 * statusViewTop.getBackground() .setAlpha(meanConfidence * (255 /
+		 * 100)); }
+		 * 
+		 * if (CONTINUOUS_DISPLAY_METADATA) { // Display recognition-related
+		 * metadata at the bottom of the screen long recognitionTimeRequired =
+		 * ocrResult .getRecognitionTimeRequired();
+		 * statusViewBottom.setTextSize(14); statusViewBottom.setText("OCR: " +
+		 * sourceLanguageReadable + " - Mean confidence: " +
+		 * meanConfidence.toString() + " - Time required: " +
+		 * recognitionTimeRequired + " ms"); }
+		 */
 	}
 
 	/**
@@ -1425,19 +1452,48 @@ public final class CaptureActivity extends Activity implements
 	}
 
 	void displayProgressDialog() {
+		// obtain random factoid message
+		final FactoidList factoids = new FactoidList();
+
 		// Set up the indeterminate progress dialog box
-		indeterminateDialog = new ProgressDialog(this);
-		indeterminateDialog.setTitle("Please wait");
-		String ocrEngineModeName = getOcrEngineModeName();
-		if (ocrEngineModeName.equals("Both")) {
-			indeterminateDialog
-					.setMessage("Performing OCR using Cube and Tesseract...");
-		} else {
-			indeterminateDialog.setMessage("Performing OCR using "
-					+ ocrEngineModeName + "...");
-		}
-		indeterminateDialog.setCancelable(false);
+
+		/*
+		 * indeterminateDialog = new ProgressDialog(this);
+		 * indeterminateDialog.setTitle("Did you know?");
+		 * 
+		 * indeterminateDialog.setMessage(factoids.getRandomFactoid());
+		 * indeterminateDialog.setCancelable(false); indeterminateDialog.show();
+		 */
+
+		indeterminateDialog = ProgressDialog.show(CaptureActivity.this, "", "");
+		indeterminateDialog.setContentView(R.layout.progress_dialog);
+
+		((TextView) indeterminateDialog.findViewById(R.id.factoid_title))
+				.setTypeface(arialblack);
+		((TextView) indeterminateDialog.findViewById(R.id.factoid_text))
+				.setText(factoids.getInitialFactoid());
+		((TextView) indeterminateDialog.findViewById(R.id.factoid_text))
+				.setTypeface(arial);
+
+		ImageButton nextButton = (ImageButton)indeterminateDialog.findViewById(R.id.factoid_next);
+		nextButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View arg0) {
+				((TextView) indeterminateDialog.findViewById(R.id.factoid_text))
+						.setText(factoids.getNext());
+
+			}
+		});
+		ImageButton prevButton = (ImageButton)indeterminateDialog.findViewById(R.id.factoid_prev);
+		prevButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View arg0) {
+				((TextView) indeterminateDialog.findViewById(R.id.factoid_text))
+						.setText(factoids.getPrev());
+
+			}
+		});
+		
 		indeterminateDialog.show();
+
 	}
 
 	ProgressDialog getProgressDialog() {
