@@ -95,6 +95,12 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 	boolean car_finished=false;
 	boolean cho_finished=false;
 	boolean sod_finished=false;
+	long prevScrollTime;
+	int fat_id=111;
+	int car_id=222;
+	int sod_id=333;
+	int cho_id=444;
+	int cal_id=555;
 	
 	private Handler handler;
 	
@@ -175,10 +181,10 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 		SharedPreferences sharedPref = this.getSharedPreferences("OCRSettingsPreferences", MODE_PRIVATE);
 		float calval = sharedPref.getFloat("calories", 2014f);
 		// need to fix this depending on units *******************
-		float fat = calval*0.03f; // fat is g
-		float carb = calval*0.15f; // carb is in g
-		float chol = 0.3f; // chol is in g
-		float sodium = 2.4f; // sodium is in g
+		float fat = 100;//calval*30f; // fat is in mg
+		float carb = 100;//calval*0.15f; // carb is in g
+		float chol = 0.2f;//300.0f; // chol is in mg
+		float sodium = 0.2f;//2400.0f; // sodium is in mg
 		set_recommended_values(calval, fat, carb, chol, sodium);
 		fat_num=values[1];
 		car_num=values[4];
@@ -210,16 +216,7 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 		serv_size_picker.setFocusableInTouchMode(true);
 		serv_size_picker.setOnValueChangedListener(this);
 		cal_pw.set_recommended_calories(rec_cal);
-		//Initial values
-		fat_pb.setProgress(fat_per);
-		car_pb.setProgress(car_per);
-		sod_pb.setProgress(sod_per);
-		cho_pb.setProgress(cho_per);
-		fat_text_anim.draw_value(fat_num, fat_per);
-		car_text_anim.draw_value(car_num, car_per);
-		sod_text_anim.draw_value(sod_num, sod_per);
-		cho_text_anim.draw_value(cho_num, cho_per);
-		cal_pw.setProgress(cal_num);
+
 		run_visualization();
 		
 		// button listener
@@ -235,6 +232,12 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 			}
 		});
 		
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		run_visualization();
 	}
 	
 	public void scale_values(int scale_factor){
@@ -261,24 +264,30 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 		cho_finished=false;
 	}
 	
-	public double interpolate_one_frame(double init, int end, boolean reached_end_goal){
-		if((int)Math.round(init)<end){
-			reached_end_goal=false;
-			init=init+(Math.sqrt((double) end-init))/2;
-		}else if ((int)Math.round(init)>end){
-			reached_end_goal=false;
-			init=init-(Math.sqrt(init-(double) end))/2;
-		}else{
-			if(reached_end_goal==fat_finished){
-				fat_finished=true;
-			}else if(reached_end_goal==car_finished){
-				car_finished=true;
-			}else if(reached_end_goal==sod_finished){
-				sod_finished=true;
-			}else if (reached_end_goal==cho_finished){
-				cho_finished=true;
-			}else if(reached_end_goal==cal_finished){
+	public double interpolate_one_frame(double init, int end, int id){
+		if(id==cal_id){
+			if((int)Math.round(init)<end){
+				init=init+(Math.sqrt((double) end-init))/2;
+			}else if ((int)Math.round(init)>end){
+				init=init-(Math.sqrt(init-(double) end))/2;
+			}else{
 				cal_finished=true;
+			}
+		}else{
+			if((int)Math.round(init)<end){
+				init=init+(Math.sqrt((double) end-init))/4;
+			}else if ((int)Math.round(init)>end){
+				init=init-(Math.sqrt(init-(double) end))/4;
+			}else{
+				if(id==fat_id){
+					fat_finished=true;
+				}else if(id==car_id){
+					car_finished=true;
+				}else if(id==sod_id){
+					sod_finished=true;
+				}else if (id==cho_id){
+					cho_finished=true;
+				}
 			}
 		}
 		return init;
@@ -312,11 +321,11 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 				
 				while (!cal_finished || !fat_finished || !car_finished || !cho_finished || !sod_finished) {
 					//Interpolate frames based on a parabolic acceleration curve for animation
-					f1=interpolate_one_frame(f1,fat_per,fat_finished);
-					f2=interpolate_one_frame(f2,car_per,car_finished);
-					f3=interpolate_one_frame(f3,sod_per,sod_finished);
-					f4=interpolate_one_frame(f4,cho_per,cho_finished);
-					f5=interpolate_one_frame(f5,(int) Math.round(cal_num),cal_finished);
+					f1=interpolate_one_frame(f1,fat_per,fat_id);
+					f2=interpolate_one_frame(f2,car_per,car_id);
+					f3=interpolate_one_frame(f3,sod_per,sod_id);
+					f4=interpolate_one_frame(f4,cho_per,cho_id);
+					f5=interpolate_one_frame(f5,(int) Math.round(cal_num),cal_id);
 					//Change any colors as necessary
 					fat_curr_color=check_color(f1, fat_curr_color);
 					car_curr_color=check_color(f2, car_curr_color);
@@ -415,17 +424,40 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 
 	@Override
 	public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-		/*if(prev_scroll_time==0){
-			prev_scroll_time=System.currentTimeMillis();
-		}
-		if((System.currentTimeMillis()-prev_scroll_time)<20){
-			prev_scroll_time=System.currentTimeMillis();
-		}else{*/
-			scale_values(newVal);
+		scale_values(newVal);
+    	reset_flags();
+    	run_visualization();
+	}
+	
+	/*public void handleScroll(int value){
+		mExecServ.execute(new Runnable() {
+			@Override
+			public void run() {
+				try {
+		           Thread.sleep(ANIM_SPEED);
+		        } catch (InterruptedException e) {
+		           e.printStackTrace();
+		        }
+
+	        	handler.post(new Runnable() {
+					public void run() {
+
+					}
+		        });
+		     }
+		});
+		if(curr_scrolling){
+			long curr_time=System.currentTimeMillis();
+			while(curr_time-prevScrollTime<100){
+				curr_time=System.currentTimeMillis();
+				curr_scrolling=false;
+			}
+		}else{
+			scale_values(value);
 	    	reset_flags();
 	    	run_visualization();
-		//}
-	}
+		}
+	}*/
 	
 }
 
