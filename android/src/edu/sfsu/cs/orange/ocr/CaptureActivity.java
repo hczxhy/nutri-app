@@ -197,6 +197,7 @@ public final class CaptureActivity extends Activity implements
 	private String characterWhitelist;
 	private ShutterButton shutterButton;
 	private Button settingsButton;
+	private Button loadButton;
 	private boolean isTranslationActive; // Whether we want to show translations
 	private boolean isContinuousModeActive; // Whether we are doing OCR in
 											// continuous mode
@@ -260,6 +261,16 @@ public final class CaptureActivity extends Activity implements
                 // Perform action on click
             	Intent settingsIntent;
             	settingsIntent = new Intent().setClass(CaptureActivity.this, SettingsActivity.class);
+            	startActivity(settingsIntent);
+            }
+        });
+		
+		loadButton = (Button) findViewById(R.id.load_button);	
+		loadButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+            	Intent settingsIntent;
+            	settingsIntent = new Intent().setClass(CaptureActivity.this, SettingsActivity.class); // change this to change what the load button shows
             	startActivity(settingsIntent);
             }
         });
@@ -375,6 +386,7 @@ public final class CaptureActivity extends Activity implements
 		if (shutterButton != null && DISPLAY_SHUTTER_BUTTON) {
 			shutterButton.setVisibility(View.VISIBLE);
 			settingsButton.setVisibility(View.VISIBLE);
+			loadButton.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -738,6 +750,7 @@ public final class CaptureActivity extends Activity implements
 		// Turn off capture-related UI elements
 		shutterButton.setVisibility(View.GONE);
 		settingsButton.setVisibility(View.GONE);
+		loadButton.setVisibility(View.GONE);
 		statusViewBottom.setVisibility(View.GONE);
 		statusViewTop.setVisibility(View.GONE);
 		cameraButtonView.setVisibility(View.GONE);
@@ -1106,6 +1119,7 @@ public final class CaptureActivity extends Activity implements
 		if (DISPLAY_SHUTTER_BUTTON) {
 			shutterButton.setVisibility(View.VISIBLE);
 			settingsButton.setVisibility(View.VISIBLE);
+			loadButton.setVisibility(View.VISIBLE);
 		}
 		lastResult = null;
 		viewfinderView.removeResultText();
@@ -1139,9 +1153,11 @@ public final class CaptureActivity extends Activity implements
 		if (shutterButton != null && visible == true && DISPLAY_SHUTTER_BUTTON) {
 			shutterButton.setVisibility(View.VISIBLE);
 			settingsButton.setVisibility(View.VISIBLE);
+			loadButton.setVisibility(View.VISIBLE);
 		} else if (shutterButton != null) {
 			shutterButton.setVisibility(View.GONE);
 			settingsButton.setVisibility(View.GONE);
+			loadButton.setVisibility(View.GONE);
 		}
 	}
 

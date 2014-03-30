@@ -18,20 +18,17 @@ package edu.sfsu.cs.orange.ocr;
 
 import java.util.List;
 
-import edu.sfsu.cs.orange.ocr.R;
-import edu.sfsu.cs.orange.ocr.camera.CameraManager;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Align;
+import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.Paint.Style;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+import edu.sfsu.cs.orange.ocr.camera.CameraManager;
 
 /**
  * This view is overlaid on top of the camera preview. It adds the viewfinder rectangle and partial
@@ -41,7 +38,7 @@ import android.view.View;
  */
 public final class ViewfinderView extends View {
   //private static final long ANIMATION_DELAY = 80L;
-
+  
   /** Flag to draw boxes representing the results from TessBaseAPI::GetRegions(). */
   static final boolean DRAW_REGION_BOXES = false;
 
@@ -82,6 +79,7 @@ public final class ViewfinderView extends View {
   //  Rect bounds;
   private Rect previewFrame;
   private Rect rect;
+  RectF roundedRect;
 
   // This constructor is used when the class is built from an XML resource.
   public ViewfinderView(Context context, AttributeSet attrs) {
@@ -98,6 +96,7 @@ public final class ViewfinderView extends View {
     //    bounds = new Rect();
     previewFrame = new Rect();
     rect = new Rect();
+    roundedRect = new RectF();
   }
 
   public void setCameraManager(CameraManager cameraManager) {
@@ -119,8 +118,7 @@ public final class ViewfinderView extends View {
     canvas.drawRect(0, 0, width, frame.top, paint);
     canvas.drawRect(0, frame.top, frame.left, frame.bottom + 1, paint);
     canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1, paint);
-    canvas.drawRect(0, frame.bottom + 1, width, height, paint);
-    
+    canvas.drawRect(0, frame.bottom + 1, width, height, paint);    
    
     // If we have an OCR result, overlay its information on the viewfinder.
     if (resultText != null) {
@@ -214,7 +212,7 @@ public final class ViewfinderView extends View {
 
     }
     // Draw a two pixel solid border inside the framing rect
-    paint.setAlpha(0);
+    paint.setAlpha(255);
     paint.setStyle(Style.FILL);
     paint.setColor(frameColor);
     canvas.drawRect(frame.left, frame.top, frame.right + 1, frame.top + 2, paint);
@@ -223,16 +221,24 @@ public final class ViewfinderView extends View {
     canvas.drawRect(frame.left, frame.bottom - 1, frame.right + 1, frame.bottom + 1, paint);
 
     // Draw the framing rect corner UI elements
-    paint.setColor(cornerColor);
-    canvas.drawRect(frame.left - 15, frame.top - 15, frame.left + 15, frame.top, paint);
-    canvas.drawRect(frame.left - 15, frame.top, frame.left, frame.top + 15, paint);
-    canvas.drawRect(frame.right - 15, frame.top - 15, frame.right + 15, frame.top, paint);
-    canvas.drawRect(frame.right, frame.top - 15, frame.right + 15, frame.top + 15, paint);
-    canvas.drawRect(frame.left - 15, frame.bottom, frame.left + 15, frame.bottom + 15, paint);
-    canvas.drawRect(frame.left - 15, frame.bottom - 15, frame.left, frame.bottom, paint);
-    canvas.drawRect(frame.right - 15, frame.bottom, frame.right + 15, frame.bottom + 15, paint);
-    canvas.drawRect(frame.right, frame.bottom - 15, frame.right + 15, frame.bottom + 15, paint);  
-
+    paint.setColor(cornerColor);      
+    canvas.drawRect(0, 0, width, frame.top, paint);
+    canvas.drawRect(0, frame.top, frame.left, height, paint);    
+    canvas.drawRect(frame.right, frame.top, width, height, paint);    
+    canvas.drawRect(frame.left, frame.bottom, frame.right, height, paint); 
+    paint.setStyle(Style.STROKE);
+    paint.setStrokeWidth(35);
+    drawRoundedEdges(canvas,35,frame);
+    
+//    canvas.drawRect(frame.left - 15, frame.top - 15, frame.left + 15, frame.top, paint);
+//    canvas.drawRect(frame.left - 15, frame.top, frame.left, frame.top + 15, paint);
+//    canvas.drawRect(frame.right - 15, frame.top - 15, frame.right + 15, frame.top, paint);
+//    canvas.drawRect(frame.right, frame.top - 15, frame.right + 15, frame.top + 15, paint);
+//    canvas.drawRect(frame.left - 15, frame.bottom, frame.left + 15, frame.bottom + 15, paint);
+//    canvas.drawRect(frame.left - 15, frame.bottom - 15, frame.left, frame.bottom, paint);
+//    canvas.drawRect(frame.right - 15, frame.bottom, frame.right + 15, frame.bottom + 15, paint);
+//    canvas.drawRect(frame.right, frame.bottom - 15, frame.right + 15, frame.bottom + 15, paint);
+    
     // Draw overlay segmentation
     /*
     paint.setColor(segmentationColor);
@@ -247,6 +253,14 @@ public final class ViewfinderView extends View {
     */
     // Request another update at the animation interval, but don't repaint the entire viewfinder mask.
     //postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
+  }
+  
+  public void drawRoundedEdges(Canvas canvas, int r, Rect frame){
+	  for (int i = 1;i<=1;i++){
+		  roundedRect.set(frame.top+i,frame.left+i,frame.right-i,frame.bottom-i);
+		  canvas.drawRoundRect(roundedRect, r, r, paint);  
+	  }
+	  
   }
 
   public void drawViewfinder() {

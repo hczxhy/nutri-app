@@ -85,7 +85,8 @@
         <activity
             android:name="edu.sfsu.cs.orange.ocr.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="edu.sfsu.cs.orange.ocr.CaptureActivity" >
+            android:parentActivityName="edu.sfsu.cs.orange.ocr.CaptureActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.sfsu.cs.orange.ocr.CaptureActivity" />

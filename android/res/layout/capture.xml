@@ -175,8 +175,8 @@
  
     <edu.sfsu.cs.orange.ocr.camera.ShutterButton
               android:id="@+id/shutter_button"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
+              android:layout_width="130dp"
+              android:layout_height="90dp"
               android:background="@drawable/shutter_button"
               android:clickable="true"
               android:focusable="true"
@@ -209,7 +209,22 @@
 		      android:layout_alignParentBottom="true"
 		      android:layout_centerInParent="true"
               android:gravity="center_vertical"
-		      android:layout_marginLeft="8dip" 
+		      android:layout_marginLeft="15dip" 
+		      android:layout_marginBottom="20dip"
+		      android:scaleType="center" 
+		      android:visibility="gone"/>
+     
+     <Button android:id="@+id/load_button"
+		      android:layout_width="wrap_content" 
+		      android:layout_height="wrap_content"
+		      android:background="@drawable/open_file"
+		      android:clickable="true" 
+		      android:focusable="true"		      
+		      android:layout_alignParentRight="true" 
+		      android:layout_alignParentBottom="true"
+		      android:layout_centerInParent="true"
+              android:gravity="center_vertical"
+		      android:layout_marginRight="15dip" 
 		      android:layout_marginBottom="20dip"
 		      android:scaleType="center" 
 		      android:visibility="gone"/>
