@@ -91,6 +91,7 @@ public class RecommenderActivity extends Activity implements
 		category_picker.setDisplayedValues(queries);
 		category_picker.setOnValueChangedListener(this);
 		category_picker.setWrapSelectorWheel(false);
+		category_picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 		// create database
 		createDataList();
 		
@@ -104,100 +105,100 @@ public class RecommenderActivity extends Activity implements
 	// create database
 	public void createDataList() {
 		ComparisonData[] cal = new ComparisonData[15];
-		cal[0] = new ComparisonData("1 blueberry", 1, R.drawable.calories_001);
+		cal[0] = new ComparisonData("a blueberry", 1, R.drawable.calories_001);
 		cal[1] = new ComparisonData("3 cherries", 10,
 				R.drawable.calories_010);
-		cal[2] = new ComparisonData("1 carrot", 35, R.drawable.calories_035);
-		cal[3] = new ComparisonData("1 box of raisin", 45,
+		cal[2] = new ComparisonData("a carrot", 35, R.drawable.calories_035);
+		cal[3] = new ComparisonData("a box of raisin", 45,
 				R.drawable.calories_045);
-		cal[4] = new ComparisonData("1 cup of pistachios", 80,
+		cal[4] = new ComparisonData("a cup of pistachios", 80,
 				R.drawable.calories_080);
-		cal[5] = new ComparisonData("1 bowl of popcorn", 150,
+		cal[5] = new ComparisonData("a bowl of popcorn", 150,
 				R.drawable.calories_150);
-		cal[6] = new ComparisonData("1 handful of fries", 225,
+		cal[6] = new ComparisonData("a handful of fries", 225,
 				R.drawable.calories_225);
-		cal[7] = new ComparisonData("1 small cup of sundae", 325,
+		cal[7] = new ComparisonData("a small cup of sundae", 325,
 				R.drawable.calories_325);
-		cal[8] = new ComparisonData("1 samll cup of onion rings", 340,
+		cal[8] = new ComparisonData("a samll cup of onion rings", 340,
 				R.drawable.calories_340);
-		cal[9] = new ComparisonData("1 cupcake", 460, R.drawable.calories_460);
+		cal[9] = new ComparisonData("a cupcake", 460, R.drawable.calories_460);
 		cal[10] = new ComparisonData("2 clices of pizza", 530,
 				R.drawable.calories_530);
-		cal[11] = new ComparisonData("1 fried chicken burger", 632,
+		cal[11] = new ComparisonData("a fried chicken burger", 632,
 				R.drawable.calories_632);
 		cal[12] = new ComparisonData("7 pancakes", 750,
 				R.drawable.calories_750);
-		cal[13] = new ComparisonData("1 triple cheeseburger", 1120,
+		cal[13] = new ComparisonData("a triple-cheeseburger", 1120,
 				R.drawable.calories_1120);
-		cal[14] = new ComparisonData("1 Mcdonald Big Breakfast", 1350,
+		cal[14] = new ComparisonData("a Mcdonald Big Breakfast", 1350,
 				R.drawable.calories_1350);
 		dataList.add(cal);
 		ComparisonData[] fat = new ComparisonData[10];
-		fat[0] = new ComparisonData("1 apple", 0, R.drawable.fat_000g);
+		fat[0] = new ComparisonData("an apple", 0, R.drawable.fat_000g);
 		fat[1] = new ComparisonData("8 pretzel biscuits", 1,
 				R.drawable.fat_001g);
-		fat[2] = new ComparisonData("1 granola bar", 2, R.drawable.fat_002g);
-		fat[3] = new ComparisonData("1 bag of baked potato crisps", 3,
+		fat[2] = new ComparisonData("a granola bar", 2, R.drawable.fat_002g);
+		fat[3] = new ComparisonData("a bag of baked potato crisps", 3,
 				R.drawable.fat_003g);
-		fat[4] = new ComparisonData("1 icecream cone", 4, R.drawable.fat_004g);
-		fat[5] = new ComparisonData("1 handful of chips", 9,
+		fat[4] = new ComparisonData("an icecream cone", 4, R.drawable.fat_004g);
+		fat[5] = new ComparisonData("a handful of chips", 9,
 				R.drawable.fat_009g);
-		fat[6] = new ComparisonData("1 bacon hamburger", 14,
+		fat[6] = new ComparisonData("a hamburger", 14,
 				R.drawable.fat_014g);
-		fat[7] = new ComparisonData("1 small fries", 25, R.drawable.fat_025g);
-		fat[8] = new ComparisonData("1 large chunk of cheese", 33,
+		fat[7] = new ComparisonData("an order of small fries", 25, R.drawable.fat_025g);
+		fat[8] = new ComparisonData("a large chunk of cheese", 33,
 				R.drawable.fat_033g);
 		fat[9] = new ComparisonData("1 bar of butter", 81, R.drawable.fat_081g);
 		dataList.add(fat);
 		ComparisonData[] chole = new ComparisonData[11];
-		chole[0] = new ComparisonData("1 plate of fruits & veggies", 0,
+		chole[0] = new ComparisonData("a plate of fruits & veggies", 0,
 				R.drawable.cholesterol_000mg);
-		chole[1] = new ComparisonData("1 oyster", 4,
+		chole[1] = new ComparisonData("an oyster", 4,
 				R.drawable.cholesterol_004mg);
-		chole[2] = new ComparisonData("1 box of milk", 21,
+		chole[2] = new ComparisonData("a box of milk", 21,
 				R.drawable.cholesterol_021mg);
-		chole[3] = new ComparisonData("1 slice of cheese", 46,
+		chole[3] = new ComparisonData("a slice of cheese", 46,
 				R.drawable.cholesterol_046mg);
-		chole[4] = new ComparisonData("1 Porkchop", 65,
+		chole[4] = new ComparisonData("a piece of porkchop", 65,
 				R.drawable.cholesterol_065mg);
-		chole[5] = new ComparisonData("1 BBQ ribs", 84,
+		chole[5] = new ComparisonData("an order of BBQ ribs", 84,
 				R.drawable.cholesterol_084mg);
-		chole[6] = new ComparisonData("1 Double cheeseburger", 103,
+		chole[6] = new ComparisonData("a double-cheeseburger", 103,
 				R.drawable.cholesterol_103mg);
 		chole[7] = new ComparisonData("4 chicken fingers", 124,
 				R.drawable.cholesterol_124mg);
-		chole[8] = new ComparisonData("1 boiled egg", 216,
+		chole[8] = new ComparisonData("a boiled egg", 216,
 				R.drawable.cholesterol_216mg);
-		chole[9] = new ComparisonData("1 McMuffin", 234,
+		chole[9] = new ComparisonData("a McMuffin", 234,
 				R.drawable.cholesterol_234mg);
 		chole[10] = new ComparisonData("2 sunny side up eggs", 367,
 				R.drawable.cholesterol_367mg);
 		dataList.add(chole);
 		ComparisonData[] sodium = new ComparisonData[8];
-		sodium[0] = new ComparisonData("1 banana", 1, R.drawable.sodium_001mg);
-		sodium[1] = new ComparisonData("1 handful of Grapes", 5,
+		sodium[0] = new ComparisonData("a banana", 1, R.drawable.sodium_001mg);
+		sodium[1] = new ComparisonData("a handful of Grapes", 5,
 				R.drawable.sodium_005mg);
-		sodium[2] = new ComparisonData("1 Oreo cookie", 80,
+		sodium[2] = new ComparisonData("an Oreo cookie", 80,
 				R.drawable.sodium_080mg);
-		sodium[3] = new ComparisonData("1 handful of almond", 119,
+		sodium[3] = new ComparisonData("a handful of almonds", 119,
 				R.drawable.sodium_119mg);
 		sodium[4] = new ComparisonData("5 slices of ham", 150, R.drawable.sodium_150mg);
 		sodium[5] = new ComparisonData("2 loaves of bread", 360,
 				R.drawable.sodium_360mg);
-		sodium[6] = new ComparisonData("1 half-foot Sandwitch", 529,
+		sodium[6] = new ComparisonData("a 6-inch Sandwitch", 529,
 				R.drawable.sodium_529mg);
 		sodium[7] = new ComparisonData("4 pieces of bacon", 1460, R.drawable.sodium_1460mg);
 		dataList.add(sodium);
 		ComparisonData[] carb = new ComparisonData[9];
-		carb[0] = new ComparisonData("1 cup of coffee", 0, R.drawable.carbohydrates_000g);
-		carb[1] = new ComparisonData("1 chunk of cheese", 1, R.drawable.carbohydrates_001g);
+		carb[0] = new ComparisonData("a cup of coffee", 0, R.drawable.carbohydrates_000g);
+		carb[1] = new ComparisonData("a chunk of cheese", 1, R.drawable.carbohydrates_001g);
 		carb[2] = new ComparisonData("3 celery sticks", 3, R.drawable.carbohydrates_003g);
-		carb[3] = new ComparisonData("1 glass of milk", 5, R.drawable.carbohydrates_005g);
-		carb[4] = new ComparisonData("1 orange", 12, R.drawable.carbohydrates_012g);
-		carb[5] = new ComparisonData("1 handful of peanuts", 16, R.drawable.carbohydrates_016g);
-		carb[6] = new ComparisonData("1 bowl of cereal", 20, R.drawable.carbohydrates_020g);
-		carb[7] = new ComparisonData("1 bowl of mac & cheese", 46, R.drawable.carbohydrates_046g);
-		carb[8] = new ComparisonData("1 cupcake", 48, R.drawable.carbohydrates_048g);
+		carb[3] = new ComparisonData("a glass of milk", 5, R.drawable.carbohydrates_005g);
+		carb[4] = new ComparisonData("an orange", 12, R.drawable.carbohydrates_012g);
+		carb[5] = new ComparisonData("a handful of peanuts", 16, R.drawable.carbohydrates_016g);
+		carb[6] = new ComparisonData("a bowl of cereal", 20, R.drawable.carbohydrates_020g);
+		carb[7] = new ComparisonData("a bowl of mac & cheese", 46, R.drawable.carbohydrates_046g);
+		carb[8] = new ComparisonData("a cupcake", 48, R.drawable.carbohydrates_048g);
 		dataList.add(carb);
 	}
 
@@ -227,8 +228,7 @@ public class RecommenderActivity extends Activity implements
 			if (category == 0) {
 				targetMeasurementText = "" + value + units[category];
 			} else {
-				targetMeasurementText = "" + value + units[category] + " of "
-						+ queries[category];
+				targetMeasurementText = "" + (int)value + units[category] ;
 			}
 			allDrawables[category] = getResources().getDrawable(
 					thisCategory[minIndex].imageID);
