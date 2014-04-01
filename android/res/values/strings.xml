@@ -38,6 +38,15 @@
     <string name="sodium">Sodium</string>
     <string name="cholesterol">Cholesterol</string>
     
-    <string name="comparison_button">This is equivalent to…</string>
+    <string name="save_button">Save Label</string>
+    <string name="comparison_button">Equivalent Foods…</string>
     <string name="title_activity_settings">% Daily Recommendations</string>
+    
+    
+    <string name="list_title">Saved Labels</string>
+    <string name="food_name">Name</string>
+    <string name="food_type">Description (Optional)</string>
+    <string name="cost">Cost (Optional)</string>
+    <string name="ok">Done</string>
+    <string name="cancel">Cancel</string>
 </resources>

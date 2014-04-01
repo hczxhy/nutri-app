@@ -1,5 +1,7 @@
 package edu.sfsu.cs.orange.ocr;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -8,7 +10,7 @@ import net.simonvt.numberpicker.NumberPicker;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -17,6 +19,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -24,7 +27,7 @@ import android.widget.TextView;
 
 import com.todddavies.components.progressbar.ProgressWheel;
 
-public class GraphActivity extends Activity implements NumberPicker.OnValueChangeListener{
+public class GraphActivity extends FragmentActivity implements NumberPicker.OnValueChangeListener{
 	
 	ExecutorService mExecServ;
 	//Threshold values and other useful values
@@ -35,13 +38,13 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 	public static final float APPLE_WEIGHT=80;
 	public static final String NUTRITION_LABEL_KEY = "nutritionValues";
 	public static final String NUTRITION_QUANT_KEY = "nutritionQuant";
+	public static final String LABEL_NAME="labelName";
 	//Recommended daily nutrition values
 	private float rec_fat=0;
 	private float rec_car=0;
 	private float rec_cal=0;
 	private float rec_sod=0;
 	private float rec_cho=0;
-	private float ser_size=0;
 	//Percent and original values of fat, sodium, carbs, and cholesterol
 	private float[] init_nums={0,0,0,0,0};			//In order: calories,fat,cholesterol,sodium,carbohydrates
 	private float fat_num=0;
@@ -101,6 +104,7 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 	int sod_id=333;
 	int cho_id=444;
 	int cal_id=555;
+	String labelname;
 	
 	private Handler handler;
 	
@@ -116,11 +120,10 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 		((TextView) findViewById(R.id.car_text)).setTypeface(arial);
 		((TextView) findViewById(R.id.cho_text)).setTypeface(arial);
 		((TextView) findViewById(R.id.sod_text)).setTypeface(arial);
+		cal_pw.setTypefaces(arial);
+		serv_size_picker.setTypefaces(arial);
 	}
 	
-	public void set_ser_size(float value){
-		ser_size=value;
-	}
 	public void set_fat(int value){
 		fat_per=value;
 	}
@@ -148,7 +151,6 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 		res=getResources();
 		setContentView(R.layout.graphs_page);
 		mExecServ=Executors.newSingleThreadExecutor();
-		setTypefaces();
 		
 		try {
 			//Use custom progress bar colors
@@ -167,37 +169,6 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 			e1.printStackTrace();
 		}
 
-	}
-	
-	@Override
-	public void onStart(){
-		super.onStart();
-		handler=new Handler();
-		//Convert values to percentages ****Needs to be connected with the settings page*****
-		float[] values={0,0,0,0,0,0,0};
-		if(getIntent().getExtras()!=null){
-			values=(getIntent().getExtras()).getFloatArray(NUTRITION_QUANT_KEY);
-		}
-		SharedPreferences sharedPref = this.getSharedPreferences("OCRSettingsPreferences", MODE_PRIVATE);
-		float calval = sharedPref.getFloat("calories", 2014f);
-		// need to fix this depending on units *******************
-		float fat = 100;//calval*30f; // fat is in mg
-		float carb = 100;//calval*0.15f; // carb is in g
-		float chol = 0.2f;//300.0f; // chol is in mg
-		float sodium = 0.2f;//2400.0f; // sodium is in mg
-		set_recommended_values(calval, fat, carb, chol, sodium);
-		fat_num=values[1];
-		car_num=values[4];
-		cho_num=values[2];
-		sod_num=values[3]; 
-		cal_num=values[0];
-		ser_size=values[6];
-		init_nums[0]=values[0];
-		init_nums[1]=values[1];
-		init_nums[2]=values[2];
-		init_nums[3]=values[3];
-		init_nums[4]=values[4];
-		set_percentages();
 		//Find fields on the layout for editing purposes
 		car_pb= (ProgressBar) findViewById(R.id.car_pb);
 		fat_pb= (ProgressBar) findViewById(R.id.fat_pb);
@@ -215,12 +186,49 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 		serv_size_picker.setFocusable(true);
 		serv_size_picker.setFocusableInTouchMode(true);
 		serv_size_picker.setOnValueChangedListener(this);
+		setTypefaces();
+	}
+	
+	@Override
+	public void onStart(){
+		super.onStart();
+		handler=new Handler();
+		//Convert values to percentages ****Needs to be connected with the settings page*****
+		float[] values={0,0,0,0,0,0,0};
+		if(getIntent().getExtras()!=null){
+			values=(getIntent().getExtras()).getFloatArray(NUTRITION_QUANT_KEY);
+			labelname=(getIntent().getExtras()).getString(LABEL_NAME);
+		}
+		SharedPreferences sharedPref = this.getSharedPreferences("OCRSettingsPreferences", MODE_PRIVATE);
+		float calval = sharedPref.getFloat("calories", 2014f);
+		// need to fix this depending on units *******************
+		float fat = 100;//calval*30f; // fat is in mg
+		float carb = 100;//calval*0.15f; // carb is in g
+		float chol = 0.2f;//300.0f; // chol is in mg
+		float sodium = 0.2f;//2400.0f; // sodium is in mg
+		set_recommended_values(calval, fat, carb, chol, sodium);
+		fat_num=values[1];
+		car_num=values[4];
+		cho_num=values[2];
+		sod_num=values[3]; 
+		cal_num=values[0];
+		init_nums[0]=values[0];
+		init_nums[1]=values[1];
+		init_nums[2]=values[2];
+		init_nums[3]=values[3];
+		init_nums[4]=values[4];
+		set_percentages();
+		if(labelname!=null){
+			((TextView) findViewById(R.id.title)).setText(labelname);
+		}
+
 		cal_pw.set_recommended_calories(rec_cal);
 
 		run_visualization();
 		
-		// button listener
-		final float[] _val = values;
+		// button listeners
+		final float[] _val = get_curr_vals();
+		//Comparison button
 		Button comparisonButton = (Button)findViewById(R.id.comparison_button);
 		comparisonButton.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
@@ -232,14 +240,30 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 			}
 		});
 		
+		// Save button 
+		Button saveButton = (Button)findViewById(R.id.save_button);
+		saveButton.setOnClickListener(new Button.OnClickListener(){
+			public void onClick(View v){
+				saveItem(_val);
+			}
+		});
 	}
-	
+
 	@Override
 	public void onResume(){
 		super.onResume();
-		run_visualization();
+		fat_text_anim.draw_value(fat_num, fat_per);
+		car_text_anim.draw_value(car_num, car_per);
+		sod_text_anim.draw_value(sod_num, sod_per);
+		cho_text_anim.draw_value(cho_num, cho_per);
+		fat_pb.setProgress(fat_per);
+		car_pb.setProgress(car_per);
+		sod_pb.setProgress(sod_per);
+		cho_pb.setProgress(cho_per);
+		cal_pw.setProgress(cal_num);
+		
 	}
-	
+	//Scale the nutritional values according to the current serving size
 	public void scale_values(int scale_factor){
 		cal_num=scale_factor*init_nums[0];
 		car_num=scale_factor*init_nums[4];
@@ -248,7 +272,7 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 		fat_num=scale_factor*init_nums[1];
 		set_percentages();
 	}
-	
+	//Set percentages of daily intake values
 	public void set_percentages(){
 		set_fat((int) Math.round(fat_num/rec_fat*100));
 		set_carb((int) Math.round(car_num/rec_car*100));
@@ -262,6 +286,11 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 		sod_finished=false;
 		car_finished=false;
 		cho_finished=false;
+	}
+	//Get the current values on the screen
+	public float[] get_curr_vals(){
+		float[] curr_vals={cal_num, fat_num, cho_num, sod_num, car_num};
+		return curr_vals;
 	}
 	
 	public double interpolate_one_frame(double init, int end, int id){
@@ -293,7 +322,8 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 		return init;
 	}
 	
-	public double check_color(double curr_frame, double curr_color){
+	public double check_color(double curr_frame){
+		double curr_color;
 		if(curr_frame<YELLOW_THRESH){
 			curr_color=GREEN_THRESH;
 		}else if(curr_frame>YELLOW_THRESH && curr_frame< RED_THRESH){
@@ -327,11 +357,11 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
 					f4=interpolate_one_frame(f4,cho_per,cho_id);
 					f5=interpolate_one_frame(f5,(int) Math.round(cal_num),cal_id);
 					//Change any colors as necessary
-					fat_curr_color=check_color(f1, fat_curr_color);
-					car_curr_color=check_color(f2, car_curr_color);
-					sod_curr_color=check_color(f3, sod_curr_color);
-					cho_curr_color=check_color(f4, cho_curr_color);
-					cal_curr_color=check_color(f5, cal_curr_color);
+					fat_curr_color=check_color(f1);
+					car_curr_color=check_color(f2);
+					sod_curr_color=check_color(f3);
+					cho_curr_color=check_color(f4);
+					cal_curr_color=check_color(f5);
 					if(fat_curr_color!=fat_prev_color){
 						runOnUiThread(new Runnable() {
 			        	     @Override
@@ -428,6 +458,13 @@ public class GraphActivity extends Activity implements NumberPicker.OnValueChang
     	reset_flags();
     	run_visualization();
 	}
+	
+	public void saveItem(float[] _vals){
+		SaveDialog sd=new SaveDialog();
+		sd.set_vals(_vals);
+		sd.show(getFragmentManager(), "dialog");
+	}
+
 	
 	/*public void handleScroll(int value){
 		mExecServ.execute(new Runnable() {

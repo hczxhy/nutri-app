@@ -288,8 +288,7 @@ public final class CaptureActivity extends Activity implements
 				// Perform action on click
 				Intent settingsIntent;
 				settingsIntent = new Intent().setClass(CaptureActivity.this,
-						SettingsActivity.class); // change this to change what
-													// the load button shows
+						LabelListActivity.class);
 				startActivity(settingsIntent);
 			}
 		});
