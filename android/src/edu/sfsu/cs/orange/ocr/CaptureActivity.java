@@ -774,9 +774,9 @@ public final class CaptureActivity extends Activity implements
 	 */
 	boolean handleOcrDecode(OcrResult ocrResult) {
 		lastResult = ocrResult;
-
+		String textResult = ocrResult.getText();
 		// Test whether the result is null
-		if (ocrResult.getText() == null || ocrResult.getText().equals("")) {
+		if (textResult == null || textResult.equals("")) {
 			Toast toast = Toast.makeText(this, "OCR failed. Please try again.",
 					Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.TOP, 0, 0);
@@ -788,6 +788,7 @@ public final class CaptureActivity extends Activity implements
 		}
 
 		// Turn off capture-related UI elements
+		/*
 		shutterButton.setVisibility(View.GONE);
 		settingsButton.setVisibility(View.GONE);
 		helper.setVisibility(View.GONE);
@@ -796,7 +797,7 @@ public final class CaptureActivity extends Activity implements
 		statusViewTop.setVisibility(View.GONE);
 		cameraButtonView.setVisibility(View.GONE);
 		viewfinderView.setVisibility(View.GONE);
-
+		*/
 		// original result UI
 		/*
 		 * resultView.setVisibility(View.VISIBLE);
@@ -853,7 +854,7 @@ public final class CaptureActivity extends Activity implements
 		// launch result activity
 		// dummy test
 		Dictionary_comparison mtranslator = new Dictionary_comparison(
-				ocrResult.getText());
+				textResult);
 		mtranslator.execute();
 		try {
 			mtranslator.get(15000, TimeUnit.MILLISECONDS);
@@ -871,12 +872,14 @@ public final class CaptureActivity extends Activity implements
 		String[] dummy = { "Calories", "Fat", "Cholesterol", "Sodium",
 				"Carbohydrate", "Protein" };
 		float[] dummyVal = mtranslator.get_core_fields();
+		/*
 		System.out.println("Calories is " + dummyVal[0]);
 		System.out.println("Fat is " + dummyVal[1]);
 		System.out.println("Cholesterol is " + dummyVal[2]);
 		System.out.println("Sodium is " + dummyVal[3]);
 		System.out.println("Carbohydrate is " + dummyVal[4]);
 		System.out.println("Protein is " + dummyVal[5]);
+		*/
 		float[] dummyVal_with_ss = { dummyVal[0], dummyVal[1], dummyVal[2],
 				dummyVal[3], dummyVal[4], dummyVal[5], 0 };
 		// end dummy test

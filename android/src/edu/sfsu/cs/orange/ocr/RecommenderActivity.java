@@ -226,14 +226,14 @@ public class RecommenderActivity extends Activity implements
 			String targetLabel = thisCategory[minIndex].label;
 			String targetMeasurementText = "";
 			if (category == 0) {
-				targetMeasurementText = "" + value + units[category];
+				targetMeasurementText = "" + (int)value + " " + units[category];
 			} else {
-				targetMeasurementText = "" + (int)value + units[category] ;
+				targetMeasurementText = "" + (int)value + " " + units[category] ;
 			}
 			allDrawables[category] = getResources().getDrawable(
 					thisCategory[minIndex].imageID);
 			allComparisonText[category] =  targetLabel;
-			allMeasurementText[category] = targetMeasurementText.toLowerCase();
+			allMeasurementText[category] = targetMeasurementText;
 		}
 
 	}
