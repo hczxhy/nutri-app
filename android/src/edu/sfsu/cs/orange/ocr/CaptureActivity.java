@@ -179,6 +179,8 @@ public final class CaptureActivity extends Activity implements
 	private TextView statusViewTop;
 	private TextView ocrResultView;
 	private TextView translationView;
+	private TextView helper;
+	private int helperCount;
 	private View cameraButtonView;
 	private View resultView;
 	private View progressView;
@@ -253,7 +255,7 @@ public final class CaptureActivity extends Activity implements
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		cameraButtonView = findViewById(R.id.camera_button_view);
 		resultView = findViewById(R.id.result_view);
-
+		helper = (TextView) findViewById(R.id.helper_text);
 		statusViewBottom = (TextView) findViewById(R.id.status_view_bottom);
 		registerForContextMenu(statusViewBottom);
 		statusViewTop = (TextView) findViewById(R.id.status_view_top);
@@ -262,6 +264,7 @@ public final class CaptureActivity extends Activity implements
 		handler = null;
 		lastResult = null;
 		hasSurface = false;
+		helperCount = 0;
 
 		// Camera shutter button
 		if (DISPLAY_SHUTTER_BUTTON) {
@@ -304,6 +307,25 @@ public final class CaptureActivity extends Activity implements
 		isEngineReady = false;
 
 		setTypefaces();
+		helper.setTypeface(arial);
+				         
+        helper.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	helperCount = (helperCount+1)%5;
+            	if (helperCount == 0){
+            		helper.setText("Click me for help.");
+            	} else if (helperCount == 1){
+            		helper.setText("Fill box with nutrition facts label.");
+            	} else if (helperCount == 2){
+            		helper.setText("Press camera icon to capture image.");
+            	} else if (helperCount == 3) {
+            		helper.setText("Personalize % Daily Value on settings page.");
+            	} else {
+            		helper.setText("Open previously saved labels with open-file icon.");
+            	}                
+            }
+        });
+		
 	}
 
 	@Override
@@ -404,6 +426,7 @@ public final class CaptureActivity extends Activity implements
 		if (shutterButton != null && DISPLAY_SHUTTER_BUTTON) {
 			shutterButton.setVisibility(View.VISIBLE);
 			settingsButton.setVisibility(View.VISIBLE);
+			helper.setVisibility(View.VISIBLE);
 			loadButton.setVisibility(View.VISIBLE);
 		}
 	}
@@ -768,6 +791,7 @@ public final class CaptureActivity extends Activity implements
 		// Turn off capture-related UI elements
 		shutterButton.setVisibility(View.GONE);
 		settingsButton.setVisibility(View.GONE);
+		helper.setVisibility(View.GONE);
 		loadButton.setVisibility(View.GONE);
 		statusViewBottom.setVisibility(View.GONE);
 		statusViewTop.setVisibility(View.GONE);
@@ -1137,6 +1161,7 @@ public final class CaptureActivity extends Activity implements
 		if (DISPLAY_SHUTTER_BUTTON) {
 			shutterButton.setVisibility(View.VISIBLE);
 			settingsButton.setVisibility(View.VISIBLE);
+			helper.setVisibility(View.VISIBLE);
 			loadButton.setVisibility(View.VISIBLE);
 		}
 		lastResult = null;
@@ -1171,10 +1196,12 @@ public final class CaptureActivity extends Activity implements
 		if (shutterButton != null && visible == true && DISPLAY_SHUTTER_BUTTON) {
 			shutterButton.setVisibility(View.VISIBLE);
 			settingsButton.setVisibility(View.VISIBLE);
+			helper.setVisibility(View.VISIBLE);
 			loadButton.setVisibility(View.VISIBLE);
 		} else if (shutterButton != null) {
 			shutterButton.setVisibility(View.GONE);
 			settingsButton.setVisibility(View.GONE);
+			helper.setVisibility(View.GONE);
 			loadButton.setVisibility(View.GONE);
 		}
 	}

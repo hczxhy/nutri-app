@@ -24,9 +24,11 @@ public class SettingsActivity extends Activity {
 	static float af;
 	static float calories;
 	static boolean ttt;
+	static int ht,wt; //stores type of units 0 - SI 1 - imperial
 	TextView caloriesValue;
 	SeekBar seekBar,seekBar2,seekBar3,seekBar4;
 	TextView seekBarValue,seekBarValue2,seekBarValue3;
+	TextView aunit,wunit,hunit; //seekbarvalueTypes
 	static SharedPreferences sharedPref;
 	static SharedPreferences.Editor editor;
 	//Get resources
@@ -48,11 +50,11 @@ public class SettingsActivity extends Activity {
 		sett.setTypeface(arial);
 		TextView calInfo = (TextView) findViewById(R.id.caloriesInfo);
 		calInfo.setTypeface(arial);
-		TextView hunit = (TextView) findViewById(R.id.heightUnit);
+		hunit = (TextView) findViewById(R.id.heightUnit);
 		hunit.setTypeface(arial);
-		TextView wunit = (TextView) findViewById(R.id.weightUnit);
+		wunit = (TextView) findViewById(R.id.weightUnit);
 		wunit.setTypeface(arial);
-		TextView aunit = (TextView) findViewById(R.id.ageUnit);
+		aunit = (TextView) findViewById(R.id.ageUnit);
 		aunit.setTypeface(arial);
 		
 		// set up preferences file
@@ -64,6 +66,8 @@ public class SettingsActivity extends Activity {
 		offset = sharedPref.getInt("offset", 5);
 		af = sharedPref.getFloat("af", 1.375f);
 		ttt = sharedPref.getBoolean("toggle", false);
+		ht = sharedPref.getInt("heightType", 0);		
+		wt = sharedPref.getInt("weightType",0);
 		
 		// initialize the settings page
 		seekBar = (SeekBar)findViewById(R.id.heightBar);		
@@ -74,7 +78,7 @@ public class SettingsActivity extends Activity {
 		seekBar3.setProgress((int)(a));
 		seekBar4 = (SeekBar)findViewById(R.id.sedentaryBar);
 		seekBar4.setProgress((int)(((af-1.2f)/0.7f)*100f));
-		updateCalories();				
+		updateCalories();					
 		
 		// reset if default button is clicked
 		Button button = (Button) findViewById(R.id.button_default);
@@ -106,16 +110,44 @@ public class SettingsActivity extends Activity {
         });
 		
 		// adjust height bar		 
-        seekBarValue = (TextView)findViewById(R.id.textHeight);
-        seekBarValue.setText(String.valueOf((int)h));
+        seekBarValue = (TextView)findViewById(R.id.textHeight);          
+        seekBarValue.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ht = (ht+1)%2;                
+                updateCalories(); 
+                if (ht == 0){			
+        	        seekBarValue.setText(String.valueOf((int)h));	        
+        	        hunit.setText("cm");	        		
+        		}
+        		else{
+        			seekBarValue.setText(String.valueOf((int)(h*0.393701)));
+        			hunit.setText("in");
+        		}
+            }
+        });
+        if (ht == 0){			
+	        seekBarValue.setText(String.valueOf((int)h));	        
+	        hunit.setText("cm");	        		
+		}
+		else{
+			seekBarValue.setText(String.valueOf((int)(h*0.393701)));
+			hunit.setText("in");
+		}        
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){ 
 		   @Override 
 		   public void onProgressChanged(SeekBar seekBar, int progress, 
 		     boolean fromUser) { 
 		    // TODO Auto-generated method stub 
-			float val = progress + 100f;
-		    seekBarValue.setText(String.valueOf((int)val));
-		    h = val;		    
+			float val = progress + 100f;		    
+		    h = val;
+		    if (ht == 0){			
+    	        seekBarValue.setText(String.valueOf((int)h));	        
+    	        hunit.setText("cm");	        		
+    		}
+    		else{
+    			seekBarValue.setText(String.valueOf((int)(h*0.393701)));
+    			hunit.setText("in");
+    		}
 		    updateCalories();
 		   } 	
 		   @Override 
@@ -129,16 +161,44 @@ public class SettingsActivity extends Activity {
        }); 
         
         // adjust weight bar 		
-        seekBarValue2 = (TextView)findViewById(R.id.textWeight); 
-        seekBarValue2.setText(String.valueOf(w));
+        seekBarValue2 = (TextView)findViewById(R.id.textWeight);        
+        seekBarValue2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                wt = (wt+1)%2;                
+                updateCalories(); 
+                if (wt == 0){			
+        			seekBarValue2.setText(String.valueOf(w));
+        	        wunit.setText("kg");	        		
+        		}
+        		else{
+        			seekBarValue2.setText(String.valueOf((int)(w*2.2)));
+        			wunit.setText("lb");
+        		} 
+            }
+        }); 
+        if (wt == 0){			
+			seekBarValue2.setText(String.valueOf(w));
+	        wunit.setText("kg");	        		
+		}
+		else{
+			seekBarValue2.setText(String.valueOf((int)(w*2.2)));
+			wunit.setText("lb");
+		}
         seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){ 
      		   @Override 
      		   public void onProgressChanged(SeekBar seekBar, int progress, 
      		     boolean fromUser) { 
      		    // TODO Auto-generated method stub 
-     			int val = progress*2;
-     		    seekBarValue2.setText(String.valueOf(val)); 
+     			int val = progress*2;     		     
      		    w = val;
+     		    if (wt == 0){			
+     				seekBarValue2.setText(String.valueOf(w));
+     		        wunit.setText("kg");	        		
+     			}
+     			else{
+     				seekBarValue2.setText(String.valueOf((int)(w*2.2)));
+     				wunit.setText("lb");
+     			} 
      		    updateCalories();
      		   } 	
      		   @Override 
@@ -210,6 +270,8 @@ public class SettingsActivity extends Activity {
 		editor.putInt("offset", offset);
 		editor.putBoolean("toggle", ttt);
 		editor.putFloat("calories", calories);
+		editor.putInt("heightType", ht);
+		editor.putInt("weightType",wt);		
 		editor.commit();
 	}
 	
@@ -231,13 +293,27 @@ public class SettingsActivity extends Activity {
 		seekBar4 = (SeekBar)findViewById(R.id.sedentaryBar);
 		seekBar4.setProgress((int)(((af-1.2f)/0.7f)*100f));
 		
-		seekBarValue = (TextView)findViewById(R.id.textHeight);
-        seekBarValue.setText(String.valueOf((int)h));
-        seekBarValue2 = (TextView)findViewById(R.id.textWeight); 
-        seekBarValue2.setText(String.valueOf(w));
+		seekBarValue = (TextView)findViewById(R.id.textHeight);		
+		if (ht == 0){			
+	        seekBarValue.setText(String.valueOf((int)h));	        
+	        hunit.setText("cm");	        		
+		}
+		else{
+			seekBarValue.setText(String.valueOf((int)(h*0.393701)));
+			hunit.setText("in");
+		}         
+		seekBarValue2 = (TextView)findViewById(R.id.textWeight);
+		if (wt == 0){			
+			seekBarValue2.setText(String.valueOf(w));
+	        wunit.setText("kg");	        		
+		}
+		else{
+			seekBarValue2.setText(String.valueOf((int)(w*2.2)));
+			wunit.setText("lb");
+		}        
         seekBarValue3 = (TextView)findViewById(R.id.textAge); 
         seekBarValue3.setText(String.valueOf((int)a));
-        
+		        		               
         updateCalories();
 	}
 	
