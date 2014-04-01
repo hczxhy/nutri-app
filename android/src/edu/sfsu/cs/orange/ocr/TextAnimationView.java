@@ -102,7 +102,11 @@ public class TextAnimationView extends ImageView {
 		canvas.drawLine(135, 0, 135, 45, grey_paint);
 		
 		//Draw text
-		canvas.drawText(Integer.toString(curr_per)+"%", 0, 35, large_curr_paint);
+		if(curr_per>=999){
+			canvas.drawText("---", 0, 35, large_curr_paint);
+		}else{
+			canvas.drawText(Integer.toString(curr_per)+"%", 0, 35, large_curr_paint);
+		}
 		if(mg==true){
 			canvas.drawText(Integer.toString(curr_val)+"mg", 205, 35, small_curr_paint);
 		}else{

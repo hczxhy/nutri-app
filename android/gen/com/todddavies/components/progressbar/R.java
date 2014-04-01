@@ -32,24 +32,24 @@ public final class R {
 		public static final int logo = 0x7f02004c;
 	}
 	public static final class id {
-		public static final int RelativeLayout01 = 0x7f07005d;
-		public static final int btn_increment = 0x7f070061;
-		public static final int btn_spin = 0x7f070060;
-		public static final int iv_login_header_image = 0x7f070053;
-		public static final int progressBar = 0x7f070056;
-		public static final int progressBarFour = 0x7f070064;
-		public static final int progressBarThree = 0x7f070063;
-		public static final int progressBarTwo = 0x7f070062;
-		public static final int progressImage = 0x7f07005e;
-		public static final int rl_login_header = 0x7f070052;
-		public static final int tv_progressText = 0x7f07005f;
-		public static final int v_login_gradient = 0x7f070054;
-		public static final int vf_login_flipper = 0x7f070055;
+		public static final int RelativeLayout01 = 0x7f070064;
+		public static final int btn_increment = 0x7f070068;
+		public static final int btn_spin = 0x7f070067;
+		public static final int iv_login_header_image = 0x7f07005a;
+		public static final int progressBar = 0x7f07005d;
+		public static final int progressBarFour = 0x7f07006b;
+		public static final int progressBarThree = 0x7f07006a;
+		public static final int progressBarTwo = 0x7f070069;
+		public static final int progressImage = 0x7f070065;
+		public static final int rl_login_header = 0x7f070059;
+		public static final int tv_progressText = 0x7f070066;
+		public static final int v_login_gradient = 0x7f07005b;
+		public static final int vf_login_flipper = 0x7f07005c;
 	}
 	public static final class layout {
-		public static final int main = 0x7f030005;
-		public static final int progress_spinner = 0x7f030008;
-		public static final int progress_wheel_activity = 0x7f030009;
+		public static final int main = 0x7f030007;
+		public static final int progress_spinner = 0x7f03000a;
+		public static final int progress_wheel_activity = 0x7f03000b;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f090001;

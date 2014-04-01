@@ -288,15 +288,38 @@
 	    android:layout_marginBottom="5dip"
         android:background="#000000"/>
 	
-     <Button
-        android:id="@+id/comparison_button"
-        android:layout_gravity="center"
-        android:layout_width="320dip"
-        android:layout_height="fill_parent"
-	    android:layout_marginBottom="10dip"
-	    android:textColor="#000000"
-	    android:background="#FFFFFF"
-        android:text="@string/comparison_button" />
+    <LinearLayout 
+        	android:layout_gravity="center"
+	        android:layout_width="320dip"
+	        android:layout_height="fill_parent"
+		    android:layout_marginBottom="10dip">
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="0dip"
+            android:layout_weight="50"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginRight="10dip"
+            android:paddingRight="10dip"
+            android:paddingLeft="10dip"
+            android:textColor="#000000"
+		    android:background="#FFFFFF"
+		    android:text="@string/save_button" />
+        <Button
+	        android:id="@+id/comparison_button"
+	        android:layout_width="0dip"
+            android:layout_weight="50"
+	        android:layout_height="fill_parent"
+			android:layout_gravity="right|center_vertical" 
+			android:layout_marginLeft="10dip"
+			android:paddingRight="10dip"
+            android:paddingLeft="10dip"
+		    android:textColor="#000000"
+		    android:background="#FFFFFF"
+	        android:text="@string/comparison_button" />
+    </LinearLayout>
+    
+   
 	
 	
 </LinearLayout>

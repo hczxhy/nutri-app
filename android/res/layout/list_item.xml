@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/food_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dip"
+        android:paddingTop="10dip"
+        android:textSize="22sp"
+        android:singleLine="true" />
+	
+    <TextView
+        android:id="@+id/food_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dip"
+        android:paddingTop="3dip"
+        android:textSize="15sp"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/food_cost"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingBottom="3dip"
+        android:paddingTop="3dip" 
+        android:textSize="15sp"
+        android:singleLine="true" />
+
+
+</LinearLayout>
