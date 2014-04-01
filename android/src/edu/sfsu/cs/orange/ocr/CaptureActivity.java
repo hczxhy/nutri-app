@@ -318,7 +318,7 @@ public final class CaptureActivity extends Activity implements
             	} else if (helperCount == 2){
             		helper.setText("Press camera icon to capture image.");
             	} else if (helperCount == 3) {
-            		helper.setText("Personalize % Daily Value on settings page.");
+            		helper.setText("Personalize % daily values on settings page.");
             	} else {
             		helper.setText("Open previously saved labels with open-file icon.");
             	}                
