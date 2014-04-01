@@ -37,15 +37,9 @@ public final class R {
 		public static final int np_numberpicker_selection_divider = 0x7f02004f;
 	}
 	public static final class id {
-<<<<<<< HEAD
 		public static final int np__decrement = 0x7f080001;
 		public static final int np__increment = 0x7f080000;
-		public static final int np__numberpicker_input = 0x7f080058;
-=======
-		public static final int np__decrement = 0x7f070001;
-		public static final int np__increment = 0x7f070000;
-		public static final int np__numberpicker_input = 0x7f07005e;
->>>>>>> 482d1f9b7094ed3dd8f2d84a072c9c4550e166b1
+		public static final int np__numberpicker_input = 0x7f08005f;
 	}
 	public static final class layout {
 		public static final int number_picker_with_selector_wheel = 0x7f030008;

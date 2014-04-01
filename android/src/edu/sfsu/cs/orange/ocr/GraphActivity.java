@@ -120,8 +120,8 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		((TextView) findViewById(R.id.car_text)).setTypeface(arial);
 		((TextView) findViewById(R.id.cho_text)).setTypeface(arial);
 		((TextView) findViewById(R.id.sod_text)).setTypeface(arial);
-		cal_pw.setTypefaces(arial);
-		serv_size_picker.setTypefaces(arial);
+		//cal_pw.setTypefaces(arial);
+		//serv_size_picker.setTypefaces(arial);
 	}
 	
 	public void set_fat(int value){
@@ -200,12 +200,11 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 			labelname=(getIntent().getExtras()).getString(LABEL_NAME);
 		}
 		SharedPreferences sharedPref = this.getSharedPreferences("OCRSettingsPreferences", MODE_PRIVATE);
-		float calval = sharedPref.getFloat("calories", 2014f);
-		// need to fix this depending on units *******************
-		float fat = 100;//calval*30f; // fat is in mg
-		float carb = 100;//calval*0.15f; // carb is in g
-		float chol = 0.2f;//300.0f; // chol is in mg
-		float sodium = 0.2f;//2400.0f; // sodium is in mg
+		float calval = sharedPref.getFloat("calories", 2014f); 
+		float fat = calval*0.03f;
+		float carb = calval*0.15f;
+		float chol = 0.3f;
+		float sodium = 2.4f;
 		set_recommended_values(calval, fat, carb, chol, sodium);
 		fat_num=values[1];
 		car_num=values[4];
