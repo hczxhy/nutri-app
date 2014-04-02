@@ -54,7 +54,6 @@ public class SaveDialog extends DialogFragment {
 			   	if(ed_cost.getText().length()==0||cost==null){
 			   		cost="";
 			   	}
-			   	
 				try {
 					FileOutputStream fs= getActivity().openFileOutput(ed_name.getText().toString(), Context.MODE_PRIVATE);
 					ObjectOutputStream oos=new ObjectOutputStream(fs);
@@ -72,6 +71,7 @@ public class SaveDialog extends DialogFragment {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				((GraphActivity) getActivity()).change_title(name);
            	}
 	    });
 	    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -81,5 +81,6 @@ public class SaveDialog extends DialogFragment {
 	    });      
 	    return builder.create();
 	}
+	
 	
 }

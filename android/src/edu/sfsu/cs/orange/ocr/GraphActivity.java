@@ -1,7 +1,5 @@
 package edu.sfsu.cs.orange.ocr;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,7 +8,6 @@ import net.simonvt.numberpicker.NumberPicker;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -104,7 +101,11 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 	int sod_id=333;
 	int cho_id=444;
 	int cal_id=555;
-	String labelname;
+	private boolean fat_is_mg=false;  
+	private boolean car_is_mg=false;
+	private boolean sod_is_mg=false;
+	private boolean cho_is_mg=false;
+	public static String labelname;
 	
 	private Handler handler;
 	
@@ -120,8 +121,10 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		((TextView) findViewById(R.id.car_text)).setTypeface(arial);
 		((TextView) findViewById(R.id.cho_text)).setTypeface(arial);
 		((TextView) findViewById(R.id.sod_text)).setTypeface(arial);
-		//cal_pw.setTypefaces(arial);
-		//serv_size_picker.setTypefaces(arial);
+		((Button) findViewById(R.id.save_button)).setTypeface(arial);
+		((Button) findViewById(R.id.comparison_button)).setTypeface(arial);
+		cal_pw.setTypefaces(arial);
+		serv_size_picker.setTypefaces(arial);
 	}
 	
 	public void set_fat(int value){
@@ -143,6 +146,12 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		rec_car=carbohydrates;
 		rec_cho=cholesterol;
 		rec_sod=sodium;
+	}
+	
+	public void change_title(String title){
+		if(findViewById(R.id.title)!=null){
+			((TextView) findViewById(R.id.title)).setText(title);
+		}
 	}
 	
 	@Override
@@ -186,6 +195,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		serv_size_picker.setFocusable(true);
 		serv_size_picker.setFocusableInTouchMode(true);
 		serv_size_picker.setOnValueChangedListener(this);
+		serv_size_picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 		setTypefaces();
 	}
 	
@@ -211,11 +221,16 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		cho_num=values[2];
 		sod_num=values[3]; 
 		cal_num=values[0];
-		init_nums[0]=values[0];
-		init_nums[1]=values[1];
-		init_nums[2]=values[2];
-		init_nums[3]=values[3];
-		init_nums[4]=values[4];
+		init_nums=values;
+		if(fat_num<1)
+			fat_is_mg=true;
+		if(car_num<1)
+			car_is_mg=true;
+		if(sod_num<1)
+			sod_is_mg=true;
+		if(cho_num<1)
+			cho_is_mg=true;
+		
 		set_percentages();
 		if(labelname!=null){
 			((TextView) findViewById(R.id.title)).setText(labelname);
@@ -225,15 +240,13 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 
 		run_visualization();
 		
-		// button listeners
-		final float[] _val = get_curr_vals();
 		//Comparison button
 		Button comparisonButton = (Button)findViewById(R.id.comparison_button);
 		comparisonButton.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
 				Intent intent = new Intent(GraphActivity.this, RecommenderActivity.class);
 				Bundle b = new Bundle();
-				b.putFloatArray(RecommenderActivity.NUTRITION_QUANT_KEY, _val);
+				b.putFloatArray(RecommenderActivity.NUTRITION_QUANT_KEY, get_curr_vals());
 				intent.putExtras(b);
 				startActivity(intent);
 			}
@@ -243,7 +256,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		Button saveButton = (Button)findViewById(R.id.save_button);
 		saveButton.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
-				saveItem(_val);
+				saveItem(get_curr_vals());
 			}
 		});
 	}
@@ -251,15 +264,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 	@Override
 	public void onResume(){
 		super.onResume();
-		fat_text_anim.draw_value(fat_num, fat_per);
-		car_text_anim.draw_value(car_num, car_per);
-		sod_text_anim.draw_value(sod_num, sod_per);
-		cho_text_anim.draw_value(cho_num, cho_per);
-		fat_pb.setProgress(fat_per);
-		car_pb.setProgress(car_per);
-		sod_pb.setProgress(sod_per);
-		cho_pb.setProgress(cho_per);
-		cal_pw.setProgress(cal_num);
+		run_visualization();
 		
 	}
 	//Scale the nutritional values according to the current serving size
@@ -291,7 +296,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		float[] curr_vals={cal_num, fat_num, cho_num, sod_num, car_num};
 		return curr_vals;
 	}
-	
+	//Draw the next frame for the progress bar
 	public double interpolate_one_frame(double init, int end, int id){
 		if(id==cal_id){
 			if((int)Math.round(init)<end){
@@ -413,7 +418,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 							}
 							if(!fat_finished){
 								fat_text_anim.invalidate();
-								fat_text_anim.draw_value(fat_num, (int) Math.round(f1));
+								fat_text_anim.draw_value(fat_num, (int) Math.round(f1), fat_is_mg);
 								fat_pb.setMax(0);
 								fat_pb.setProgress(0);
 								fat_pb.setMax(100);
@@ -421,7 +426,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 							}
 							if(!car_finished){
 								car_text_anim.invalidate();
-								car_text_anim.draw_value(car_num, (int) Math.round(f2));
+								car_text_anim.draw_value(car_num, (int) Math.round(f2), car_is_mg);
 								car_pb.setMax(0);
 								car_pb.setProgress(0);
 								car_pb.setMax(100);
@@ -429,7 +434,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 							}
 							if(!sod_finished){
 								sod_text_anim.invalidate();
-								sod_text_anim.draw_value(sod_num, (int) Math.round(f3));
+								sod_text_anim.draw_value(sod_num, (int) Math.round(f3), sod_is_mg);
 								sod_pb.setMax(0);
 								sod_pb.setProgress(0);
 								sod_pb.setMax(100);
@@ -437,7 +442,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 							}
 							if(!cho_finished){
 								cho_text_anim.invalidate();
-								cho_text_anim.draw_value(cho_num, (int) Math.round(f4));
+								cho_text_anim.draw_value(cho_num, (int) Math.round(f4), cho_is_mg);
 								cho_pb.setMax(0);
 								cho_pb.setProgress(0);
 								cho_pb.setMax(100);

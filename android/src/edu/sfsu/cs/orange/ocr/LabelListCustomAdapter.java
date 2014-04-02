@@ -37,8 +37,6 @@ public class LabelListCustomAdapter extends ArrayAdapter<String> {
 		food_cost.setTypeface(arial);
 		
 		food_name.setText(mNames[position]);
-		System.out.println("*"+mTypes[position]+"*");
-		System.out.println("*"+mCosts[position]+"*");
 		if(mTypes[position].length()==0){
 			food_type.setText("No Description");
 		}else{

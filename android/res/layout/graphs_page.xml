@@ -300,10 +300,9 @@
             android:layout_height="fill_parent"
             android:layout_gravity="left|center_vertical"
             android:layout_marginRight="10dip"
-            android:paddingRight="10dip"
-            android:paddingLeft="10dip"
             android:textColor="#000000"
 		    android:background="#FFFFFF"
+		    android:singleLine="true"
 		    android:text="@string/save_button" />
         <Button
 	        android:id="@+id/comparison_button"
@@ -312,10 +311,9 @@
 	        android:layout_height="fill_parent"
 			android:layout_gravity="right|center_vertical" 
 			android:layout_marginLeft="10dip"
-			android:paddingRight="10dip"
-            android:paddingLeft="10dip"
 		    android:textColor="#000000"
 		    android:background="#FFFFFF"
+		    android:singleLine="true"
 	        android:text="@string/comparison_button" />
     </LinearLayout>
     
