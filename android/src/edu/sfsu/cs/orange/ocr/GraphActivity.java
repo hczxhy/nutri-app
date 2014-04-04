@@ -54,9 +54,18 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 	private int car_per=0;
 	private float cal_num=0;
 	//Drawables to be used in the progress bar
-	private Drawable green_bar=null;
-	private Drawable yellow_bar=null;
-	private Drawable red_bar=null;
+	private Drawable fat_green_bar=null;
+	private Drawable fat_yellow_bar=null;
+	private Drawable fat_red_bar=null;
+	private Drawable car_green_bar=null;
+	private Drawable car_yellow_bar=null;
+	private Drawable car_red_bar=null;
+	private Drawable sod_green_bar=null;
+	private Drawable sod_yellow_bar=null;
+	private Drawable sod_red_bar=null;
+	private Drawable cho_green_bar=null;
+	private Drawable cho_yellow_bar=null;
+	private Drawable cho_red_bar=null;
 	private Drawable divider=null;
 	//Find views to be animated
 	private TextAnimationView fat_text_anim;
@@ -163,10 +172,20 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		
 		try {
 			//Use custom progress bar colors
-			green_bar=Drawable.createFromXml(res, res.getXml(R.drawable.greenprogressbar));
-			yellow_bar=Drawable.createFromXml(res, res.getXml(R.drawable.yellowprogressbar));
-			red_bar=Drawable.createFromXml(res, res.getXml(R.drawable.redprogressbar));
 			divider=Drawable.createFromXml(res, res.getXml(R.drawable.divider));
+			//Give each progress bar its own set of color drawables
+			fat_green_bar=Drawable.createFromXml(res, res.getXml(R.drawable.greenprogressbar));
+			car_green_bar=Drawable.createFromXml(res, res.getXml(R.drawable.greenprogressbar));
+			sod_green_bar=Drawable.createFromXml(res, res.getXml(R.drawable.greenprogressbar));
+			cho_green_bar=Drawable.createFromXml(res, res.getXml(R.drawable.greenprogressbar));
+			fat_yellow_bar=Drawable.createFromXml(res, res.getXml(R.drawable.yellowprogressbar));
+			car_yellow_bar=Drawable.createFromXml(res, res.getXml(R.drawable.yellowprogressbar));
+			sod_yellow_bar=Drawable.createFromXml(res, res.getXml(R.drawable.yellowprogressbar));
+			cho_yellow_bar=Drawable.createFromXml(res, res.getXml(R.drawable.yellowprogressbar));
+			fat_red_bar=Drawable.createFromXml(res, res.getXml(R.drawable.redprogressbar));
+			car_red_bar=Drawable.createFromXml(res, res.getXml(R.drawable.redprogressbar));
+			sod_red_bar=Drawable.createFromXml(res, res.getXml(R.drawable.redprogressbar));
+			cho_red_bar=Drawable.createFromXml(res, res.getXml(R.drawable.redprogressbar));
 		} catch (NotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -177,7 +196,6 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
 		//Find fields on the layout for editing purposes
 		car_pb= (ProgressBar) findViewById(R.id.car_pb);
 		fat_pb= (ProgressBar) findViewById(R.id.fat_pb);
@@ -221,16 +239,31 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		cho_num=values[2];
 		sod_num=values[3]; 
 		cal_num=values[0];
-		init_nums=values;
-		if(fat_num<1)
+		init_nums=values.clone();
+		if(fat_num<1){
 			fat_is_mg=true;
-		if(car_num<1)
+			fat_num=1000*fat_num;
+			rec_fat=1000*rec_fat;
+			init_nums[1]=1000*init_nums[1];
+		}
+		if(car_num<1){
 			car_is_mg=true;
-		if(sod_num<1)
+			car_num=1000*car_num;
+			rec_car=1000*rec_car;
+			init_nums[4]=1000*init_nums[4];
+		}
+		if(sod_num<1){
 			sod_is_mg=true;
-		if(cho_num<1)
+			sod_num=1000*sod_num;
+			rec_sod=1000*rec_sod;
+			init_nums[3]=1000*init_nums[3];
+		}
+		if(cho_num<1){
 			cho_is_mg=true;
-		
+			cho_num=1000*cho_num;
+			rec_cho=1000*rec_cho;
+			init_nums[2]=1000*init_nums[2];
+		}
 		set_percentages();
 		if(labelname!=null){
 			((TextView) findViewById(R.id.title)).setText(labelname);
@@ -300,9 +333,9 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 	public double interpolate_one_frame(double init, int end, int id){
 		if(id==cal_id){
 			if((int)Math.round(init)<end){
-				init=init+(Math.sqrt((double) end-init))/2;
+				init=init+2*(Math.sqrt((double) end-init))/3;
 			}else if ((int)Math.round(init)>end){
-				init=init-(Math.sqrt(init-(double) end))/2;
+				init=init-2*(Math.sqrt(init-(double) end))/3;
 			}else{
 				cal_finished=true;
 			}
@@ -337,14 +370,36 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		}
 		return curr_color;
 	}
-	public Drawable getBarColorDrawable(double curr_color){
+	public Drawable getBarColorDrawable(double curr_color, int id){
 		if(curr_color==GREEN_THRESH){
-			return green_bar;
+			if(id==fat_id)
+				return fat_green_bar;
+			if(id==car_id)
+				return car_green_bar;
+			if(id==sod_id)
+				return sod_green_bar;
+			if(id==cho_id)
+				return cho_green_bar;
 		}else if(curr_color==YELLOW_THRESH){
-			return yellow_bar;
+			if(id==fat_id)
+				return fat_yellow_bar;
+			if(id==car_id)
+				return car_yellow_bar;
+			if(id==sod_id)
+				return sod_yellow_bar;
+			if(id==cho_id)
+				return cho_yellow_bar;
 		}else{
-			return red_bar;
+			if(id==fat_id)
+				return fat_red_bar;
+			if(id==car_id)
+				return car_red_bar;
+			if(id==sod_id)
+				return sod_red_bar;
+			if(id==cho_id)
+				return cho_red_bar;
 		}
+		return fat_green_bar;
 	}
 	
 	public void run_visualization(){
@@ -352,7 +407,9 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		mExecServ.execute(new Runnable() {
 			@Override
 			public void run() {
-				
+				System.out.println("Sod_num initially is "+Float.toString(sod_num));
+
+				//System.out.println("Sod_num now is "+Float.toString(sod_num));
 				while (!cal_finished || !fat_finished || !car_finished || !cho_finished || !sod_finished) {
 					//Interpolate frames based on a parabolic acceleration curve for animation
 					f1=interpolate_one_frame(f1,fat_per,fat_id);
@@ -370,7 +427,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 						runOnUiThread(new Runnable() {
 			        	     @Override
 			        	     public void run() {
-			        	    	 fat_pb.setProgressDrawable(getBarColorDrawable(fat_curr_color));
+			        	    	 fat_pb.setProgressDrawable(getBarColorDrawable(fat_curr_color, fat_id));
 			        	    }
 			        	});
 						fat_prev_color=fat_curr_color;
@@ -379,7 +436,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 						runOnUiThread(new Runnable() {
 			        	     @Override
 			        	     public void run() {
-			        	    	 car_pb.setProgressDrawable(getBarColorDrawable(car_curr_color));
+			        	    	 car_pb.setProgressDrawable(getBarColorDrawable(car_curr_color, car_id));
 			        	    }
 			        	});
 						car_prev_color=car_curr_color;
@@ -388,7 +445,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 						runOnUiThread(new Runnable() {
 			        	     @Override
 			        	     public void run() {
-			        	    	 sod_pb.setProgressDrawable(getBarColorDrawable(sod_curr_color));
+			        	    	 sod_pb.setProgressDrawable(getBarColorDrawable(sod_curr_color, sod_id));
 			        	    }
 			        	});
 						sod_prev_color=sod_curr_color;
@@ -397,7 +454,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 						runOnUiThread(new Runnable() {
 			        	     @Override
 			        	     public void run() {
-			        	    	 cho_pb.setProgressDrawable(getBarColorDrawable(cho_curr_color));
+			        	    	 cho_pb.setProgressDrawable(getBarColorDrawable(cho_curr_color, cho_id));
 			        	    }
 			        	});
 						cho_prev_color=cho_curr_color;
@@ -418,7 +475,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 							}
 							if(!fat_finished){
 								fat_text_anim.invalidate();
-								fat_text_anim.draw_value(fat_num, (int) Math.round(f1), fat_is_mg);
+								fat_text_anim.draw_value((int)fat_num, (int) Math.round(f1), fat_is_mg);
 								fat_pb.setMax(0);
 								fat_pb.setProgress(0);
 								fat_pb.setMax(100);
@@ -426,7 +483,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 							}
 							if(!car_finished){
 								car_text_anim.invalidate();
-								car_text_anim.draw_value(car_num, (int) Math.round(f2), car_is_mg);
+								car_text_anim.draw_value((int)car_num, (int) Math.round(f2), car_is_mg);
 								car_pb.setMax(0);
 								car_pb.setProgress(0);
 								car_pb.setMax(100);
@@ -434,7 +491,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 							}
 							if(!sod_finished){
 								sod_text_anim.invalidate();
-								sod_text_anim.draw_value(sod_num, (int) Math.round(f3), sod_is_mg);
+								sod_text_anim.draw_value((int)sod_num, (int) Math.round(f3), sod_is_mg);
 								sod_pb.setMax(0);
 								sod_pb.setProgress(0);
 								sod_pb.setMax(100);
@@ -442,7 +499,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 							}
 							if(!cho_finished){
 								cho_text_anim.invalidate();
-								cho_text_anim.draw_value(cho_num, (int) Math.round(f4), cho_is_mg);
+								cho_text_anim.draw_value((int)cho_num, (int) Math.round(f4), cho_is_mg);
 								cho_pb.setMax(0);
 								cho_pb.setProgress(0);
 								cho_pb.setMax(100);

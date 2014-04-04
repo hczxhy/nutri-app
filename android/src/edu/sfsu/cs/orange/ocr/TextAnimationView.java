@@ -74,7 +74,7 @@ public class TextAnimationView extends ImageView {
 		init();
 	}
 
-	 public void draw_value(float value, int percent, boolean is_in_mg){
+	 public void draw_value(int value, int percent, boolean is_in_mg){
 		 if(percent<=GraphActivity.YELLOW_THRESH){
 			 large_curr_paint=large_green_paint;
 			 small_curr_paint=small_green_paint;
@@ -85,15 +85,11 @@ public class TextAnimationView extends ImageView {
 			 large_curr_paint=large_red_paint;
 			 small_curr_paint=small_red_paint;
 		 }
-		 curr_per=percent;
 		 if(is_in_mg){
-			 if(curr_val<1){
-				 curr_val=(int)Math.round(value*1000);
-				 mg=true;
-			 }
-		 }else{
-			 curr_val=(int)Math.round(value);
+			 mg=true;
 		 }
+		 curr_per=percent;
+		 curr_val=value;
 	 }
 	 
 	 @Override
