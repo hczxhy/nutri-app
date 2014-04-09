@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -130,8 +131,8 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		((TextView) findViewById(R.id.car_text)).setTypeface(arial);
 		((TextView) findViewById(R.id.cho_text)).setTypeface(arial);
 		((TextView) findViewById(R.id.sod_text)).setTypeface(arial);
-		((Button) findViewById(R.id.save_button)).setTypeface(arial);
-		((Button) findViewById(R.id.comparison_button)).setTypeface(arial);
+		//((Button) findViewById(R.id.save_button)).setTypeface(arial);
+		//((Button) findViewById(R.id.comparison_button)).setTypeface(arial);
 		cal_pw.setTypefaces(arial);
 		serv_size_picker.setTypefaces(arial);
 	}
@@ -274,7 +275,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		run_visualization();
 		
 		//Comparison button
-		Button comparisonButton = (Button)findViewById(R.id.comparison_button);
+		ImageButton comparisonButton = (ImageButton)findViewById(R.id.comparison_button);
 		comparisonButton.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
 				Intent intent = new Intent(GraphActivity.this, RecommenderActivity.class);
@@ -286,7 +287,7 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 		});
 		
 		// Save button 
-		Button saveButton = (Button)findViewById(R.id.save_button);
+		ImageButton saveButton = (ImageButton)findViewById(R.id.save_button);
 		saveButton.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
 				saveItem(get_curr_vals());
@@ -296,9 +297,27 @@ public class GraphActivity extends FragmentActivity implements NumberPicker.OnVa
 
 	@Override
 	public void onResume(){
-		super.onResume();
 		run_visualization();
-		
+		super.onResume();
+	}
+	@Override
+	public void onStop(){
+		car_pb.invalidate();
+		fat_pb.invalidate();
+		cho_pb.invalidate();
+		sod_pb.invalidate();
+		fat_text_anim.invalidate();
+		car_text_anim.invalidate();
+		cho_text_anim.invalidate();
+		sod_text_anim.invalidate();
+		cal_pw.invalidate();
+		fat_num=0;
+		car_num=0;
+		cho_num=0;
+		sod_num=0;
+		cal_num=0;
+		set_percentages();
+		super.onStop();
 	}
 	//Scale the nutritional values according to the current serving size
 	public void scale_values(int scale_factor){
